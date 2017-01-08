@@ -30,7 +30,7 @@ public class Tableaux {
     /**
      * Define se as mensagens de depuração devem ser mostradas ou não.
      */
-    public static void setDepuracao(boolean depuracao) {
+    static void setDepuracao(boolean depuracao) {
         cdepuracao = depuracao;
     }
 
@@ -38,14 +38,14 @@ public class Tableaux {
      * Expande o tableaux ao máximo de forma estrita.
      */
     public void expandir() {
-        show("Tableaux original : ");
+        show("Tableaux original : ", this);
         while (eExpansivel()) {
             expandirUmNivel();
-            show("Expansão do tableaux : ");
+            show("Expansão do tableaux : ", this);
             fechar();
         }
         fechar();
-        show("Tableaux sem ramos fechados : ");
+        show("Tableaux sem ramos fechados : ", this);
     }
     
     /**
@@ -94,7 +94,7 @@ public class Tableaux {
     /**
      * Aplica uma regra de expansão ao tableaux.
      */
-    protected void expandirUmNivel() {
+    private void expandirUmNivel() {
         // 1. Para cada ramo ATUAL
         final int numRamos = _ramos.size();
         for (int i = 0; i < numRamos; i++) {
@@ -193,7 +193,10 @@ public class Tableaux {
     public String toString() {
         StringBuilder resultado = new StringBuilder();
         for (int i = 0; i < getRamos().size(); i++) {
-            resultado.append(getRamos().get(i)).append("\n");
+            if (i != 0) {
+                resultado.append("\n");
+            }
+            resultado.append(getRamos().get(i));
         }
         return resultado.toString();
     }
