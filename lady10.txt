@@ -1,0 +1,17 @@
+# Tenth Trial
+# 3 portas
+3
+# Moça e Tigre
+m,t
+# Restrições
+# Uma moça e dois tigres
+# A porta com a moça diz a verdade, as com tigres podem dizer a verdade ou não
+((em(m,1) ^ em(t,2) ^ em(t,3)) v (em(t,1) ^ em(m,2) ^ em(t,3)) v (em(t,1) ^ em(t,2) ^ em(m,3))) ^ ((!em(m,1))v(a(1)^((!a(2))v(!a(3))))) ^ ((!em(m,2))v(a(2)^((!a(1))v(!a(3))))) ^ ((!em(m,3))v(a(3)^((!a(1))v(!a(2)))))
+# 1) A tiger is in room 2
+em(t,2)
+# 2) A tiger is in this room
+em(t,2)
+# 3) A tiger is in room 1
+em(t,1)
+# SOLUÇÃO
+[a(1), a(2), em(m, 1), em(t, 2), em(t, 3), ¬a(3), ¬em(m, 2), ¬em(m, 3), ¬em(t, 1)]

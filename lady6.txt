@@ -1,0 +1,17 @@
+# Sixth Trial
+# 2 portas
+2
+# Moça e Tigre
+m,t
+# Restrições naturais
+(((!a(1))^(!a(2))) v (a(1)^a(2)) v ((!a(1))^a(2)) v (a(1)^(!a(2))))  ^  ((!em(m,1))v a(1))^((!em(t,1))v (!a(1)))^((!em(m,2))v (!a(2)))^((!em(t,2))v a(2))
+#em(m,1)->a(1)
+#em(t,1)->!a(1)
+#em(m,2)->!a(2)
+#em(t,2)->a(2)
+# 1) It makes no difference which room you pick
+(em(m,1) ^ em(m,2)) v (em(t,1) ^ em(t,2))
+# 2) There is a lady in the other room
+em(m,1)
+# SOLUÇÃO
+[em(m, 2), em(t, 1), ¬a(1), ¬a(2), ¬em(m, 1), ¬em(t, 2)]

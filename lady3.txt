@@ -1,0 +1,13 @@
+# Third Trial
+# 2 portas
+2
+# Moça e Tigre
+m,t
+# The statements are either both true or both false
+((!a(1))^(!a(2)))v(a(1)^a(2))
+# 1) Either a tiger is in this room or a lady is in the other room.
+em(t,1) v em(m,2)
+# 2) A lady is in the other room
+em(m,1)
+# SOLUÇÃO
+[a(1), a(2), em(m, 1), em(m, 2), ¬em(t, 1), ¬em(t, 2)]

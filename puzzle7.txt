@@ -1,0 +1,10 @@
+# Uma afirmativa é verdadeira e a outra é falsa
+(a(1) ^ !a(2))v((!a(1))^a(2))
+# São duas portas
+2
+# 1) Nesta sala há uma moça e na outra há um tigre
+em(1, 1) ^ em(0, 2)
+# 2) Eu sou verdadeira
+a(2)
+# Solução
+Desconhecida

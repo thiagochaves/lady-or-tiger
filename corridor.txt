@@ -1,0 +1,16 @@
+# Isto é um comentário
+# Linhas em branco são proibidas.
+# São duas portas
+4
+# Os objetos válidos são m e t
+a,b,c
+# Uma afirmativa é verdadeira e a outra é falsa
+a(4)va(2)
+# 1) Nesta sala há uma moça e na outra há um tigre
+em(a, 1) ^ em(b, 2)
+# 2) Em uma destas salas há uma moça e na outra há um tigre
+a(1)
+em(c,1) ^ !a(2)
+a(1)va(2)^a(3)
+# Solução
+Desconhecida

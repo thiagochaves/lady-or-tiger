@@ -1,0 +1,17 @@
+# Second Trial
+# 2 portas
+2
+# Moça e Tigre
+m,t
+# The statements are either both true or both false
+((!a(1))^(!a(2)))v(a(1)^a(2))
+#^((em(0,1) v em(1,1))^(em(0,2) v em(1,2)))^(!((em(0,1) ^ em(1,1)))^!((em(0,2) ^ em(1,2))))
+# 1) At least one of these rooms contains a lady
+em(m,1)v em(m,2)
+# 2) A tiger is in the other room
+em(t,1)
+# SOLUÇÃO
+[a(1), a(2), em(m, 2), em(t, 1), ¬em(m, 1), ¬em(t, 2)]
+# Duas regras são necessárias para resolver este problema:
+# 1- Uma sala contém obrigatoriamente uma moça ou um tigre.
+# 2- A regra anterior é exclusiva.

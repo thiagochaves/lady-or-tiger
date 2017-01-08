@@ -1,0 +1,15 @@
+# Puzzle 69a.
+# A única restrição do problema é que as afirmativas são verdadeiras ou falsas,
+# logo todos os oito cenários são possíveis.
+((!a(1))^(!a(2))^(!a(3))) v ((!a(1))^(!a(2))^(a(3))) v ((!a(1))^(a(2))^(!a(3))) v ((!a(1))^(a(2))^(a(3))) v ((a(1))^(!a(2))^(!a(3))) v ((a(1))^(!a(2))^(a(3))) v ((a(1))^(a(2))^(!a(3))) v ((a(1))^(a(2))^(a(3)))
+# São três caskets
+3
+# Gold : The dagger is in this casket
+em(0, 1)
+# Silver : This casket is empty
+!em(0, 1)
+# Lead : At most one of these three caskets was fashioned by Bellini
+# Pelo menos uma das afirmativas é verdadeira.
+((!a(1))^(!a(2))^(a(3))) v ((!a(1))^(a(2))^(!a(3))) v ((!a(1))^(a(2))^(a(3))) v ((a(1))^(!a(2))^(!a(3))) v ((a(1))^(!a(2))^(a(3))) v ((a(1))^(a(2))^(!a(3))) v ((a(1))^(a(2))^(a(3)))
+# Solução - Parece que não termina
+Desconhecida
