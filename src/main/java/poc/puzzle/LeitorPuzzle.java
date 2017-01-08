@@ -108,6 +108,12 @@ public class LeitorPuzzle {
             throw new ExcecaoArquivoInvalido("O arquivo é inválido. " 
                     + "As restrições não foram informadas.");
         }
+        String restricaoSemEspacosFinais = restricao.trim();
+        while (restricaoSemEspacosFinais.endsWith("\\")) {
+            restricao = restricaoSemEspacosFinais.substring(0, restricaoSemEspacosFinais.length() - 1);
+            restricao += leitor.readLine();
+            restricaoSemEspacosFinais = restricao.trim();
+        }
         return restricao;
     }
 

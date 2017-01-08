@@ -2,12 +2,13 @@ package poc;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
 import poc.afirmativa.Expansao;
 import poc.afirmativa.Localizacao;
-import poc.afirmativa.Negacao;
+import poc.afirmativa.Referencia;
 import poc.puzzle.Puzzle;
 
 /**
@@ -17,15 +18,24 @@ import poc.puzzle.Puzzle;
  */
 public final class Ramo {
     private List<Envelope> _envelopes = new ArrayList<Envelope>();
+    private int _indicePossivelEnvelopeExpansivel;
+    private Suposicao _suposicao;
+    private boolean _fechado;
 
-    public Ramo() {
+    private Ramo(Suposicao s) {
+        _suposicao = Suposicao.criarNovaDeMesmaEstrutura(s);
     }
     
-    public Ramo(List<Envelope> envelopes) {
+    public Ramo(Puzzle puzzle) {
+        _suposicao = Suposicao.criar(puzzle.getNumPortas(), puzzle.getObjetos());
+    }
+    
+    public Ramo(List<Envelope> envelopes, Puzzle puzzle) {
         if (envelopes == null) {
             throw new IllegalArgumentException();
         }
         _envelopes.addAll(envelopes);
+        _suposicao = Suposicao.criar(puzzle.getNumPortas(), puzzle.getObjetos());
     }
     
     /**
@@ -33,8 +43,11 @@ public final class Ramo {
      * @param ramo Não pode ser <code>null</code>.
      */
     public Ramo(Ramo ramo) {
+        _indicePossivelEnvelopeExpansivel = ramo._indicePossivelEnvelopeExpansivel;
+        _suposicao = Suposicao.copiar(ramo._suposicao);
+        _fechado = ramo._fechado;
         for (Envelope e : ramo._envelopes) {
-			adicionarEnvelope(Envelope.criarCopia(e));
+            _envelopes.add(Envelope.criarCopia(e));
         }
     }
 
@@ -49,7 +62,11 @@ public final class Ramo {
         if (_envelopes.contains(envelope)) {
             return;
         }
+        if (_suposicao.contradiz(envelope.getAfirmativa())) {
+            _fechado = true;
+        }
         _envelopes.add(envelope);
+        _suposicao.suporTambem(envelope.getAfirmativa());
     }
     
     public Envelope getEnvelope(int indice) {
@@ -65,11 +82,14 @@ public final class Ramo {
      * ramo.
      */
     public Envelope obterPrimeiroEnvelopeExpansivel() {
-        for (Envelope envelope : _envelopes) {
+        for (int i = _indicePossivelEnvelopeExpansivel; i < _envelopes.size(); i++) {
+            Envelope envelope = _envelopes.get(i);
             if (envelope.eExpansivel()) {
+                _indicePossivelEnvelopeExpansivel = i;
                 return envelope;
             }
         }
+        _indicePossivelEnvelopeExpansivel = _envelopes.size();
         return null;
     }
     
@@ -79,16 +99,7 @@ public final class Ramo {
      * @return
      */
     public boolean podeSerFechado() {
-        for (int j = 0; j < getNumEnvelopes() - 1; j++) {
-            Envelope envelopeAtual = getEnvelope(j);
-            for (int k = j + 1; k < getNumEnvelopes(); k++) {
-                Envelope envelopeTeste = getEnvelope(k);
-                if (envelopeAtual.eOposto(envelopeTeste)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return _fechado;
     }
     
     /**
@@ -97,7 +108,7 @@ public final class Ramo {
      * de porta).
      */
     public Ramo getEssenciais() {
-        Ramo saida = new Ramo();
+        Ramo saida = new Ramo(_suposicao);
         for (Envelope envelope : _envelopes) {
             if (envelope.eEssencial()) {
                 saida.adicionarEnvelope(envelope);
@@ -124,14 +135,13 @@ public final class Ramo {
         // 2- Passar por todas as verdades, se ela for uma negação de uma
         // localização então então inclua seu objeto no container respectivo
         for (Envelope atual : _envelopes) {
-            if (!(atual.getAfirmativa() instanceof Negacao)) {
+            if (!(atual.getAfirmativa().estaNegada())) {
                 continue;
             }
-            if (atual.getTipoExpansao() != Expansao.ATOMICA) {
+            if (atual.getTipoExpansao() != Expansao.IDENTIDADE) {
                 continue;
             }
-            Negacao negacao = (Negacao) atual.getAfirmativa();
-            Localizacao localizacao = negacao.getLocalizacao();
+            Localizacao localizacao = (Localizacao) atual.getAfirmativa();
             String objeto = localizacao.getObjeto();
             int lugar = localizacao.getLugar();
             if (!portas[lugar - 1].contains(objeto)) {
@@ -171,7 +181,7 @@ public final class Ramo {
         if (outroRamo == null) {
             throw new IllegalArgumentException();
         }
-        Ramo intersecao = new Ramo();
+        Ramo intersecao = new Ramo(_suposicao);
         for (Envelope env : _envelopes) {
             // Trata o caso em que há repetições
             if (intersecao.contem(env)) {
@@ -190,7 +200,37 @@ public final class Ramo {
 
     @Override
     public String toString() {
-        return "" + _envelopes;
+        List<Envelope> copia = new ArrayList<Envelope>(_envelopes);
+        Collections.sort(copia, new Comparator<Envelope>() {
+            // TODO Acertar esta bagunça aqui
+            @Override
+            public int compare(Envelope o1, Envelope o2) {
+                if (o1.eEssencial() && !o2.eEssencial()) {
+                    return -1;
+                }
+                if (!o1.eEssencial() && o2.eEssencial()) {
+                    return 1;
+                }
+                if (!o1.eEssencial() && !o2.eEssencial()) {
+                    return o1.hashCode() - o2.hashCode();
+                }
+                if (o1.getTipoExpansao() == Expansao.DELTA && o2.getTipoExpansao() == Expansao.IDENTIDADE) {
+                    return -1;
+                }
+                if (o2.getTipoExpansao() == Expansao.DELTA && o1.getTipoExpansao() == Expansao.IDENTIDADE) {
+                    return 1;
+                }
+                if (o1.getTipoExpansao() == Expansao.DELTA && o2.getTipoExpansao() == Expansao.DELTA) {
+                    return ((Referencia)o1.getAfirmativa()).getIndice() - ((Referencia)o2.getAfirmativa()).getIndice();
+                }
+                int comparacaoLugar = ((Localizacao)o1.getAfirmativa()).getLugar() - ((Localizacao)o2.getAfirmativa()).getLugar();
+                if (comparacaoLugar == 0) {
+                    return ((Localizacao)o1.getAfirmativa()).getObjeto().compareTo(((Localizacao)o2.getAfirmativa()).getObjeto());
+                }
+                return comparacaoLugar;
+            }
+        });
+        return copia.toString();
     }
     
     public String toCanonicalString() {
@@ -248,7 +288,7 @@ public final class Ramo {
     public Ramo deduzirAusencia(Puzzle puzzle) {
         Ramo saida = new Ramo(this);
         for (Envelope e : _envelopes) {
-            for (Negacao n : e.explicitarObjetosQueNaoEstaoAqui()) {
+            for (Localizacao n : e.explicitarObjetosQueNaoEstaoAqui()) {
                 saida.adicionarEnvelope(new Envelope(n));
             }
         }

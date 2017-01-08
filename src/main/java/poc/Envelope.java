@@ -6,7 +6,6 @@ import java.util.Set;
 
 import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Expansao;
-import poc.afirmativa.Negacao;
 import poc.afirmativa.Localizacao;
 
 /**
@@ -81,8 +80,8 @@ public class Envelope {
 	 */
 	public boolean eOposto(Envelope envelope) {
 	    // FIXME mover para as afirmativas
-		Afirmativa outraAfirmativa = new Negacao(envelope._afirmativa).resolverNegacoesDuplas();
-		Afirmativa estaAfirmativa = _afirmativa.resolverNegacoesDuplas();
+		Afirmativa outraAfirmativa = envelope._afirmativa.negar();
+		Afirmativa estaAfirmativa = _afirmativa;
 
 		if (estaAfirmativa.equals(outraAfirmativa)) {
 			return true;
@@ -96,9 +95,11 @@ public class Envelope {
 				&& envelope._afirmativa instanceof Localizacao) {
 			Localizacao lugar1 = (Localizacao) _afirmativa;
 			Localizacao lugar2 = (Localizacao) envelope._afirmativa;
-			if ((!lugar1.getObjeto().equals(lugar2.getObjeto()))
-					&& (lugar1.getLugar() == lugar2.getLugar())) {
-				return true;
+			if (!lugar1.estaNegada() && !lugar2.estaNegada()) {
+    			if ((!lugar1.getObjeto().equals(lugar2.getObjeto()))
+    					&& (lugar1.getLugar() == lugar2.getLugar())) {
+    				return true;
+    			}
 			}
 		}
 
@@ -109,7 +110,7 @@ public class Envelope {
 	    return _afirmativa.eEssencial();
 	}
 	
-	public Collection<Negacao> explicitarObjetosQueNaoEstaoAqui() {
+	public Collection<Localizacao> explicitarObjetosQueNaoEstaoAqui() {
 	    return _afirmativa.explicitarObjetosQueNaoEstaoAqui();
 	}
 

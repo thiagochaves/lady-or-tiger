@@ -10,6 +10,10 @@ import poc.puzzle.Puzzle;
  */
 public interface Afirmativa {
     
+    boolean estaNegada();
+    
+    Afirmativa negar();
+    
     /**
      * Indica se a afirmativa pode ser expandida.
      */
@@ -29,12 +33,6 @@ public interface Afirmativa {
 	Expansao getTipoExpansao();
 	
 	/**
-	 * Se a afirmativa é uma negação dupla, elimina as negações.
-	 * O resultado nunca será uma negação dupla
-	 */
-	Afirmativa resolverNegacoesDuplas();
-	
-	/**
 	 * Liga a afirmativa ao puzzle informado.
 	 * Permite a referência cruzada às afirmativas das portas.
 	 * @param puzzle
@@ -47,5 +45,5 @@ public interface Afirmativa {
      * Afirmativas que explicitam todos os objetos que não estão neste lugar.
      * Vazio se não se aplicar.
      */
-    Collection<Negacao> explicitarObjetosQueNaoEstaoAqui();
+    Collection<Localizacao> explicitarObjetosQueNaoEstaoAqui();
 }

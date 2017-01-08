@@ -6,7 +6,7 @@ package poc.afirmativa;
  */
 public enum Expansao {
     /** Expansão proibida, pois não há o que expandir. */
-    ATOMICA,
+    IDENTIDADE,
     /** Expansão do tipo alfa (conjunção). */
     ALFA,
     /** Expansão do tipo beta (disjunção). */

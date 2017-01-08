@@ -38,14 +38,14 @@ public class Tableaux {
      * Expande o tableaux ao máximo de forma estrita.
      */
     public void expandir() {
-        show("Tableaux original : " + getRamos());
+        show("Tableaux original : ");
         while (eExpansivel()) {
             expandirUmNivel();
-            show("Expansão do tableaux : " + getRamos());
+            show("Expansão do tableaux : ");
             fechar();
         }
         fechar();
-        show("Tableaux sem ramos fechados : " + getRamos());
+        show("Tableaux sem ramos fechados : ");
     }
     
     /**
@@ -149,7 +149,7 @@ public class Tableaux {
      *            Ramo a ser bifurcado.
      */
     private void bifurcarRamo(Set<Afirmativa> afirmativas, int indiceRamo) {
-        assert afirmativas.size() == 2;
+        assert afirmativas.size() == 2 : afirmativas.toString();
         Ramo ramoAtual = getRamo(indiceRamo);
         Ramo novoRamo = new Ramo(ramoAtual);
         Iterator<Afirmativa> it = afirmativas.iterator();
@@ -201,9 +201,13 @@ public class Tableaux {
     /**
      * Mostra uma mensagem de depuração se assim for pedido.
      */
-    protected static void show(String mensagem) {
+    protected void show(String mensagem, Object... objetosAExibir) {
         if (cdepuracao) {
-            System.out.println(mensagem);
+            if (objetosAExibir.length > 0) {
+                System.out.println(mensagem + Arrays.asList(objetosAExibir));
+            } else {
+                System.out.println(mensagem);
+            }
         }
     }
 }

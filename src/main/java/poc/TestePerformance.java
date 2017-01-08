@@ -23,10 +23,11 @@ public class TestePerformance {
     public static void main(String[] args) {
         File caminho = new File(DIRETORIO, "lady11.txt");
         double total = 0.0;
-        for (int i = 0; i < 100; i++) {
+        int numRuns = 10000;
+        for (int i = 0; i < numRuns; i++) {
             total += testarConfiguracaoDoArquivo(caminho);
         }
-        double media = total / 100;
+        double media = total / numRuns;
         System.out.println("Tempo médio: " + media + "s");
     }
 

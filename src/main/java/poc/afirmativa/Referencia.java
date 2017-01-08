@@ -17,6 +17,7 @@ public class Referencia implements Afirmativa {
 	private Puzzle _puzzle;
 	/** A que afirmativa do Puzzle esta se refere. */
 	private int _indice;
+    private boolean _negada;
 
 	/**
 	 * Cria uma nova referência a uma afirmativa.
@@ -24,9 +25,6 @@ public class Referencia implements Afirmativa {
 	 * @param indice Deve estar entre 1 e puzzle.getNumPortas().
 	 */
 	public Referencia(int indice) {
-	    if (indice < 1) {
-	        throw new IllegalArgumentException();
-	    }
 		_indice = indice;
 	}
 
@@ -34,6 +32,19 @@ public class Referencia implements Afirmativa {
 		return _indice;
 	}
 
+
+    @Override
+    public boolean estaNegada() {
+        return _negada;
+    }
+
+    @Override
+    public Afirmativa negar() {
+        Referencia negada = new Referencia(_indice);
+        negada._puzzle = _puzzle;
+        negada._negada = !_negada;
+        return negada;
+    }
 
     @Override
     public boolean eExpansivel() {
@@ -46,7 +57,11 @@ public class Referencia implements Afirmativa {
 	public Set<Afirmativa> expandir() {
 		Afirmativa resultado = _puzzle.getPorta(_indice);
 		Set<Afirmativa> expansao = new HashSet<Afirmativa>();
-		expansao.add(resultado);
+        if (!estaNegada()) {
+            expansao.add(resultado);
+        } else {
+            expansao.add(resultado.negar());
+        }
 		return expansao;
 	}
 
@@ -57,52 +72,21 @@ public class Referencia implements Afirmativa {
 		return Expansao.DELTA;
 	}
 
-	@Override
-    public Afirmativa resolverNegacoesDuplas() {
-        return this;
-    }
-
-    public String toString() {
-		return "a(" + _indice + ")";
+	public String toString() {
+		String base = "a(" + _indice + ")";
+        if (estaNegada()) {
+            return "¬" + base;
+        } else {
+            return base;
+        }
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + _indice;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Referencia other = (Referencia) obj;
-		if (_indice != other._indice)
-			return false;
-		if (_puzzle == null) {
-			if (other._puzzle != null)
-				return false;
-		} else if (!_puzzle.equals(other._puzzle))
-			return false;
-		return true;
-	}
-
-    @Override
     public void associarAPuzzle(Puzzle puzzle) {
         if (puzzle == null) {
             throw new IllegalArgumentException("Puzzle nulo");
         }
         _puzzle = puzzle;
-        if (_indice > _puzzle.getNumPortas()) {
-            throw new IllegalArgumentException("Número de porta " + _indice 
-                    + " não permitido para o puzzle " + puzzle);
-        }
     }
 
     @Override
@@ -111,7 +95,44 @@ public class Referencia implements Afirmativa {
     }
 
     @Override
-    public Collection<Negacao> explicitarObjetosQueNaoEstaoAqui() {
+    public Collection<Localizacao> explicitarObjetosQueNaoEstaoAqui() {
         return Collections.emptyList();
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + _indice;
+        result = prime * result + (_negada ? 1231 : 1237);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Referencia other = (Referencia) obj;
+        if (_indice != other._indice) {
+            return false;
+        }
+        if (_negada != other._negada) {
+            return false;
+        }
+        if (_puzzle == null) {
+            if (other._puzzle != null) {
+                return false;
+            }
+        } else if (!_puzzle.equals(other._puzzle)) {
+            return false;
+        }
+        return true;
     }
 }

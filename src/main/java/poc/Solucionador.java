@@ -1,10 +1,10 @@
 package poc;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Disjuncao;
-import poc.afirmativa.Negacao;
 import poc.afirmativa.Referencia;
 import poc.puzzle.Puzzle;
 
@@ -21,7 +21,7 @@ public class Solucionador extends Tableaux {
      */
     public Solucionador(Puzzle puzzle) {
         _puzzle = puzzle;
-        Ramo ramoInicial = new Ramo();
+        Ramo ramoInicial = new Ramo(puzzle);
         ramoInicial.adicionarEnvelope(new Envelope(_puzzle.getAxioma()));
         adicionarRamo(ramoInicial);
     }
@@ -52,16 +52,24 @@ public class Solucionador extends Tableaux {
         }
         // Calculamos a interseção dos ramos restantes
         if (!ramos.isEmpty()) {
-            Ramo verdades = new Ramo(ramos.get(0));
-            for (int i = 0; i < ramos.size(); i++) {
-                Ramo ramo = ramos.get(i).getEssenciais();
-                verdades = verdades.calcularIntersecao(ramo);
-            }
-            show("Solução : " + verdades);
-            return verdades;
+            return calcularIntersecao(ramos);
         } else {
-            return new Ramo();
+            return new Ramo(_puzzle);
         }
+    }
+
+    private Ramo calcularIntersecao(List<Ramo> ramos) {
+        show("Calculando interseção:");
+        Ramo verdades = new Ramo(ramos.get(0).getEssenciais());
+        show("Encontrado : ", verdades);
+        for (int i = 0; i < ramos.size(); i++) {
+            Ramo ramo = ramos.get(i).getEssenciais();
+            show("Encontrado : ", ramo);
+            verdades = verdades.calcularIntersecao(ramo);
+            show("Interseção parcial : ", verdades);
+        }
+        show("Solução : ", verdades);
+        return verdades;
     }
 
     @Override
@@ -81,7 +89,7 @@ public class Solucionador extends Tableaux {
         for (int iPorta = 1; iPorta <= _puzzle.getNumPortas(); iPorta++) {
             Afirmativa afPorta = _puzzle.getPorta(iPorta);
             Disjuncao portaEstaCertaOuErrada = new Disjuncao(
-                    new Negacao(afPorta), new Referencia(iPorta));
+                    afPorta.negar(), new Referencia(iPorta));
             portaEstaCertaOuErrada.associarAPuzzle(_puzzle);
             deducoes.add(portaEstaCertaOuErrada);
         }
