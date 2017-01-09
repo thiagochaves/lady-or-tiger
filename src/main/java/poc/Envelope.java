@@ -14,7 +14,7 @@ import poc.afirmativa.Localizacao;
 public class Envelope {
 	/** A afirmativa envelopada. */
 	private Afirmativa _afirmativa;
-	/** Indica se este envelope j· foi expandido */
+	/** Indica se este envelope j√° foi expandido */
 	private boolean _expandido = false;
 
 	public Envelope(Afirmativa afirmativa) {
@@ -22,8 +22,8 @@ public class Envelope {
 	}
 	
 	/**
-	 * Cria uma cÛpia precisa do envelope informado.
-	 * @param original N„o pode ser null.
+	 * Cria uma c√≥pia precisa do envelope informado.
+	 * @param original N√£o pode ser null.
 	 */
 	public static Envelope criarCopia(Envelope original) {
 	    Envelope copia = new Envelope(original._afirmativa);
@@ -39,10 +39,10 @@ public class Envelope {
 	}
 
 	/**
-     * Expande a afirmativa. Retorna os componentes da mesma. AVISO: SÛ pode ser
+     * Expande a afirmativa. Retorna os componentes da mesma. AVISO: S√≥ pode ser
      * executada uma vez.
      * 
-     * @return Se a expans„o for do tipo gama, retorna um elemento apenas. Se
+     * @return Se a expans√£o for do tipo gama, retorna um elemento apenas. Se
      *         for do tipo alfa ou beta retorna dois elementos.
      */
     public Set<Afirmativa> expandir() {
@@ -54,29 +54,29 @@ public class Envelope {
     }
 
     /**
-	 * ObtÈm a afirmativa envelopada por este objeto.
+	 * Obt√©m a afirmativa envelopada por este objeto.
 	 */
 	public Afirmativa getAfirmativa() {
 		return _afirmativa;
 	}
 
 	/**
-     * RepresentaÁao textual.
+     * Representa√ßao textual.
      */
     public String toString() {
     	return _afirmativa.toString();
     }
 
     /**
-	 * Indica o tipo de expans„o que o mÈtodo expandir() far·.
+	 * Indica o tipo de expans√£o que o m√©todo expandir() far√°.
 	 */
 	public Expansao getTipoExpansao() {
 		return _afirmativa.getTipoExpansao();
 	}
 
 	/**
-	 * Retorna verdadeiro se o envelope for a negaÁ„o do atual ou se afirma que
-	 * h· mais de um objeto em um determinado lugar.
+	 * Retorna verdadeiro se o envelope for a nega√ß√£o do atual ou se afirma que
+	 * h√° mais de um objeto em um determinado lugar.
 	 */
 	public boolean eOposto(Envelope envelope) {
 	    // FIXME mover para as afirmativas
@@ -87,9 +87,9 @@ public class Envelope {
 			return true;
 		}
 
-		// RestriÁ„o de unipresenÁa
-		// Dois ou mais objeto n„o podem estar no mesmo lugar
-		// Obs: O significado da restriÁ„o foi alterado. Verifique o relatÛrio
+		// Restri√ß√£o de unipresen√ßa
+		// Dois ou mais objeto n√£o podem estar no mesmo lugar
+		// Obs: O significado da restri√ß√£o foi alterado. Verifique o relat√≥rio
 		// do POC I para o significado anterior.
 		if (_afirmativa instanceof Localizacao
 				&& envelope._afirmativa instanceof Localizacao) {
@@ -116,7 +116,7 @@ public class Envelope {
 
     @Override
     /**
-     * A expansibilidade n„o È considerada.
+     * A expansibilidade n√£o √© considerada.
      */
     public boolean equals(Object obj) {
     	if (this == obj)

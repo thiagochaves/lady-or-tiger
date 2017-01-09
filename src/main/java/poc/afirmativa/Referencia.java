@@ -8,19 +8,19 @@ import java.util.Set;
 import poc.puzzle.Puzzle;
 
 /**
- * Usada pelo parser. Substitui uma referência a uma afirmativa se ela não
- * estiver disponível. Feita para resolver o problema de recursão mútua entre
+ * Usada pelo parser. Substitui uma referÃªncia a uma afirmativa se ela nÃ£o
+ * estiver disponÃ­vel. Feita para resolver o problema de recursÃ£o mÃºtua entre
  * afirmativas.
  */
 public class Referencia implements Afirmativa {
-	/** Puzzle a que esta afirmativa está relacionada. */
+	/** Puzzle a que esta afirmativa estÃ¡ relacionada. */
 	private Puzzle _puzzle;
 	/** A que afirmativa do Puzzle esta se refere. */
 	private int _indice;
     private boolean _negada;
 
 	/**
-	 * Cria uma nova referência a uma afirmativa.
+	 * Cria uma nova referÃªncia a uma afirmativa.
 	 * 
 	 * @param indice Deve estar entre 1 e puzzle.getNumPortas().
 	 */
@@ -52,7 +52,7 @@ public class Referencia implements Afirmativa {
     }
 
     /**
-	 * Uma referência para uma afirmativa é expandida para o conteúdo da mesma.
+	 * Uma referÃªncia para uma afirmativa Ã© expandida para o conteÃºdo da mesma.
 	 */
 	public Set<Afirmativa> expandir() {
 		Afirmativa resultado = _puzzle.getPorta(_indice);
@@ -66,7 +66,7 @@ public class Referencia implements Afirmativa {
 	}
 
 	/**
-	 * Indica o tipo de expansão que o método expandir() fará.
+	 * Indica o tipo de expansÃ£o que o mÃ©todo expandir() farÃ¡.
 	 */
 	public Expansao getTipoExpansao() {
 		return Expansao.DELTA;
@@ -75,7 +75,7 @@ public class Referencia implements Afirmativa {
 	public String toString() {
 		String base = "a(" + _indice + ")";
         if (estaNegada()) {
-            return "¬" + base;
+            return "Â¬" + base;
         } else {
             return base;
         }

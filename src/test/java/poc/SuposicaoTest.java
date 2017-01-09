@@ -17,7 +17,7 @@ public class SuposicaoTest {
         Set<String> objetos = new HashSet<String>();
         objetos.add("m");
         objetos.add("t");
-        Suposicao s = parse("¬a(1), a(2), ¬em(t,2), em(t,1), em(m,2)", 3, objetos);
+        Suposicao s = parse("Â¬a(1), a(2), Â¬em(t,2), em(t,1), em(m,2)", 3, objetos);
         Localizacao ladyIsNotBehindDoorOne = new Localizacao("m", 1).negar();
         assertFalse(s.contradiz(ladyIsNotBehindDoorOne));
     }
@@ -28,7 +28,7 @@ public class SuposicaoTest {
         objetos.add("m");
         objetos.add("t");
         objetos.add("n");
-        Suposicao s = parse("[a(1), ¬a(2), ¬a(3), ¬a(4), ¬a(5), a(6), a(7), ¬a(8), ¬a(9), ¬em(m, 1), ¬em(m, 2), ¬em(n, 2), ¬em(m, 3), ¬em(m, 4), ¬em(m, 5), ¬em(m, 6), ¬em(m, 7), ¬em(m, 8), ¬em(t, 8)]", 9, objetos);
+        Suposicao s = parse("[a(1), Â¬a(2), Â¬a(3), Â¬a(4), Â¬a(5), a(6), a(7), Â¬a(8), Â¬a(9), Â¬em(m, 1), Â¬em(m, 2), Â¬em(n, 2), Â¬em(m, 3), Â¬em(m, 4), Â¬em(m, 5), Â¬em(m, 6), Â¬em(m, 7), Â¬em(m, 8), Â¬em(t, 8)]", 9, objetos);
         Localizacao ladyIsBehindDoorNine = new Localizacao("m", 9);
         assertFalse(s.contradiz(ladyIsBehindDoorNine));
     }

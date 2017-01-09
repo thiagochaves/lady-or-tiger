@@ -1,9 +1,9 @@
 # Fourth Trial
 # 2 portas
 2
-# Moça e Tigre
+# MoÃ§a e Tigre
 m,t
-# Restrições naturais
+# RestriÃ§Ãµes naturais
 (((!a(1))^(!a(2))) v (a(1)^a(2)) v ((!a(1))^a(2)) v (a(1)^(!a(2))))  ^  ((!em(m,1))v a(1))^((!em(t,1))v (!a(1)))^((!em(m,2))v (!a(2)))^((!em(t,2))v a(2))
 #em(m,1)->a(1)
 #em(t,1)->!a(1)
@@ -13,5 +13,5 @@ m,t
 em(m,1) ^ em(m,2)
 # 2) Both rooms contain ladies
 em(m,1) ^ em(m,2)
-# SOLUÇÃO
-[em(m, 2), em(t, 1), ¬a(1), ¬a(2), ¬em(m, 1), ¬em(t, 2)]
+# SOLUÃ‡ÃƒO
+[em(m, 2), em(t, 1), Â¬a(1), Â¬a(2), Â¬em(m, 1), Â¬em(t, 2)]

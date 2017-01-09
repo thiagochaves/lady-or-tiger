@@ -1,7 +1,7 @@
 package poc;
 
 /**
- * Um erro de implementaÁ„o. Significa que um acontecimento n„o previsto
+ * Um erro de implementa√ß√£o. Significa que um acontecimento n√£o previsto
  * ocorreu.
  * 
  * @author Thiago

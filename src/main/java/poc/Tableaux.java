@@ -6,12 +6,12 @@ import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Expansao;
 
 /**
- * Representa um tableaux sem‚ntico genÈrico.
+ * Representa um tableaux sem√¢ntico gen√©rico.
  */
 public class Tableaux {
-    /** Lista de ramos da ·rvore. */
+    /** Lista de ramos da √°rvore. */
     private List<Ramo> _ramos = new ArrayList<Ramo>();
-    /** Indica se as mensagens de depuraÁ„o devem ser mostradas. */
+    /** Indica se as mensagens de depura√ß√£o devem ser mostradas. */
     private static boolean cdepuracao = false;
 
     /**
@@ -21,27 +21,27 @@ public class Tableaux {
     }
 
     /**
-     * Cria um tableaux para resolver alguma implic‚ncia.
+     * Cria um tableaux para resolver alguma implic√¢ncia.
      */
     public Tableaux(Ramo axiomas) {
         _ramos.add(axiomas);
     }
 
     /**
-     * Define se as mensagens de depuraÁ„o devem ser mostradas ou n„o.
+     * Define se as mensagens de depura√ß√£o devem ser mostradas ou n√£o.
      */
     static void setDepuracao(boolean depuracao) {
         cdepuracao = depuracao;
     }
 
     /**
-     * Expande o tableaux ao m·ximo de forma estrita.
+     * Expande o tableaux ao m√°ximo de forma estrita.
      */
     public void expandir() {
         show("Tableaux original : ", this);
         while (eExpansivel()) {
             expandirUmNivel();
-            show("Expans„o do tableaux : ", this);
+            show("Expans√£o do tableaux : ", this);
             fechar();
         }
         fechar();
@@ -50,7 +50,7 @@ public class Tableaux {
     
     /**
      * Adiciona um ramo ao tableaux.
-     * @param ramo N„o pode ser <code>null</code>.
+     * @param ramo N√£o pode ser <code>null</code>.
      */
     protected void adicionarRamo(Ramo ramo) {
         if (ramo == null) {
@@ -60,39 +60,39 @@ public class Tableaux {
     }
     
     /**
-     * Remove o ramo no Ìndice informado.
+     * Remove o ramo no √≠ndice informado.
      */
     private void removerRamo(int indice) {
         if (indice < 0 || indice >= getNumRamos()) {
-            throw new IllegalArgumentException("Õndice inv·lido " + indice);
+            throw new IllegalArgumentException("√çndice inv√°lido " + indice);
         }
         _ramos.remove(indice);
     }
 
     /**
-     * ObtÈm um ramo do tableaux.
+     * Obt√©m um ramo do tableaux.
      */
     protected Ramo getRamo(int indice) {
-        assert _ramos != null : "N„o h· ramos";
+        assert _ramos != null : "N√£o h√° ramos";
         return _ramos.get(indice);
     }
 
     /**
-     * ObtÈm a ·rvore toda.
+     * Obt√©m a √°rvore toda.
      */
     protected List<Ramo> getRamos() {
         return Collections.unmodifiableList(_ramos);
     }
     
     /**
-     * @return O n˙mero de ramos neste tableaux.
+     * @return O n√∫mero de ramos neste tableaux.
      */
     protected int getNumRamos() {
         return _ramos.size();
     }
 
     /**
-     * Aplica uma regra de expans„o ao tableaux.
+     * Aplica uma regra de expans√£o ao tableaux.
      */
     private void expandirUmNivel() {
         // 1. Para cada ramo ATUAL
@@ -106,9 +106,9 @@ public class Tableaux {
             // 1.2 Expanda-o
             Expansao tipoExpansao = envelopeASerExpandido.getTipoExpansao();
             Set<Afirmativa> expansao = envelopeASerExpandido.expandir();
-            // No caso de conjunÁıes e disjunÁıes, mantemos apenas os
-            // elementos separados, arrancando fora a express„o de 
-            // conjunÁ„o ou disjunÁ„o
+            // No caso de conjun√ß√µes e disjun√ß√µes, mantemos apenas os
+            // elementos separados, arrancando fora a express√£o de 
+            // conjun√ß√£o ou disjun√ß√£o
             if (tipoExpansao == Expansao.ALFA || 
                     tipoExpansao == Expansao.BETA ||
                     tipoExpansao == Expansao.GAMA) {
@@ -118,12 +118,12 @@ public class Tableaux {
                 case ALFA:
                 case GAMA:
                 case DELTA:
-                    // Nestes tipos de expansıes os elementos s„o adicionados ao
+                    // Nestes tipos de expans√µes os elementos s√£o adicionados ao
                     // ramo atual
                     adicionarAfirmativasRamo(expansao, i);
                     break;
                 case BETA:
-                    // Neste tipo de expans„o È criado um novo ramo
+                    // Neste tipo de expans√£o √© criado um novo ramo
                     bifurcarRamo(expansao, i);
             }
         }
@@ -172,8 +172,8 @@ public class Tableaux {
     }
 
     /**
-     * Indica se mais alguma expans„o pode ser feita ou n„o. Em caso negativo o
-     * tableaux j· atingiu a atomicidade m·xima.
+     * Indica se mais alguma expans√£o pode ser feita ou n√£o. Em caso negativo o
+     * tableaux j√° atingiu a atomicidade m√°xima.
      */
     public boolean eExpansivel() {
         final int numRamos = getRamos().size();
@@ -188,7 +188,7 @@ public class Tableaux {
     }
 
     /**
-     * Retorna uma representaÁ„o textual do tableaux.
+     * Retorna uma representa√ß√£o textual do tableaux.
      */
     public String toString() {
         StringBuilder resultado = new StringBuilder();
@@ -202,7 +202,7 @@ public class Tableaux {
     }
 
     /**
-     * Mostra uma mensagem de depuraÁ„o se assim for pedido.
+     * Mostra uma mensagem de depura√ß√£o se assim for pedido.
      */
     protected void show(String mensagem, Object... objetosAExibir) {
         if (cdepuracao) {

@@ -9,23 +9,23 @@ import poc.afirmativa.Afirmativa;
  */
 public class Puzzle {
 
-	/** RestriÁ„o do problema que È sempre verdadeira. */
+	/** Restri√ß√£o do problema que √© sempre verdadeira. */
 	private Afirmativa _axioma;
 	/** Afirmativas das portas. */
 	private List<Afirmativa> _portas;
-	/** Objetos que podem se encontrar atr·s das portas. */
+	/** Objetos que podem se encontrar atr√°s das portas. */
 	private Set<String> _objetos;
 
     /**
      * Cria um novo puzzle.
      * 
      * @param restricao
-     *            Uma restriÁ„o que È assumida como verdadeira.
+     *            Uma restri√ß√£o que √© assumida como verdadeira.
      * @param portas
      *            As afirmativas das portas (na ordem).
      * @param objetosValidos
-     *            Os objetos que podem estar atr·s das portas.
-     * @throws ExcecaoParsing Falha ao interpretar as restriÁıes.
+     *            Os objetos que podem estar atr√°s das portas.
+     * @throws ExcecaoParsing Falha ao interpretar as restri√ß√µes.
      */
 	public Puzzle(Afirmativa axioma, List<Afirmativa> portas, Set<String> objetosValidos) {
         _objetos = new HashSet<String>(objetosValidos);
@@ -43,35 +43,35 @@ public class Puzzle {
     }
 	
 	/**
-	 * ObtÈm o axioma.
+	 * Obt√©m o axioma.
 	 */
 	public Afirmativa getAxioma() {
 		return _axioma;
 	}
 
 	/**
-	 * ObtÈm o n˙mero de portas.
+	 * Obt√©m o n√∫mero de portas.
 	 */
 	public int getNumPortas() {
 		return _portas.size();
 	}
 
 	/**
-	 * ObtÈm a afirmativa de uma porta. Obs: A primeira porta tem Ìndice 1.
+	 * Obt√©m a afirmativa de uma porta. Obs: A primeira porta tem √≠ndice 1.
 	 */
 	public Afirmativa getPorta(int indice) {
 		return _portas.get(indice - 1);
 	}
 
 	/**
-	 * Descobre se o par‚metro representa um objeto v·lido.
+	 * Descobre se o par√¢metro representa um objeto v√°lido.
 	 */
 	public boolean eObjeto(String objeto) {
 		return _objetos.contains(objeto);
 	}
 
 	/**
-	 * ObtÈm um conjunto com os objetos v·lidos.
+	 * Obt√©m um conjunto com os objetos v√°lidos.
 	 */
 	public Set<String> getObjetos() {
 		return Collections.unmodifiableSet(_objetos);

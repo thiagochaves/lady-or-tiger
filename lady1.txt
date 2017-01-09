@@ -1,14 +1,14 @@
-# Isto é um comentário
-# Linhas em branco são proibidas.
-# São duas portas
+# Isto Ã© um comentÃ¡rio
+# Linhas em branco sÃ£o proibidas.
+# SÃ£o duas portas
 2
-# Os objetos válidos são m e t
+# Os objetos vÃ¡lidos sÃ£o m e t
 m,t
-# Uma afirmativa é verdadeira e a outra é falsa
+# Uma afirmativa Ã© verdadeira e a outra Ã© falsa
 (a(1) ^ !a(2))v((!a(1))^a(2))
-# 1) Nesta sala há uma moça e na outra há um tigre
+# 1) Nesta sala hÃ¡ uma moÃ§a e na outra hÃ¡ um tigre
 em(m, 1) ^ em(t, 2)
-# 2) Em uma destas salas há uma moça e na outra há um tigre
+# 2) Em uma destas salas hÃ¡ uma moÃ§a e na outra hÃ¡ um tigre
 (em(m,1)^em(t,2))v(em(m,2)^em(t,1))
-# Solução
-[a(2), em(m, 2), em(t, 1), ¬a(1), ¬em(m, 1), ¬em(t, 2)]
+# SoluÃ§Ã£o
+[a(2), em(m, 2), em(t, 1), Â¬a(1), Â¬em(m, 1), Â¬em(t, 2)]

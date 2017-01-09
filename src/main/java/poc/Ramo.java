@@ -39,8 +39,8 @@ public final class Ramo {
     }
     
     /**
-     * Cria um novo ramo fazendo uma cÛpia do conte˙do do ramo informado.
-     * @param ramo N„o pode ser <code>null</code>.
+     * Cria um novo ramo fazendo uma c√≥pia do conte√∫do do ramo informado.
+     * @param ramo N√£o pode ser <code>null</code>.
      */
     public Ramo(Ramo ramo) {
         _indicePossivelEnvelopeExpansivel = ramo._indicePossivelEnvelopeExpansivel;
@@ -71,14 +71,14 @@ public final class Ramo {
     
     public Envelope getEnvelope(int indice) {
         if (indice < 0 || indice >= getNumEnvelopes()) {
-            throw new IllegalArgumentException("Õndice inv·lido " + indice);
+            throw new IllegalArgumentException("√çndice inv√°lido " + indice);
         }
         return _envelopes.get(indice);
     }
     
     /**
-     * Procure linearmente pelo primeiro envelope expansÌvel neste ramo.
-     * @return <code>null</code> se n„o houver envelope expansÌvel no 
+     * Procure linearmente pelo primeiro envelope expans√≠vel neste ramo.
+     * @return <code>null</code> se n√£o houver envelope expans√≠vel no 
      * ramo.
      */
     public Envelope obterPrimeiroEnvelopeExpansivel() {
@@ -95,7 +95,7 @@ public final class Ramo {
     
     /**
      * Indica se o ramo pode ser fechado, ou seja, possui uma 
-     * contradiÁ„o em seu conte˙do.
+     * contradi√ß√£o em seu conte√∫do.
      * @return
      */
     public boolean podeSerFechado() {
@@ -103,8 +103,8 @@ public final class Ramo {
     }
     
     /**
-     * Retorna um ramo que contÈm todos os envelopes deste ramo que
-     * envolvem uma afirmativa essencial (localizaÁ„o ou afirmativa 
+     * Retorna um ramo que cont√©m todos os envelopes deste ramo que
+     * envolvem uma afirmativa essencial (localiza√ß√£o ou afirmativa 
      * de porta).
      */
     public Ramo getEssenciais() {
@@ -118,12 +118,12 @@ public final class Ramo {
     }
 
     /**
-     * Dado que uma porta precisa esconder um e apenas um objeto este mÈtodo
-     * analisa e infere o que pode estar atr·s das portas. O resultado completo
-     * (junto com dados iniciais) È retornado. Ex: Se houver !em(m,1) e os
-     * ˙nicos objetos v·lidos sejam m e t, ent„o È inferido que em(t,1). OBS:
-     * Sempre deve existir um objeto atr·s de uma porta. Se isso n„o acontecer o
-     * mÈtodo retorna null.
+     * Dado que uma porta precisa esconder um e apenas um objeto este m√©todo
+     * analisa e infere o que pode estar atr√°s das portas. O resultado completo
+     * (junto com dados iniciais) √© retornado. Ex: Se houver !em(m,1) e os
+     * √∫nicos objetos v√°lidos sejam m e t, ent√£o √© inferido que em(t,1). OBS:
+     * Sempre deve existir um objeto atr√°s de uma porta. Se isso n√£o acontecer o
+     * m√©todo retorna null.
      */
     @SuppressWarnings("unchecked")
 	public Ramo deduzirPresenca(Puzzle puzzle) {
@@ -132,8 +132,8 @@ public final class Ramo {
         for (int i = 0; i < puzzle.getNumPortas(); i++) {
             portas[i] = new ArrayList<String>();
         }
-        // 2- Passar por todas as verdades, se ela for uma negaÁ„o de uma
-        // localizaÁ„o ent„o ent„o inclua seu objeto no container respectivo
+        // 2- Passar por todas as verdades, se ela for uma nega√ß√£o de uma
+        // localiza√ß√£o ent√£o ent√£o inclua seu objeto no container respectivo
         for (Envelope atual : _envelopes) {
             if (!(atual.getAfirmativa().estaNegada())) {
                 continue;
@@ -148,8 +148,8 @@ public final class Ramo {
                 portas[lugar - 1].add(objeto);
             }
         }
-        // 3- Para cada porta determine os objetos que poderiam estar l· e
-        // se houver apenas uma possibilidade adicione-a ‡ verdade
+        // 3- Para cada porta determine os objetos que poderiam estar l√° e
+        // se houver apenas uma possibilidade adicione-a √† verdade
         Ramo saida = new Ramo(this);
         for (int j = 0; j < portas.length; j++) {
             ArrayList<String> portaAtual = portas[j];
@@ -157,7 +157,7 @@ public final class Ramo {
             objetos.addAll(puzzle.getObjetos());
             objetos.removeAll(portaAtual);
             if (objetos.size() == 0) {
-                // Est· dizendo que n„o h· objetos atr·s da porta, o que n„o
+                // Est√° dizendo que n√£o h√° objetos atr√°s da porta, o que n√£o
                 // pode
                 // acontecer
                 return null;
@@ -174,7 +174,7 @@ public final class Ramo {
     }
     
     /**
-     * Calcula a interseÁ„o do ramo atual com o informado. 
+     * Calcula a interse√ß√£o do ramo atual com o informado. 
      * @throws NullPointerException Se o ramo for <code>null</code>.
      */
     public Ramo calcularIntersecao(Ramo outroRamo) {
@@ -183,7 +183,7 @@ public final class Ramo {
         }
         Ramo intersecao = new Ramo(_suposicao);
         for (Envelope env : _envelopes) {
-            // Trata o caso em que h· repetiÁıes
+            // Trata o caso em que h√° repeti√ß√µes
             if (intersecao.contem(env)) {
                 continue;
             }
@@ -202,7 +202,7 @@ public final class Ramo {
     public String toString() {
         List<Envelope> copia = new ArrayList<Envelope>(_envelopes);
         Collections.sort(copia, new Comparator<Envelope>() {
-            // TODO Acertar esta bagunÁa aqui
+            // TODO Acertar esta bagun√ßa aqui
             @Override
             public int compare(Envelope o1, Envelope o2) {
                 if (o1.eEssencial() && !o2.eEssencial()) {
@@ -282,8 +282,8 @@ public final class Ramo {
     }
 
     /**
-     * Se j· foi descoberto o que h· atr·s de uma porta, ent„o afirmaremos
-     * que os outros objetos n„o podem estar atr·s de tal porta.
+     * Se j√° foi descoberto o que h√° atr√°s de uma porta, ent√£o afirmaremos
+     * que os outros objetos n√£o podem estar atr√°s de tal porta.
      */
     public Ramo deduzirAusencia(Puzzle puzzle) {
         Ramo saida = new Ramo(this);

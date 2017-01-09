@@ -1,18 +1,18 @@
 package poc.afirmativa;
 
 /**
- * Tipo de expans„o que a afirmativa realiza. 
+ * Tipo de expans√£o que a afirmativa realiza. 
  * @author Thiago
  */
 public enum Expansao {
-    /** Expans„o proibida, pois n„o h· o que expandir. */
+    /** Expans√£o proibida, pois n√£o h√° o que expandir. */
     IDENTIDADE,
-    /** Expans„o do tipo alfa (conjunÁ„o). */
+    /** Expans√£o do tipo alfa (conjun√ß√£o). */
     ALFA,
-    /** Expans„o do tipo beta (disjunÁ„o). */
+    /** Expans√£o do tipo beta (disjun√ß√£o). */
     BETA,
-    /** Expans„o devido ‡ negaÁ„o de uma negaÁ„o. */
+    /** Expans√£o devido √† nega√ß√£o de uma nega√ß√£o. */
     GAMA,
-    /** Expans„o de uma referÍncia para seu conte˙do. */
+    /** Expans√£o de uma refer√™ncia para seu conte√∫do. */
     DELTA
 }

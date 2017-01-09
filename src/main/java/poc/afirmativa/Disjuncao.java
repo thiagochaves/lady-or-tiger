@@ -8,7 +8,7 @@ import java.util.Set;
 import poc.puzzle.Puzzle;
 
 /**
- * Representa a disjunÁ„o de duas afirmativas.
+ * Representa a disjun√ß√£o de duas afirmativas.
  */
 public class Disjuncao implements Afirmativa {
 	/** Primeira afirmativa. */
@@ -17,7 +17,7 @@ public class Disjuncao implements Afirmativa {
 	private Afirmativa _afirmativaDois; // NOPMD by Thiago on 05/09/10 13:01
     private boolean _negada;
 
-	/** ConstrÛi uma afirmativa que È a disjunÁ„o de duas. */
+	/** Constr√≥i uma afirmativa que √© a disjun√ß√£o de duas. */
 	public Disjuncao(Afirmativa umaAfirmativa,
 			Afirmativa outraAfirmativa) {
 		_afirmativaUm = umaAfirmativa;
@@ -42,7 +42,7 @@ public class Disjuncao implements Afirmativa {
     }
 
     /**
-	 * Os componentes s„o as subafirmativas.
+	 * Os componentes s√£o as subafirmativas.
 	 */
     public Set<Afirmativa> expandir() {
         Set<Afirmativa> expansao = new HashSet<Afirmativa>();
@@ -57,7 +57,7 @@ public class Disjuncao implements Afirmativa {
     }
 
 	/**
-	 * Indica o tipo de expans„o que o mÈtodo expandir() far·.
+	 * Indica o tipo de expans√£o que o m√©todo expandir() far√°.
 	 */
 	public Expansao getTipoExpansao() {
 	    if (!estaNegada()) {
@@ -68,12 +68,12 @@ public class Disjuncao implements Afirmativa {
 	}
 
 	/**
-	 * RepresentaÁ„o textual.
+	 * Representa√ß√£o textual.
 	 */
 	public String toString() {
 		String base = "(" + _afirmativaUm + " v " + _afirmativaDois + ")";
         if (estaNegada()) {
-            return "¨" + base;
+            return "¬¨" + base;
         } else {
             return base;
         }

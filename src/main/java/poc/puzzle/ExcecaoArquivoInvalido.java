@@ -1,7 +1,7 @@
 package poc.puzzle;
 
 /**
- * Indica que o arquivo informado È inv·lido, contendo uma representaÁ„o errada
+ * Indica que o arquivo informado √© inv√°lido, contendo uma representa√ß√£o errada
  * de um puzzle.
  * 
  * @author Thiago

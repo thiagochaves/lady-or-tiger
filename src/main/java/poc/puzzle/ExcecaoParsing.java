@@ -1,7 +1,7 @@
 package poc.puzzle;
 
 /**
- * Um erro durante o parsing de uma express„o.
+ * Um erro durante o parsing de uma express√£o.
  * 
  * @author Thiago
  */

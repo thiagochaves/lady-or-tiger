@@ -1,11 +1,11 @@
 # Ninth Trial
 # 3 portas
 3
-# Moça e Tigre
+# MoÃ§a e Tigre
 m,t
-# Restrições
-# No máximo UMA porta diz a verdade.
-# Uma porta tem uma moça, as outra têm tigres
+# RestriÃ§Ãµes
+# No mÃ¡ximo UMA porta diz a verdade.
+# Uma porta tem uma moÃ§a, as outra tÃªm tigres
 (((!a(1))^(!a(2))^(!a(3))) v ((a(1))^(!a(2))^(!a(3))) v ((!a(1))^(a(2))^(!a(3))) v ((!a(1))^(!a(2))^(a(3)))) ^ ((em(m,1) ^ em(t,2) ^ em(t,3)) v (em(t,1) ^ em(m,2) ^ em(t,3)) v (em(t,1) ^ em(t,2) ^ em(m,3)))
 # 1) A tiger is in this room 
 em(t,1)
@@ -13,5 +13,5 @@ em(t,1)
 em(m,2)
 # 3) A tiger is in room 2
 em(t,2)
-# SOLUÇÃO
-[a(3), em(m, 1), em(t, 2), em(t, 3), ¬a(1), ¬a(2), ¬em(m, 2), ¬em(m, 3), ¬em(t, 1)]
+# SOLUÃ‡ÃƒO
+[a(3), em(m, 1), em(t, 2), em(t, 3), Â¬a(1), Â¬a(2), Â¬em(m, 2), Â¬em(m, 3), Â¬em(t, 1)]

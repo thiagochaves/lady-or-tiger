@@ -8,7 +8,7 @@ import java.util.Set;
 import poc.puzzle.Puzzle;
 
 /**
- * Representa a conjunÁ„o de duas afirmativas.
+ * Representa a conjun√ß√£o de duas afirmativas.
  */
 public class Conjuncao implements Afirmativa {
 	/** Primeira afirmativa. */
@@ -17,7 +17,7 @@ public class Conjuncao implements Afirmativa {
 	private final Afirmativa _afirmativaDois;
     private boolean _negada;
 
-	/** ConstrÛi uma afirmativa que È a conjunÁ„o de duas. */
+	/** Constr√≥i uma afirmativa que √© a conjun√ß√£o de duas. */
 	public Conjuncao(Afirmativa umaAfirmativa,
 			Afirmativa outraAfirmativa) {
 		_afirmativaUm = umaAfirmativa;
@@ -42,7 +42,7 @@ public class Conjuncao implements Afirmativa {
     }
 
 	/**
-	 * Os componentes s„o as subafirmativas.
+	 * Os componentes s√£o as subafirmativas.
 	 */
 	public Set<Afirmativa> expandir() {
 	    Set<Afirmativa> expansao = new HashSet<Afirmativa>();
@@ -57,7 +57,7 @@ public class Conjuncao implements Afirmativa {
 	}
 
 	/**
-	 * Indica o tipo de expans„o que o mÈtodo expandir() far·.
+	 * Indica o tipo de expans√£o que o m√©todo expandir() far√°.
 	 */
 	public Expansao getTipoExpansao() {
 	    if (!estaNegada()) {
@@ -68,12 +68,12 @@ public class Conjuncao implements Afirmativa {
 	}
 
 	/**
-	 * RepresentaÁ„o textual.
+	 * Representa√ß√£o textual.
 	 */
 	public String toString() {
 		String base = "(" + _afirmativaUm + " ^ " + _afirmativaDois + ")";
 		if (estaNegada()) {
-		    return "¨" + base;
+		    return "¬¨" + base;
 		} else {
 		    return base;
 		}

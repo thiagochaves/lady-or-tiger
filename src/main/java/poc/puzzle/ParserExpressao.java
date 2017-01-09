@@ -12,11 +12,11 @@ public class ParserExpressao {
     }
 
     /**
-     * Faz o parsing de uma sentenÁa usando um algoritmo descendente recursivo. A
-     * gram·tica È a seguinte: 
+     * Faz o parsing de uma senten√ßa usando um algoritmo descendente recursivo. A
+     * gram√°tica √© a seguinte: 
      * Exp = Term && Exp | Term || Exp | Term -> Exp | Term 
      * Term = !Exp | (Exp) | a(N) | em(N, N)
-     * @throws ExcecaoParsing Caso o texto n„o seja v·lido.
+     * @throws ExcecaoParsing Caso o texto n√£o seja v√°lido.
      */
     public Afirmativa parse(String texto) throws ExcecaoParsing {
         StringBuffer frase = new StringBuffer(texto.trim());
@@ -24,9 +24,9 @@ public class ParserExpressao {
     }
 
     /**
-     * Faz o parsing de uma express„o (afirmativa). O buffer enviado como
-     * par‚metro È modificado.
-     * @throws ExcecaoParsing Caso a express„o n„o seja v·lida.
+     * Faz o parsing de uma express√£o (afirmativa). O buffer enviado como
+     * par√¢metro √© modificado.
+     * @throws ExcecaoParsing Caso a express√£o n√£o seja v√°lida.
      */
     private Afirmativa exp(StringBuffer texto) throws ExcecaoParsing {
         Afirmativa termo1 = term(texto);
@@ -55,14 +55,14 @@ public class ParserExpressao {
     }
 
     /**
-     * Faz o parsing de uma sub-express„o. O buffer enviado como par‚metro È
+     * Faz o parsing de uma sub-express√£o. O buffer enviado como par√¢metro √©
      * modificado.
-     * @throws ExcecaoParsing Express„o inv·lida.
+     * @throws ExcecaoParsing Express√£o inv√°lida.
      */
     private Afirmativa term(StringBuffer texto) throws ExcecaoParsing {
         char inicio = next(texto);
         // ! Exp
-        if (inicio == '!' || inicio == '¨') {
+        if (inicio == '!' || inicio == '¬¨') {
             Afirmativa expressao = exp(texto);
             return expressao.negar();
         }
@@ -71,7 +71,7 @@ public class ParserExpressao {
             Afirmativa expressao = exp(texto);
             char fim = next(texto);
             if (fim != ')') {
-            	throw new ExcecaoParsing("Express„o dentro de parÍnteses n„o foi fechada.");
+            	throw new ExcecaoParsing("Express√£o dentro de par√™nteses n√£o foi fechada.");
             }
             return expressao;
         }
@@ -110,7 +110,7 @@ public class ParserExpressao {
     }
 
     /**
-     * ObtÈm o prÛximo caracter da seq¸Íncia (ignorando espaÁos), removendo-o do
+     * Obt√©m o pr√≥ximo caracter da seq√º√™ncia (ignorando espa√ßos), removendo-o do
      * buffer.
      */
     private char next(final StringBuffer texto) {

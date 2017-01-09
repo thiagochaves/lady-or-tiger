@@ -14,7 +14,7 @@ import poc.afirmativa.Afirmativa;
 import poc.util.CommentLineBufferedReader;
 
 /**
- * LÍ um puzzle armazenado no formato padr„o.
+ * L√™ um puzzle armazenado no formato padr√£o.
  */
 public class LeitorPuzzle {
     
@@ -24,8 +24,8 @@ public class LeitorPuzzle {
     private LeitorPuzzle() {}
 
     /**
-     * ObtÈm as informaÁıes para configurar um puzzle de um arquivo.
-     * @param caminho Arquivo com a especificaÁ„o de um puzzle no formato esperado.
+     * Obt√©m as informa√ß√µes para configurar um puzzle de um arquivo.
+     * @param caminho Arquivo com a especifica√ß√£o de um puzzle no formato esperado.
      * @return nunca null.
      */
     public static LeitorPuzzle lerDoArquivo(File caminho) {
@@ -80,8 +80,8 @@ public class LeitorPuzzle {
             throws IOException {
         String linhaPortas = leitor.readLine();
         if (linhaPortas == null) {
-            throw new ExcecaoArquivoInvalido("O arquivo È inv·lido. " 
-                    + "O n˙mero de portas n„o foi informado.");
+            throw new ExcecaoArquivoInvalido("O arquivo √© inv√°lido. " 
+                    + "O n√∫mero de portas n√£o foi informado.");
         }
         int numPortas = Integer.parseInt(linhaPortas);
         return numPortas;
@@ -91,8 +91,8 @@ public class LeitorPuzzle {
             throws IOException {
         String listaObjetos = leitor.readLine();
         if (listaObjetos == null) {
-            throw new ExcecaoArquivoInvalido("O arquivo È inv·lido. " 
-                    + "Os objetos existentes n„o foram informados.");
+            throw new ExcecaoArquivoInvalido("O arquivo √© inv√°lido. " 
+                    + "Os objetos existentes n√£o foram informados.");
         }
         StringTokenizer tokenizer = new StringTokenizer(listaObjetos, ", ");
         Set<String> objetos = new HashSet<String>();
@@ -105,8 +105,8 @@ public class LeitorPuzzle {
     private static String lerAxioma(BufferedReader leitor) throws IOException {
         String restricao = leitor.readLine();
         if (restricao == null) {
-            throw new ExcecaoArquivoInvalido("O arquivo È inv·lido. " 
-                    + "As restriÁıes n„o foram informadas.");
+            throw new ExcecaoArquivoInvalido("O arquivo √© inv√°lido. " 
+                    + "As restri√ß√µes n√£o foram informadas.");
         }
         String restricaoSemEspacosFinais = restricao.trim();
         while (restricaoSemEspacosFinais.endsWith("\\")) {

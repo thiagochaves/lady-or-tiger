@@ -1,12 +1,12 @@
-# Isto é um comentário
-# Linhas em branco são proibidas.
-# Uma afirmativa é verdadeira e a outra é falsa
+# Isto Ã© um comentÃ¡rio
+# Linhas em branco sÃ£o proibidas.
+# Uma afirmativa Ã© verdadeira e a outra Ã© falsa
 (a(1) ^ !a(2))v((!a(1))^a(2))
-# São duas portas
+# SÃ£o duas portas
 2
-# 1) Nesta sala há uma moça e na outra há um tigre
+# 1) Nesta sala hÃ¡ uma moÃ§a e na outra hÃ¡ um tigre
 em(1, 1) ^ em(0, 2)
-# 2) Em uma destas salas há uma moça e na outra há um tigre
+# 2) Em uma destas salas hÃ¡ uma moÃ§a e na outra hÃ¡ um tigre
 (em(1,1)^em(0,2))v(em(1,2)^em(0,1))
-# Solução
-[¬a(1), a(2), em(1, 2), em(0, 1)]
+# SoluÃ§Ã£o
+[Â¬a(1), a(2), em(1, 2), em(0, 1)]

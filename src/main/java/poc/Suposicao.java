@@ -8,23 +8,23 @@ import poc.afirmativa.Localizacao;
 import poc.afirmativa.Referencia;
 
 /**
- * Conjunto de suposições acerca de afirmativas essenciais realizadas em um ramo do tableaux.
- * O objetivo desta classe é responder rapidamente se existe uma contradição entre as suposições
+ * Conjunto de suposiÃ§Ãµes acerca de afirmativas essenciais realizadas em um ramo do tableaux.
+ * O objetivo desta classe Ã© responder rapidamente se existe uma contradiÃ§Ã£o entre as suposiÃ§Ãµes
  * e determinada afirmativa.
  * 
- * Usar os métodos {@link #criar(int, Set)}, {@link #criarNovaDeMesmaEstrutura(Suposicao)} e 
+ * Usar os mÃ©todos {@link #criar(int, Set)}, {@link #criarNovaDeMesmaEstrutura(Suposicao)} e 
  * {@link #copiar(Suposicao)} para criar objetos deste tipo.
  */
 public class Suposicao {
-    // Se para um índice i é verdadeira, então _afirmativas[i] pode ser usado, c.c, não.
+    // Se para um Ã­ndice i Ã© verdadeira, entÃ£o _afirmativas[i] pode ser usado, c.c, nÃ£o.
     private boolean[] _suposicoesFeitas;
-    // Cada posição indica se supõe-se que determinada afirmativa é verdadeira ou não.
-    // Algumas posições representam afirmativas de portas (ex: a(2)) e outras
-    // representam afirmativas de localização (ex: em(m,1)).
+    // Cada posiÃ§Ã£o indica se supÃµe-se que determinada afirmativa Ã© verdadeira ou nÃ£o.
+    // Algumas posiÃ§Ãµes representam afirmativas de portas (ex: a(2)) e outras
+    // representam afirmativas de localizaÃ§Ã£o (ex: em(m,1)).
     private boolean[] _afirmativas;
     private int _numLocais;
     private int _numObjetos;
-    // A ordem em que os objetos devem ser levados em consideração
+    // A ordem em que os objetos devem ser levados em consideraÃ§Ã£o
     private HashMap<String, Integer> _indicesDeObjetos = new HashMap<String, Integer>();
     
     private Suposicao() {
@@ -136,7 +136,7 @@ public class Suposicao {
                 if (_afirmativas[i]) {
                     saida += "a(" + (i - 1) + ")";
                 } else {
-                    saida += "¬a(" + (i - 1) + ")";
+                    saida += "Â¬a(" + (i - 1) + ")";
                 }
             }
             saida += " ";

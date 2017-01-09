@@ -8,7 +8,7 @@ import java.util.Set;
 import poc.puzzle.Puzzle;
 
 /**
- * SuposiÁ„o em torno da localizaÁ„o de um objeto.
+ * Suposi√ß√£o em torno da localiza√ß√£o de um objeto.
  */
 public class Localizacao implements Afirmativa {
 	private String _objeto;
@@ -19,7 +19,7 @@ public class Localizacao implements Afirmativa {
 	/**
 	 * 
 	 * @param umObjeto
-	 *            N„o pode ser <code>null</code>.
+	 *            N√£o pode ser <code>null</code>.
 	 * @param umLugar
 	 *            Inteiro positivo.
 	 */
@@ -29,7 +29,7 @@ public class Localizacao implements Afirmativa {
 		}
 		if (umLugar <= 0) {
 			throw new IllegalArgumentException(
-					"N˙mero de porta fora do intervalo:" + umLugar);
+					"N√∫mero de porta fora do intervalo:" + umLugar);
 		}
 		_objeto = umObjeto;
 		_lugar = umLugar;
@@ -63,18 +63,18 @@ public class Localizacao implements Afirmativa {
     }
 
     /**
-	 * Uma afirmativa atÙmica como Localizacao n„o pode ser expandida.
+	 * Uma afirmativa at√¥mica como Localizacao n√£o pode ser expandida.
 	 * 
 	 * @throws UnsupportedOperationException
 	 *             Sempre.
 	 */
 	public Set<Afirmativa> expandir() {
 		throw new UnsupportedOperationException(
-				"Afirmativas atÙmicas n„o podem ser " + "expandidas.");
+				"Afirmativas at√¥micas n√£o podem ser " + "expandidas.");
 	}
 
 	/**
-	 * Indica o tipo de expans„o que o mÈtodo expandir() far·.
+	 * Indica o tipo de expans√£o que o m√©todo expandir() far√°.
 	 */
 	public Expansao getTipoExpansao() {
 		return Expansao.IDENTIDADE;
@@ -83,7 +83,7 @@ public class Localizacao implements Afirmativa {
 	public String toString() {
 		String base = "em(" + _objeto + ", " + _lugar + ")";
         if (estaNegada()) {
-            return "¨" + base;
+            return "¬¨" + base;
         } else {
             return base;
         }
@@ -100,8 +100,8 @@ public class Localizacao implements Afirmativa {
     }
     
     /**
-     * Afirmativas que explicitam todos os objetos que n„o est„o neste lugar.
-     * Vazio se n„o se aplicar.
+     * Afirmativas que explicitam todos os objetos que n√£o est√£o neste lugar.
+     * Vazio se n√£o se aplicar.
      */
     public Collection<Localizacao> explicitarObjetosQueNaoEstaoAqui() {
         assert _puzzle != null;

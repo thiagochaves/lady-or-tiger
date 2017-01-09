@@ -6,7 +6,7 @@ import java.util.Set;
 import poc.puzzle.Puzzle;
 
 /**
- * … uma afirmativa lÛgica.
+ * √â uma afirmativa l√≥gica.
  */
 public interface Afirmativa {
     
@@ -22,19 +22,19 @@ public interface Afirmativa {
     /**
 	 * Expande a afirmativa. Retorna os componentes da mesma.
 	 * 
-	 * @return Se a expans„o for do tipo gama, retorna um elemento apenas. Se
+	 * @return Se a expans√£o for do tipo gama, retorna um elemento apenas. Se
 	 *         for do tipo alfa ou beta retorna dois elementos.
 	 */
 	Set<Afirmativa> expandir();
 
 	/**
-	 * Indica o tipo de expans„o que o mÈtodo expandir() far·.
+	 * Indica o tipo de expans√£o que o m√©todo expandir() far√°.
 	 */
 	Expansao getTipoExpansao();
 	
 	/**
 	 * Liga a afirmativa ao puzzle informado.
-	 * Permite a referÍncia cruzada ‡s afirmativas das portas.
+	 * Permite a refer√™ncia cruzada √†s afirmativas das portas.
 	 * @param puzzle
 	 */
 	void associarAPuzzle(Puzzle puzzle);
@@ -42,8 +42,8 @@ public interface Afirmativa {
 	boolean eEssencial();
 
     /**
-     * Afirmativas que explicitam todos os objetos que n„o est„o neste lugar.
-     * Vazio se n„o se aplicar.
+     * Afirmativas que explicitam todos os objetos que n√£o est√£o neste lugar.
+     * Vazio se n√£o se aplicar.
      */
     Collection<Localizacao> explicitarObjetosQueNaoEstaoAqui();
 }

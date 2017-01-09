@@ -6,7 +6,7 @@ import java.io.Reader;
 
 /**
  * Leitor de texto que ignora as linhas que se iniciam com o caracter #,
- * considerando-as coment·rios. Para leitura use apenas o mÈtodo
+ * considerando-as coment√°rios. Para leitura use apenas o m√©todo
  * {@link #readLine()}.
  * 
  * @author Thiago
@@ -17,8 +17,8 @@ public class CommentLineBufferedReader extends BufferedReader {
     }
 
     /**
-     * LÍ uma linha do arquivo, mas ignorando aquelas que s„o coment·rios (cujo
-     * primeiro caracter È #).
+     * L√™ uma linha do arquivo, mas ignorando aquelas que s√£o coment√°rios (cujo
+     * primeiro caracter √© #).
      */
     public String readLine() throws IOException {
         String linha = "#";

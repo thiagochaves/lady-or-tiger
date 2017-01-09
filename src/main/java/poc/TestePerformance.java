@@ -28,7 +28,7 @@ public class TestePerformance {
             total += testarConfiguracaoDoArquivo(caminho);
         }
         double media = total / numRuns;
-        System.out.println("Tempo médio: " + media + "s");
+        System.out.println("Tempo mÃ©dio: " + media + "s");
     }
 
 }

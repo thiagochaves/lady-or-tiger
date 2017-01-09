@@ -9,7 +9,7 @@ import poc.afirmativa.Referencia;
 import poc.puzzle.Puzzle;
 
 /**
- * Representa um tableaux sem‚ntico para um determinado problema.
+ * Representa um tableaux sem√¢ntico para um determinado problema.
  */
 public class Solucionador extends Tableaux {
 
@@ -27,16 +27,16 @@ public class Solucionador extends Tableaux {
     }
 
     /**
-     * ObtÈm a soluÁ„o do puzzle, se for coerente.
+     * Obt√©m a solu√ß√£o do puzzle, se for coerente.
      */
     public Ramo getSolucao() {
         if (eExpansivel()) {
             throw new IllegalStateException(
-                    "SoluÁıes sÛ podem ser encontradas apÛs "
-                            + "a expans„o completa do tableaux.");
+                    "Solu√ß√µes s√≥ podem ser encontradas ap√≥s "
+                            + "a expans√£o completa do tableaux.");
         }
         fechar();
-        // Realiza mais algumas inferÍncias
+        // Realiza mais algumas infer√™ncias
         List<Ramo> ramos = new ArrayList<Ramo>();
         for (int i = 0; i < getNumRamos(); i++) {
             Ramo ramo = getRamo(i).getEssenciais();
@@ -50,7 +50,7 @@ public class Solucionador extends Tableaux {
             }
             ramos.add(ramo);
         }
-        // Calculamos a interseÁ„o dos ramos restantes
+        // Calculamos a interse√ß√£o dos ramos restantes
         if (!ramos.isEmpty()) {
             return calcularIntersecao(ramos);
         } else {
@@ -59,29 +59,29 @@ public class Solucionador extends Tableaux {
     }
 
     private Ramo calcularIntersecao(List<Ramo> ramos) {
-        show("Calculando interseÁ„o:");
+        show("Calculando interse√ß√£o:");
         Ramo verdades = new Ramo(ramos.get(0).getEssenciais());
         show("Encontrado : ", verdades);
         for (int i = 0; i < ramos.size(); i++) {
             Ramo ramo = ramos.get(i).getEssenciais();
             show("Encontrado : ", ramo);
             verdades = verdades.calcularIntersecao(ramo);
-            show("InterseÁ„o parcial : ", verdades);
+            show("Interse√ß√£o parcial : ", verdades);
         }
-        show("SoluÁ„o : ", verdades);
+        show("Solu√ß√£o : ", verdades);
         return verdades;
     }
 
     @Override
     /**
-     * ApÛs expandir tudo, a soluÁ„o pode n„o conter a indicaÁ„o
-     * se uma determinada porta est· dizendo a verdade ou n„o.
-     * Inserimos ent„o, em cada ramo, a implic‚ncia
-     * (conte˙do da afirmativa da porta) -> (porta diz a verdade).
-     * Com isso instruÌmos o tableaux a dizer que a afirmativa da 
-     * porta È verdadeira se ele for capaz de deduzir isso.
-     * Funciona porque a expans„o de uma porta mantÈm sua afirmativa
-     * no ramo, que È nosso objetivo
+     * Ap√≥s expandir tudo, a solu√ß√£o pode n√£o conter a indica√ß√£o
+     * se uma determinada porta est√° dizendo a verdade ou n√£o.
+     * Inserimos ent√£o, em cada ramo, a implic√¢ncia
+     * (conte√∫do da afirmativa da porta) -> (porta diz a verdade).
+     * Com isso instru√≠mos o tableaux a dizer que a afirmativa da 
+     * porta √© verdadeira se ele for capaz de deduzir isso.
+     * Funciona porque a expans√£o de uma porta mant√©m sua afirmativa
+     * no ramo, que √© nosso objetivo
      */
     public void expandir() {
         super.expandir();

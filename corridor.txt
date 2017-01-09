@@ -1,16 +1,16 @@
-# Isto È um coment·rio
-# Linhas em branco s„o proibidas.
-# S„o duas portas
+# Isto √© um coment√°rio
+# Linhas em branco s√£o proibidas.
+# S√£o duas portas
 4
-# Os objetos v·lidos s„o m e t
+# Os objetos v√°lidos s√£o m e t
 a,b,c
-# Uma afirmativa È verdadeira e a outra È falsa
+# Uma afirmativa √© verdadeira e a outra √© falsa
 a(4)va(2)
-# 1) Nesta sala h· uma moÁa e na outra h· um tigre
+# 1) Nesta sala h√° uma mo√ßa e na outra h√° um tigre
 em(a, 1) ^ em(b, 2)
-# 2) Em uma destas salas h· uma moÁa e na outra h· um tigre
+# 2) Em uma destas salas h√° uma mo√ßa e na outra h√° um tigre
 a(1)
 em(c,1) ^ !a(2)
 a(1)va(2)^a(3)
-# SoluÁ„o
+# Solu√ß√£o
 Desconhecida
