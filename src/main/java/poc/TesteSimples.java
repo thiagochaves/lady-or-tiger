@@ -20,7 +20,7 @@ public class TesteSimples {
     }
 
     public static void main(String[] args) {
-        File caminho = new File(DIRETORIO, "lady12.txt");
+        File caminho = new File(DIRETORIO, "lady4.txt");
         testarConfiguracaoDoArquivo(caminho);
     }
 
