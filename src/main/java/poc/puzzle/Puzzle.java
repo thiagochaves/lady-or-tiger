@@ -19,7 +19,7 @@ public class Puzzle {
     /**
      * Cria um novo puzzle.
      * 
-     * @param restricao
+     * @param axioma
      *            Uma restrição que é assumida como verdadeira.
      * @param portas
      *            As afirmativas das portas (na ordem).

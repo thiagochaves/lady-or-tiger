@@ -1,10 +1,6 @@
 package poc.puzzle;
 
-import poc.afirmativa.Afirmativa;
-import poc.afirmativa.Conjuncao;
-import poc.afirmativa.Disjuncao;
-import poc.afirmativa.Localizacao;
-import poc.afirmativa.Referencia;
+import poc.afirmativa.*;
 
 public class ParserExpressao {
     
@@ -43,7 +39,7 @@ public class ParserExpressao {
         }
         else if (operador == '>') {
             Afirmativa termo2 = exp(texto);
-            return new Disjuncao(termo1.negar(), termo2);
+            return new Implicacao(termo1, termo2);
         }
         // Term
         else {
