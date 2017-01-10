@@ -3,10 +3,7 @@ package poc;
 import java.util.ArrayList;
 import java.util.List;
 
-import poc.afirmativa.Afirmativa;
-import poc.afirmativa.Disjuncao;
-import poc.afirmativa.Implicacao;
-import poc.afirmativa.Referencia;
+import poc.afirmativa.*;
 import poc.puzzle.Puzzle;
 
 /**
@@ -89,9 +86,7 @@ public class Solucionador extends Tableaux {
         List<Afirmativa> deducoes = new ArrayList<Afirmativa>();
         for (int iPorta = 1; iPorta <= _puzzle.getNumPortas(); iPorta++) {
             Afirmativa afPorta = _puzzle.getPorta(iPorta);
-            //FIXME Trocar por implicação bidirecional
-            Implicacao portaEstaCertaOuErrada = new Implicacao(
-                    afPorta, new Referencia(iPorta));
+            Bicondicional portaEstaCertaOuErrada = new Bicondicional(afPorta, new Referencia(iPorta));
             portaEstaCertaOuErrada.associarAPuzzle(_puzzle);
             deducoes.add(portaEstaCertaOuErrada);
         }

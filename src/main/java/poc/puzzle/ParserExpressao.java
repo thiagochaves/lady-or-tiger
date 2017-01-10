@@ -10,7 +10,7 @@ public class ParserExpressao {
     /**
      * Faz o parsing de uma sentença usando um algoritmo descendente recursivo. A
      * gramática é a seguinte: 
-     * Exp = Term && Exp | Term || Exp | Term -> Exp | Term 
+     * Exp = Term && Exp | Term || Exp | Term -> Exp | Term <-> Exp | Term
      * Term = !Exp | (Exp) | a(N) | em(N, N)
      * @throws ExcecaoParsing Caso o texto não seja válido.
      */
@@ -36,10 +36,12 @@ public class ParserExpressao {
         else if (operador == 'v') {
             Afirmativa termo2 = exp(texto);
             return new Disjuncao(termo1, termo2);
-        }
-        else if (operador == '>') {
+        } else if (operador == '>') {
             Afirmativa termo2 = exp(texto);
             return new Implicacao(termo1, termo2);
+        } else if (operador == '=') {
+            Afirmativa termo2 = exp(texto);
+            return new Bicondicional(termo1, termo2);
         }
         // Term
         else {

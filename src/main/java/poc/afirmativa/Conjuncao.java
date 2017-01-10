@@ -30,7 +30,7 @@ public class Conjuncao implements Afirmativa {
     }
 
     @Override
-    public Afirmativa negar() {
+    public Conjuncao negar() {
         Conjuncao negada = new Conjuncao(_afirmativaUm, _afirmativaDois);
         negada._negada = !_negada;
         return negada;
