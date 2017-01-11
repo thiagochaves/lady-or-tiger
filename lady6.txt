@@ -14,4 +14,4 @@ m,t
 # 2) There is a lady in the other room
 em(m,1)
 # SOLUÇÃO
-[em(m, 2), em(t, 1), ¬a(1), ¬a(2), ¬em(m, 1), ¬em(t, 2)]
+[¬a(1), ¬a(2), ¬em(m, 1), em(t, 1), em(m, 2), ¬em(t, 2)]

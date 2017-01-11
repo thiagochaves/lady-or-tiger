@@ -25,7 +25,7 @@ public class CorrecaoTest {
         Solucionador tableaux = new Solucionador(puzzle);
         tableaux.expandir();
         Ramo solucao = tableaux.getSolucao();
-        assertEquals(leitor.solucao(), solucao.toCanonicalString());
+        assertEquals(leitor.solucao(), solucao.toString());
     }
 
     @Test
@@ -85,6 +85,12 @@ public class CorrecaoTest {
     @Test
     public void test11() {
         File caminho = new File(DIRETORIO, "lady11.txt");
+        testarConfiguracaoDoArquivo(caminho);
+    }
+
+    @Test
+    public void test12() {
+        File caminho = new File(DIRETORIO, "lady12.txt");
         testarConfiguracaoDoArquivo(caminho);
     }
 }

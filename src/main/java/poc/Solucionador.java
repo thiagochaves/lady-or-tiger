@@ -48,6 +48,10 @@ public class Solucionador extends Tableaux {
             }
             ramos.add(ramo);
         }
+        show("Ramos antes da interseção:", this);
+        show("Número de ramos:", getNumRamos());
+        System.out.println("Número1: " + getNumRamos());
+        System.out.println("Número2: " + ramos.size());
         // Calculamos a interseção dos ramos restantes
         if (!ramos.isEmpty()) {
             return calcularIntersecao(ramos);
@@ -72,17 +76,16 @@ public class Solucionador extends Tableaux {
 
     @Override
     /**
-     * Após expandir tudo, a solução pode não conter a indicação
+     * A solução pode não conter a indicação
      * se uma determinada porta está dizendo a verdade ou não.
      * Inserimos então, em cada ramo, a implicância
-     * (conteúdo da afirmativa da porta) -> (porta diz a verdade).
+     * (conteúdo da afirmativa da porta) <-> (porta diz a verdade).
      * Com isso instruímos o tableaux a dizer que a afirmativa da 
      * porta é verdadeira se ele for capaz de deduzir isso.
      * Funciona porque a expansão de uma porta mantém sua afirmativa
      * no ramo, que é nosso objetivo
      */
     public void expandir() {
-        super.expandir();
         List<Afirmativa> deducoes = new ArrayList<Afirmativa>();
         for (int iPorta = 1; iPorta <= _puzzle.getNumPortas(); iPorta++) {
             Afirmativa afPorta = _puzzle.getPorta(iPorta);

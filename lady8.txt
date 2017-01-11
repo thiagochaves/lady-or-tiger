@@ -20,4 +20,4 @@ m,t
 # 3) Um dado qualquer para a terceira porta (irrelevante)
 em(m,3)
 # SOLUÇÃO
-[em(m, 2), em(t, 1), em(t, 3), ¬a(1), ¬a(2), ¬a(3), ¬em(m, 1), ¬em(m, 3), ¬em(t, 2)]
+[¬a(1), ¬a(2), ¬a(3), ¬em(m, 1), em(t, 1), em(m, 2), ¬em(t, 2), ¬em(m, 3), em(t, 3)]

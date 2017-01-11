@@ -14,4 +14,4 @@ m,t
 # 2) You are better off choosing the other room
 em(m,1)
 # SOLUÇÃO
-[a(1), a(2), em(m, 1), em(t, 2), ¬em(m, 2), ¬em(t, 1)]
+[a(1), a(2), em(m, 1), ¬em(t, 1), ¬em(m, 2), em(t, 2)]

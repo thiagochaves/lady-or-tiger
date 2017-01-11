@@ -156,6 +156,7 @@ public final class Ramo {
             HashSet<String> objetos = new HashSet<String>();
             objetos.addAll(puzzle.getObjetos());
             objetos.removeAll(portaAtual);
+            // FIXME Verificar se isto está fazendo o resto, pois está cortando muitos ramos
             if (objetos.size() == 0) {
                 // Está dizendo que não há objetos atrás da porta, o que não
                 // pode

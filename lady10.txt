@@ -14,4 +14,4 @@ em(t,2)
 # 3) A tiger is in room 1
 em(t,1)
 # SOLUÇÃO
-[a(1), a(2), em(m, 1), em(t, 2), em(t, 3), ¬a(3), ¬em(m, 2), ¬em(m, 3), ¬em(t, 1)]
+[a(1), a(2), ¬a(3), em(m, 1), ¬em(t, 1), ¬em(m, 2), em(t, 2), ¬em(m, 3), em(t, 3)]

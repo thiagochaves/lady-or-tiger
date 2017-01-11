@@ -11,4 +11,4 @@ em(m, 1) ^ em(t, 2)
 # 2) Em uma destas salas há uma moça e na outra há um tigre
 (em(m,1)^em(t,2))v(em(m,2)^em(t,1))
 # Solução
-[a(2), em(m, 2), em(t, 1), ¬a(1), ¬em(m, 1), ¬em(t, 2)]
+[¬a(1), a(2), ¬em(m, 1), em(t, 1), em(m, 2), ¬em(t, 2)]
