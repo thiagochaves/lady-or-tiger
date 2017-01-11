@@ -156,11 +156,9 @@ public final class Ramo {
             HashSet<String> objetos = new HashSet<String>();
             objetos.addAll(puzzle.getObjetos());
             objetos.removeAll(portaAtual);
-            // FIXME Verificar se isto está fazendo o resto, pois está cortando muitos ramos
+            // O método Ramo.impossivelTerAlgoNoLugar() já elimina estas situações durante a expansão
             if (objetos.size() == 0) {
-                // Está dizendo que não há objetos atrás da porta, o que não
-                // pode
-                // acontecer
+                // Está dizendo que não há objetos atrás da porta, o que não pode acontecer
                 return null;
             }
             if (objetos.size() == 1) {

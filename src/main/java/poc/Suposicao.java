@@ -1,7 +1,6 @@
 package poc;
 
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Localizacao;
@@ -26,6 +25,7 @@ public class Suposicao {
     private int _numObjetos;
     // A ordem em que os objetos devem ser levados em consideração
     private HashMap<String, Integer> _indicesDeObjetos = new HashMap<String, Integer>();
+    private List<String> _objetos = new ArrayList<String>();
     
     private Suposicao() {
     }
@@ -39,6 +39,7 @@ public class Suposicao {
         int indice = 0;
         for (String o : objetos) {
             _indicesDeObjetos.put(o, indice++);
+            _objetos.add(o);
         }
     }
     
@@ -67,7 +68,7 @@ public class Suposicao {
 
     public boolean contradiz(Afirmativa a) {
         if (a.eEssencial()) {
-            return negacaoJaSuposta(a) || jaTemAlgoNoMesmoLocal(a);
+            return negacaoJaSuposta(a) || jaTemAlgoNoMesmoLocal(a) || impossivelTerAlgoNoLugar(a);
         } else {
             return false;
         }
@@ -118,6 +119,29 @@ public class Suposicao {
         return false;
     }
 
+    private boolean impossivelTerAlgoNoLugar(Afirmativa a) {
+        if (a.estaNegada()) {
+            if (a instanceof Localizacao) {
+                Localizacao loc = (Localizacao)a;
+                int lugar = loc.getLugar();
+                int indiceInicioLocal = _numLocais + (lugar - 1) * _numObjetos;
+                int indiceLimiteLocal = indiceInicioLocal + _numObjetos;
+                assert indiceLimiteLocal <= _afirmativas.length : "Indice " + indiceLimiteLocal
+                        + " passou do limite de " + _afirmativas.length;
+                for (int i = indiceInicioLocal; i < indiceLimiteLocal; i++) {
+                    if (i - indiceInicioLocal == _indicesDeObjetos.get(((Localizacao) a).getObjeto())) {
+                        continue;
+                    }
+                    if (!_suposicoesFeitas[i] || _afirmativas[i]) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void suporTambem(Afirmativa a) {
         if (a.eEssencial()) {
             int indice = obterIndice(a);
@@ -134,14 +158,26 @@ public class Suposicao {
         for (int i = 0; i < _numLocais; i++) {
             if (_suposicoesFeitas[i]) {
                 if (_afirmativas[i]) {
-                    saida += "a(" + (i - 1) + ")";
+                    saida += "a(" + (i + 1) + ")";
                 } else {
-                    saida += "¬a(" + (i - 1) + ")";
+                    saida += "¬a(" + (i + 1) + ")";
                 }
             }
             saida += " ";
         }
-        // TODO
+        for (int i = 0; i < _numLocais; i++) {
+            for (int j = 0; j < _numObjetos; j++) {
+                int indice = _numLocais + i * _numLocais + j;
+                if (_suposicoesFeitas[indice]) {
+                    if (_afirmativas[indice]) {
+                        saida += "em(" + _objetos.get(j) + ", " + (i + 1) + ")";
+                    } else {
+                        saida += "¬em(" + _objetos.get(j) + ", " + (i + 1) + ")";
+                    }
+                }
+                saida += " ";
+            }
+        }
         return saida;
     }
 }

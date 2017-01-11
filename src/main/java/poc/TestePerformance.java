@@ -21,9 +21,9 @@ public class TestePerformance {
     }
 
     public static void main(String[] args) {
-        File caminho = new File(DIRETORIO, "lady11.txt");
+        File caminho = new File(DIRETORIO, "lady12.txt");
         double total = 0.0;
-        int numRuns = 10000;
+        int numRuns = 10;
         for (int i = 0; i < numRuns; i++) {
             total += testarConfiguracaoDoArquivo(caminho);
         }

@@ -48,10 +48,6 @@ public class Solucionador extends Tableaux {
             }
             ramos.add(ramo);
         }
-        show("Ramos antes da interseção:", this);
-        show("Número de ramos:", getNumRamos());
-        System.out.println("Número1: " + getNumRamos());
-        System.out.println("Número2: " + ramos.size());
         // Calculamos a interseção dos ramos restantes
         if (!ramos.isEmpty()) {
             return calcularIntersecao(ramos);
