@@ -35,7 +35,6 @@ public interface Afirmativa {
 	/**
 	 * Liga a afirmativa ao puzzle informado.
 	 * Permite a referência cruzada às afirmativas das portas.
-	 * @param puzzle
 	 */
 	void associarAPuzzle(Puzzle puzzle);
 	

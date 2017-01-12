@@ -63,14 +63,7 @@ public class Puzzle {
 		return _portas.get(indice - 1);
 	}
 
-	/**
-	 * Descobre se o parâmetro representa um objeto válido.
-	 */
-	public boolean eObjeto(String objeto) {
-		return _objetos.contains(objeto);
-	}
-
-	/**
+    /**
 	 * Obtém um conjunto com os objetos válidos.
 	 */
 	public Set<String> getObjetos() {

@@ -61,7 +61,7 @@ public class Solucionador extends Tableaux {
      * Se já foi descoberto o que há atrás de uma porta, então afirmaremos
      * que os outros objetos não podem estar atrás de tal porta.
      */
-    public Ramo deduzirAusencia(Ramo ramo) {
+    private Ramo deduzirAusencia(Ramo ramo) {
         Ramo saida = new Ramo(ramo);
         for (Envelope e : ramo) {
             for (Localizacao n : e.explicitarObjetosQueNaoEstaoAqui()) {
@@ -117,7 +117,7 @@ public class Solucionador extends Tableaux {
             }
             if (objetos.size() == 1) {
                 Localizacao localizacaoInferida = new Localizacao(
-                        (String) objetos.iterator().next(), j + 1);
+                        objetos.iterator().next(), j + 1);
                 localizacaoInferida.associarAPuzzle(_puzzle);
                 Envelope envelope = new Envelope(localizacaoInferida);
                 saida.adicionarEnvelope(envelope);
@@ -130,8 +130,8 @@ public class Solucionador extends Tableaux {
         show("Calculando interseção:");
         Ramo verdades = new Ramo(ramos.get(0).getEssenciais());
         show("Encontrado : ", verdades);
-        for (int i = 0; i < ramos.size(); i++) {
-            Ramo ramo = ramos.get(i).getEssenciais();
+        for (Ramo r : ramos) {
+            Ramo ramo = r.getEssenciais();
             show("Encontrado : ", ramo);
             verdades = verdades.calcularIntersecao(ramo);
             show("Interseção parcial : ", verdades);
@@ -141,15 +141,15 @@ public class Solucionador extends Tableaux {
     }
 
     @Override
-    /**
-     * A solução pode não conter a indicação
-     * se uma determinada porta está dizendo a verdade ou não.
-     * Inserimos então, em cada ramo, a implicância
-     * (conteúdo da afirmativa da porta) <-> (porta diz a verdade).
-     * Com isso instruímos o tableaux a dizer que a afirmativa da 
-     * porta é verdadeira se ele for capaz de deduzir isso.
-     * Funciona porque a expansão de uma porta mantém sua afirmativa
-     * no ramo, que é nosso objetivo
+    /*
+      A solução pode não conter a indicação
+      se uma determinada porta está dizendo a verdade ou não.
+      Inserimos então, em cada ramo, a implicância
+      (conteúdo da afirmativa da porta) <-> (porta diz a verdade).
+      Com isso instruímos o tableaux a dizer que a afirmativa da
+      porta é verdadeira se ele for capaz de deduzir isso.
+      Funciona porque a expansão de uma porta mantém sua afirmativa
+      no ramo, que é nosso objetivo
      */
     public void expandir() {
         List<Afirmativa> deducoes = new ArrayList<Afirmativa>();

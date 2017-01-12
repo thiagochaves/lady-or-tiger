@@ -67,11 +67,7 @@ public class Suposicao {
     }
 
     public boolean contradiz(Afirmativa a) {
-        if (a.eEssencial()) {
-            return negacaoJaSuposta(a) || jaTemAlgoNoMesmoLocal(a) || impossivelTerAlgoNoLugar(a);
-        } else {
-            return false;
-        }
+        return a.eEssencial() && (negacaoJaSuposta(a) || jaTemAlgoNoMesmoLocal(a) || impossivelTerAlgoNoLugar(a));
     }
     
     private boolean negacaoJaSuposta(Afirmativa a) {

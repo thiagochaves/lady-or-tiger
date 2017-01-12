@@ -25,15 +25,7 @@ public final class Ramo implements Iterable<Envelope> {
     public Ramo(Puzzle puzzle) {
         _suposicao = Suposicao.criar(puzzle.getNumPortas(), puzzle.getObjetos());
     }
-    
-    public Ramo(List<Envelope> envelopes, Puzzle puzzle) {
-        if (envelopes == null) {
-            throw new IllegalArgumentException();
-        }
-        _envelopes.addAll(envelopes);
-        _suposicao = Suposicao.criar(puzzle.getNumPortas(), puzzle.getObjetos());
-    }
-    
+
     /**
      * Cria um novo ramo fazendo uma cópia do conteúdo do ramo informado.
      * @param ramo Não pode ser <code>null</code>.
@@ -47,10 +39,6 @@ public final class Ramo implements Iterable<Envelope> {
         }
     }
 
-    public int getNumEnvelopes() {
-        return _envelopes.size();
-    }
-    
     public void adicionarEnvelope(Envelope envelope) {
         if (envelope == null) {
             throw new IllegalArgumentException();
@@ -64,14 +52,7 @@ public final class Ramo implements Iterable<Envelope> {
         _envelopes.add(envelope);
         _suposicao.suporTambem(envelope.getAfirmativa());
     }
-    
-    public Envelope getEnvelope(int indice) {
-        if (indice < 0 || indice >= getNumEnvelopes()) {
-            throw new IllegalArgumentException("Índice inválido " + indice);
-        }
-        return _envelopes.get(indice);
-    }
-    
+
     /**
      * Procure linearmente pelo primeiro envelope expansível neste ramo.
      * @return <code>null</code> se não houver envelope expansível no 
@@ -92,7 +73,6 @@ public final class Ramo implements Iterable<Envelope> {
     /**
      * Indica se o ramo pode ser fechado, ou seja, possui uma 
      * contradição em seu conteúdo.
-     * @return
      */
     public boolean podeSerFechado() {
         return _fechado;
@@ -172,15 +152,6 @@ public final class Ramo implements Iterable<Envelope> {
         });
         return copia.toString();
     }
-    
-    public String toCanonicalString() {
-        List<String> texto = new ArrayList<String>();
-        for (Envelope e : _envelopes) {
-            texto.add(e.toString());
-        }
-        Collections.sort(texto);
-        return "" + texto;
-    }
 
     @Override
     public int hashCode() {
@@ -210,15 +181,6 @@ public final class Ramo implements Iterable<Envelope> {
 
     public void removerEnvelope(Envelope envelopeASerExpandido) {
         _envelopes.remove(envelopeASerExpandido);
-    }
-
-    public void adicionarEnvelopes(Ramo ramo) {
-        if (ramo == null) {
-            throw new IllegalArgumentException();
-        }
-        for (Envelope e : ramo._envelopes) {
-            adicionarEnvelope(e);
-        }
     }
 
     @Override

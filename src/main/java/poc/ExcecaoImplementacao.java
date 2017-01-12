@@ -10,15 +10,8 @@ public class ExcecaoImplementacao extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public ExcecaoImplementacao() {
-	}
-
 	public ExcecaoImplementacao(String message) {
 		super(message);
-	}
-
-	public ExcecaoImplementacao(Throwable cause) {
-		super(cause);
 	}
 
 	public ExcecaoImplementacao(String message, Throwable cause) {

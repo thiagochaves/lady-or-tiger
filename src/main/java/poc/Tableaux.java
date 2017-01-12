@@ -21,13 +21,6 @@ public class Tableaux {
     }
 
     /**
-     * Cria um tableaux para resolver alguma implicância.
-     */
-    public Tableaux(Ramo axiomas) {
-        _ramos.add(axiomas);
-    }
-
-    /**
      * Define se as mensagens de depuração devem ser mostradas ou não.
      */
     static void setDepuracao(boolean depuracao) {

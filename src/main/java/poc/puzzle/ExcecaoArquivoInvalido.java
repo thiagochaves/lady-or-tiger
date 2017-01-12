@@ -10,10 +10,6 @@ public class ExcecaoArquivoInvalido extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public ExcecaoArquivoInvalido() {
-		super();
-	}
-
 	public ExcecaoArquivoInvalido(String message, Throwable cause) {
 		super(message, cause);
 	}
@@ -22,7 +18,4 @@ public class ExcecaoArquivoInvalido extends RuntimeException {
 		super(message);
 	}
 
-	public ExcecaoArquivoInvalido(Throwable cause) {
-		super(cause);
-	}
 }

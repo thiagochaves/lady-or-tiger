@@ -3,23 +3,16 @@ package poc;
 import org.junit.Before;
 import org.junit.Test;
 import poc.afirmativa.Afirmativa;
-import poc.afirmativa.Localizacao;
 import poc.afirmativa.Referencia;
 import poc.puzzle.ParserExpressao;
 import poc.puzzle.Puzzle;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by Thiago on 11/01/17.
- */
 public class SolucionadorPresencaTest {
     private List<Afirmativa> axioma;
     private List<Afirmativa> portas;
@@ -56,9 +49,7 @@ public class SolucionadorPresencaTest {
     }
 
     private void configurarObjetos(String... nomes) {
-        for (String nome : nomes) {
-            objetos.add(nome);
-        }
+        Collections.addAll(objetos, nomes);
     }
 
     private void configurarPortas(int numPortas) {

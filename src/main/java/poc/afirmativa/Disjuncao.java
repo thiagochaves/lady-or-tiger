@@ -133,9 +133,6 @@ public class Disjuncao implements Afirmativa {
         } else if (!_afirmativaUm.equals(other._afirmativaUm)) {
             return false;
         }
-        if (_negada != other._negada) {
-            return false;
-        }
-        return true;
+        return _negada == other._negada;
     }
 }

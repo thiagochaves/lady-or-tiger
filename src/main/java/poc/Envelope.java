@@ -74,38 +74,6 @@ public class Envelope {
 		return _afirmativa.getTipoExpansao();
 	}
 
-	/**
-	 * Retorna verdadeiro se o envelope for a negação do atual ou se afirma que
-	 * há mais de um objeto em um determinado lugar.
-	 */
-	public boolean eOposto(Envelope envelope) {
-	    // FIXME mover para as afirmativas
-		Afirmativa outraAfirmativa = envelope._afirmativa.negar();
-		Afirmativa estaAfirmativa = _afirmativa;
-
-		if (estaAfirmativa.equals(outraAfirmativa)) {
-			return true;
-		}
-
-		// Restrição de unipresença
-		// Dois ou mais objeto não podem estar no mesmo lugar
-		// Obs: O significado da restrição foi alterado. Verifique o relatório
-		// do POC I para o significado anterior.
-		if (_afirmativa instanceof Localizacao
-				&& envelope._afirmativa instanceof Localizacao) {
-			Localizacao lugar1 = (Localizacao) _afirmativa;
-			Localizacao lugar2 = (Localizacao) envelope._afirmativa;
-			if (!lugar1.estaNegada() && !lugar2.estaNegada()) {
-    			if ((!lugar1.getObjeto().equals(lugar2.getObjeto()))
-    					&& (lugar1.getLugar() == lugar2.getLugar())) {
-    				return true;
-    			}
-			}
-		}
-
-		return false;
-	}
-	
 	public boolean eEssencial() {
 	    return _afirmativa.eEssencial();
 	}
@@ -115,8 +83,8 @@ public class Envelope {
 	}
 
     @Override
-    /**
-     * A expansibilidade não é considerada.
+    /*
+      A expansibilidade não é considerada.
      */
     public boolean equals(Object obj) {
     	if (this == obj)

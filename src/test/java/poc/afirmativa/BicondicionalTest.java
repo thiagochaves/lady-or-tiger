@@ -13,14 +13,13 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 /**
+ * Testa a classe Bicondicional.
  * Created by Thiago on 10/01/17.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class BicondicionalTest {
 
     private Bicondicional imp;
-    @Mock
-    private Puzzle _puzzle;
     @Mock
     private Afirmativa _antecedente;
     @Mock

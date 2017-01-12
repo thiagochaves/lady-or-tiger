@@ -5,19 +5,12 @@ package poc.puzzle;
  * 
  * @author Thiago
  */
-public class ExcecaoParsing extends RuntimeException {
+class ExcecaoParsing extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public ExcecaoParsing() {
-	}
-
 	public ExcecaoParsing(String message) {
 		super(message);
-	}
-
-	public ExcecaoParsing(Throwable cause) {
-		super(cause);
 	}
 
 	public ExcecaoParsing(String message, Throwable cause) {

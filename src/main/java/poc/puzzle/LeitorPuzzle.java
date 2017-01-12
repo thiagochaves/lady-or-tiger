@@ -70,10 +70,9 @@ public class LeitorPuzzle {
             return "a(1)v(!a(1))";
         }
         String saidaPortasMenosUm = gerarRestricaoBasica(numPortas - 1);
-        String saida = "((" + saidaPortasMenosUm + ") ^ a(" + numPortas
+        return "((" + saidaPortasMenosUm + ") ^ a(" + numPortas
                 + ")) v ((" + saidaPortasMenosUm + ") ^ (!a(" + numPortas
                 + ")))";
-        return saida;
     }
 
     private static int lerNumeroDePortas(BufferedReader leitor)
@@ -83,8 +82,7 @@ public class LeitorPuzzle {
             throw new ExcecaoArquivoInvalido("O arquivo é inválido. " 
                     + "O número de portas não foi informado.");
         }
-        int numPortas = Integer.parseInt(linhaPortas);
-        return numPortas;
+        return Integer.parseInt(linhaPortas);
     }
     
     private static Set<String> lerObjetos(BufferedReader leitor)

@@ -1,8 +1,6 @@
 package poc;
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import poc.afirmativa.Expansao;
@@ -25,12 +23,12 @@ public class LocalizacaoTest {
 		try {
 			new Localizacao("a", -1);
 			fail("Porta negativa aceita.");
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException ignored) {
 		}
 		try {
 			new Localizacao("a", 0);
 			fail("Porta zero aceita.");
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException ignored) {
 		}
 	}
 
