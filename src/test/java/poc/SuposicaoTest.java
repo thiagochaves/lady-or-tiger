@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import poc.afirmativa.Localizacao;
 import poc.puzzle.ParserExpressao;
+import poc.tableaux.Suposicao;
 
 public class SuposicaoTest {
 

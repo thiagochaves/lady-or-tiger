@@ -6,6 +6,8 @@ import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Referencia;
 import poc.puzzle.ParserExpressao;
 import poc.puzzle.Puzzle;
+import poc.tableaux.Envelope;
+import poc.tableaux.Ramo;
 
 import java.util.*;
 

@@ -6,6 +6,9 @@ import java.util.List;
 
 import poc.afirmativa.*;
 import poc.puzzle.Puzzle;
+import poc.tableaux.Envelope;
+import poc.tableaux.Ramo;
+import poc.tableaux.Tableaux;
 
 /**
  * Representa um tableaux semântico para um determinado problema.

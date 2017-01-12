@@ -4,6 +4,8 @@ import java.io.File;
 
 import poc.puzzle.LeitorPuzzle;
 import poc.puzzle.Puzzle;
+import poc.tableaux.Ramo;
+import poc.tableaux.Tableaux;
 
 public class TesteSimples {
 

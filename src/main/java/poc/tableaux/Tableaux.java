@@ -1,4 +1,4 @@
-package poc;
+package poc.tableaux;
 
 import java.util.*;
 
@@ -23,7 +23,7 @@ public class Tableaux {
     /**
      * Define se as mensagens de depuração devem ser mostradas ou não.
      */
-    static void setDepuracao(boolean depuracao) {
+    public static void setDepuracao(boolean depuracao) {
         cdepuracao = depuracao;
     }
 

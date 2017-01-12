@@ -1,7 +1,8 @@
-package poc;
+package poc.tableaux;
 
 import java.util.*;
 
+import poc.ExcecaoImplementacao;
 import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Localizacao;
 import poc.afirmativa.Referencia;

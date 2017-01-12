@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import poc.puzzle.LeitorPuzzle;
 import poc.puzzle.Puzzle;
+import poc.tableaux.Ramo;
 
 public class CorrecaoTest {
 
