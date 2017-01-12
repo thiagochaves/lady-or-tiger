@@ -1,6 +1,7 @@
 package poc;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import poc.afirmativa.*;
@@ -38,11 +39,11 @@ public class Solucionador extends Tableaux {
         List<Ramo> ramos = new ArrayList<Ramo>();
         for (int i = 0; i < getNumRamos(); i++) {
             Ramo ramo = getRamo(i).getEssenciais();
-            ramo = ramo.deduzirPresenca(_puzzle);
+            ramo = deduzirPresenca(ramo);
             if (ramo == null) {
                 continue;
             }
-            ramo = ramo.deduzirAusencia(_puzzle);
+            ramo = deduzirAusencia(ramo);
             if (ramo == null) {
                 continue;
             }
@@ -54,6 +55,75 @@ public class Solucionador extends Tableaux {
         } else {
             return new Ramo(_puzzle);
         }
+    }
+
+    /**
+     * Se já foi descoberto o que há atrás de uma porta, então afirmaremos
+     * que os outros objetos não podem estar atrás de tal porta.
+     */
+    public Ramo deduzirAusencia(Ramo ramo) {
+        Ramo saida = new Ramo(ramo);
+        for (Envelope e : ramo) {
+            for (Localizacao n : e.explicitarObjetosQueNaoEstaoAqui()) {
+                saida.adicionarEnvelope(new Envelope(n));
+            }
+        }
+        return saida;
+    }
+
+    /**
+     * Dado que uma porta precisa esconder um e apenas um objeto este método
+     * analisa e infere o que pode estar atrás das portas. O resultado completo
+     * (junto com dados iniciais) é retornado. Ex: Se houver !em(m,1) e os
+     * únicos objetos válidos sejam m e t, então é inferido que em(t,1). OBS:
+     * Sempre deve existir um objeto atrás de uma porta. Se isso não acontecer o
+     * método retorna null.
+     */
+    @SuppressWarnings("unchecked")
+    public Ramo deduzirPresenca(Ramo ramo) {
+        // 1- Criar um container para cada porta
+        ArrayList<String>[] portas = new ArrayList[_puzzle.getNumPortas()];
+        for (int i = 0; i < _puzzle.getNumPortas(); i++) {
+            portas[i] = new ArrayList<String>();
+        }
+        // 2- Passar por todas as verdades, se ela for uma negação de uma
+        // localização então então inclua seu objeto no container respectivo
+        for (Envelope atual : ramo) {
+            if (!(atual.getAfirmativa().estaNegada())) {
+                continue;
+            }
+            if (atual.getTipoExpansao() != Expansao.IDENTIDADE) {
+                continue;
+            }
+            Localizacao localizacao = (Localizacao) atual.getAfirmativa();
+            String objeto = localizacao.getObjeto();
+            int lugar = localizacao.getLugar();
+            if (!portas[lugar - 1].contains(objeto)) {
+                portas[lugar - 1].add(objeto);
+            }
+        }
+        // 3- Para cada porta determine os objetos que poderiam estar lá e
+        // se houver apenas uma possibilidade adicione-a à verdade
+        Ramo saida = new Ramo(ramo);
+        for (int j = 0; j < portas.length; j++) {
+            ArrayList<String> portaAtual = portas[j];
+            HashSet<String> objetos = new HashSet<String>();
+            objetos.addAll(_puzzle.getObjetos());
+            objetos.removeAll(portaAtual);
+            // O método Ramo.impossivelTerAlgoNoLugar() já elimina estas situações durante a expansão
+            if (objetos.size() == 0) {
+                // Está dizendo que não há objetos atrás da porta, o que não pode acontecer
+                return null;
+            }
+            if (objetos.size() == 1) {
+                Localizacao localizacaoInferida = new Localizacao(
+                        (String) objetos.iterator().next(), j + 1);
+                localizacaoInferida.associarAPuzzle(_puzzle);
+                Envelope envelope = new Envelope(localizacaoInferida);
+                saida.adicionarEnvelope(envelope);
+            }
+        }
+        return saida;
     }
 
     private Ramo calcularIntersecao(List<Ramo> ramos) {

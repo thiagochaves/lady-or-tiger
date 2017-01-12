@@ -1,10 +1,6 @@
 package poc;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import poc.afirmativa.Expansao;
 import poc.afirmativa.Localizacao;
@@ -16,7 +12,7 @@ import poc.puzzle.Puzzle;
  * 
  * @author Thiago
  */
-public final class Ramo {
+public final class Ramo implements Iterable<Envelope> {
     private List<Envelope> _envelopes = new ArrayList<Envelope>();
     private int _indicePossivelEnvelopeExpansivel;
     private Suposicao _suposicao;
@@ -117,61 +113,6 @@ public final class Ramo {
         return saida;
     }
 
-    /**
-     * Dado que uma porta precisa esconder um e apenas um objeto este método
-     * analisa e infere o que pode estar atrás das portas. O resultado completo
-     * (junto com dados iniciais) é retornado. Ex: Se houver !em(m,1) e os
-     * únicos objetos válidos sejam m e t, então é inferido que em(t,1). OBS:
-     * Sempre deve existir um objeto atrás de uma porta. Se isso não acontecer o
-     * método retorna null.
-     */
-    @SuppressWarnings("unchecked")
-	public Ramo deduzirPresenca(Puzzle puzzle) {
-        // 1- Criar um container para cada porta
-        ArrayList<String>[] portas = new ArrayList[puzzle.getNumPortas()];
-        for (int i = 0; i < puzzle.getNumPortas(); i++) {
-            portas[i] = new ArrayList<String>();
-        }
-        // 2- Passar por todas as verdades, se ela for uma negação de uma
-        // localização então então inclua seu objeto no container respectivo
-        for (Envelope atual : _envelopes) {
-            if (!(atual.getAfirmativa().estaNegada())) {
-                continue;
-            }
-            if (atual.getTipoExpansao() != Expansao.IDENTIDADE) {
-                continue;
-            }
-            Localizacao localizacao = (Localizacao) atual.getAfirmativa();
-            String objeto = localizacao.getObjeto();
-            int lugar = localizacao.getLugar();
-            if (!portas[lugar - 1].contains(objeto)) {
-                portas[lugar - 1].add(objeto);
-            }
-        }
-        // 3- Para cada porta determine os objetos que poderiam estar lá e
-        // se houver apenas uma possibilidade adicione-a à verdade
-        Ramo saida = new Ramo(this);
-        for (int j = 0; j < portas.length; j++) {
-            ArrayList<String> portaAtual = portas[j];
-            HashSet<String> objetos = new HashSet<String>();
-            objetos.addAll(puzzle.getObjetos());
-            objetos.removeAll(portaAtual);
-            // O método Ramo.impossivelTerAlgoNoLugar() já elimina estas situações durante a expansão
-            if (objetos.size() == 0) {
-                // Está dizendo que não há objetos atrás da porta, o que não pode acontecer
-                return null;
-            }
-            if (objetos.size() == 1) {
-                Localizacao localizacaoInferida = new Localizacao(
-                        (String) objetos.iterator().next(), j + 1);
-                localizacaoInferida.associarAPuzzle(puzzle);
-                Envelope envelope = new Envelope(localizacaoInferida);
-                saida.adicionarEnvelope(envelope);
-            }
-        }
-        return saida;
-    }
-    
     /**
      * Calcula a interseção do ramo atual com o informado. 
      * @throws NullPointerException Se o ramo for <code>null</code>.
@@ -280,17 +221,8 @@ public final class Ramo {
         }
     }
 
-    /**
-     * Se já foi descoberto o que há atrás de uma porta, então afirmaremos
-     * que os outros objetos não podem estar atrás de tal porta.
-     */
-    public Ramo deduzirAusencia(Puzzle puzzle) {
-        Ramo saida = new Ramo(this);
-        for (Envelope e : _envelopes) {
-            for (Localizacao n : e.explicitarObjetosQueNaoEstaoAqui()) {
-                saida.adicionarEnvelope(new Envelope(n));
-            }
-        }
-        return saida;
+    @Override
+    public Iterator<Envelope> iterator() {
+        return Collections.unmodifiableList(_envelopes).iterator();
     }
 }
