@@ -134,13 +134,13 @@ public final class Ramo implements Iterable<Envelope> {
                 if (!o1.eEssencial() && !o2.eEssencial()) {
                     return o1.hashCode() - o2.hashCode();
                 }
-                if (o1.getTipoExpansao() == Expansao.DELTA && o2.getTipoExpansao() == Expansao.IDENTIDADE) {
+                if (o1.getAfirmativa() instanceof Referencia && o2.getAfirmativa() instanceof Localizacao) {
                     return -1;
                 }
-                if (o2.getTipoExpansao() == Expansao.DELTA && o1.getTipoExpansao() == Expansao.IDENTIDADE) {
+                if (o2.getAfirmativa() instanceof Referencia && o1.getAfirmativa() instanceof Localizacao) {
                     return 1;
                 }
-                if (o1.getTipoExpansao() == Expansao.DELTA && o2.getTipoExpansao() == Expansao.DELTA) {
+                if (o1.getAfirmativa() instanceof Referencia && o2.getAfirmativa() instanceof Referencia) {
                     return ((Referencia)o1.getAfirmativa()).getIndice() - ((Referencia)o2.getAfirmativa()).getIndice();
                 }
                 int comparacaoLugar = ((Localizacao)o1.getAfirmativa()).getLugar() - ((Localizacao)o2.getAfirmativa()).getLugar();

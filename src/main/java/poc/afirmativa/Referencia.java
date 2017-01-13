@@ -48,28 +48,16 @@ public class Referencia implements Afirmativa {
 
     @Override
     public boolean eExpansivel() {
-        return true;
+        return false;
     }
 
-    /**
-	 * Uma referência para uma afirmativa é expandida para o conteúdo da mesma.
-	 */
 	public Set<Afirmativa> expandir() {
-		Afirmativa resultado = _puzzle.getPorta(_indice);
-		Set<Afirmativa> expansao = new HashSet<Afirmativa>();
-        if (!estaNegada()) {
-            expansao.add(resultado);
-        } else {
-            expansao.add(resultado.negar());
-        }
-		return expansao;
+        throw new UnsupportedOperationException(
+                "Afirmativas atômicas não podem ser expandidas.");
 	}
 
-	/**
-	 * Indica o tipo de expansão que o método expandir() fará.
-	 */
 	public Expansao getTipoExpansao() {
-		return Expansao.DELTA;
+		return Expansao.IDENTIDADE;
 	}
 
 	public String toString() {

@@ -12,7 +12,5 @@ public enum Expansao {
     /** Expansão do tipo beta (disjunção). */
     BETA,
     /** Expansão devido à negação de uma negação. */
-    GAMA,
-    /** Expansão de uma referência para seu conteúdo. */
-    DELTA
+    GAMA
 }

@@ -93,14 +93,13 @@ public class Solucionador {
             if (!(atual.getAfirmativa().estaNegada())) {
                 continue;
             }
-            if (atual.getTipoExpansao() != Expansao.IDENTIDADE) {
-                continue;
-            }
-            Localizacao localizacao = (Localizacao) atual.getAfirmativa();
-            String objeto = localizacao.getObjeto();
-            int lugar = localizacao.getLugar();
-            if (!portas[lugar - 1].contains(objeto)) {
-                portas[lugar - 1].add(objeto);
+            if (atual.getAfirmativa() instanceof Localizacao) {
+                Localizacao localizacao = (Localizacao) atual.getAfirmativa();
+                String objeto = localizacao.getObjeto();
+                int lugar = localizacao.getLugar();
+                if (!portas[lugar - 1].contains(objeto)) {
+                    portas[lugar - 1].add(objeto);
+                }
             }
         }
         // 3- Para cada porta determine os objetos que poderiam estar lá e

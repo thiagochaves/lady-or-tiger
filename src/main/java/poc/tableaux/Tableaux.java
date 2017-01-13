@@ -96,18 +96,10 @@ public class Tableaux {
             // 1.2 Expanda-o
             Expansao tipoExpansao = envelopeASerExpandido.getTipoExpansao();
             Set<Afirmativa> expansao = envelopeASerExpandido.expandir();
-            // No caso de conjunções e disjunções, mantemos apenas os
-            // elementos separados, arrancando fora a expressão de 
-            // conjunção ou disjunção
-            if (tipoExpansao == Expansao.ALFA || 
-                    tipoExpansao == Expansao.BETA ||
-                    tipoExpansao == Expansao.GAMA) {
-                ramoAtual.removerEnvelope(envelopeASerExpandido);
-            }
+            ramoAtual.removerEnvelope(envelopeASerExpandido);
             switch (tipoExpansao) {
                 case ALFA:
                 case GAMA:
-                case DELTA:
                     // Nestes tipos de expansões os elementos são adicionados ao
                     // ramo atual
                     adicionarAfirmativasRamo(expansao, i);

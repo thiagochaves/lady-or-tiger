@@ -70,7 +70,7 @@ public class Localizacao implements Afirmativa {
 	 */
 	public Set<Afirmativa> expandir() {
 		throw new UnsupportedOperationException(
-				"Afirmativas atômicas não podem ser " + "expandidas.");
+				"Afirmativas atômicas não podem ser expandidas.");
 	}
 
 	/**
