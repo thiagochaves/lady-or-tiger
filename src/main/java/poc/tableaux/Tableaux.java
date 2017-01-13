@@ -89,14 +89,14 @@ public class Tableaux {
         final int numRamos = _ramos.size();
         for (int i = 0; i < numRamos; i++) {
             Ramo ramoAtual = getRamo(i);
-            Afirmativa envelopeASerExpandido = ramoAtual.obterPrimeiroEnvelopeExpansivel();
-            if (envelopeASerExpandido == null) {
+            Afirmativa afirmativaAExpandir = ramoAtual.obterPrimeiraAfirmativaExpansivel();
+            if (afirmativaAExpandir == null) {
                 continue;
             }
             // 1.2 Expanda-o
-            Expansao tipoExpansao = envelopeASerExpandido.getTipoExpansao();
-            Set<Afirmativa> expansao = envelopeASerExpandido.expandir();
-            ramoAtual.removerEnvelope(envelopeASerExpandido);
+            Expansao tipoExpansao = afirmativaAExpandir.getTipoExpansao();
+            Set<Afirmativa> expansao = afirmativaAExpandir.expandir();
+            ramoAtual.removerAfirmativa(afirmativaAExpandir);
             switch (tipoExpansao) {
                 case ALFA:
                 case GAMA:
@@ -118,7 +118,7 @@ public class Tableaux {
             int indiceRamo) {
         Ramo ramoAtual = getRamo(indiceRamo);
         for(Afirmativa a : afirmativas) {
-            ramoAtual.adicionarEnvelope(a);
+            ramoAtual.adicionarAfirmativa(a);
         }
     }
 
@@ -135,8 +135,8 @@ public class Tableaux {
         Ramo ramoAtual = getRamo(indiceRamo);
         Ramo novoRamo = new Ramo(ramoAtual);
         Iterator<Afirmativa> it = afirmativas.iterator();
-        ramoAtual.adicionarEnvelope(it.next());
-        novoRamo.adicionarEnvelope(it.next());
+        ramoAtual.adicionarAfirmativa(it.next());
+        novoRamo.adicionarAfirmativa(it.next());
         adicionarRamo(novoRamo);
     }
 
@@ -161,8 +161,8 @@ public class Tableaux {
         final int numRamos = getRamos().size();
         for (int i = 0; i < numRamos; i++) {
             Ramo ramoAtual = getRamo(i);
-            Afirmativa env = ramoAtual.obterPrimeiroEnvelopeExpansivel();
-            if (env != null) {
+            Afirmativa afirmativa = ramoAtual.obterPrimeiraAfirmativaExpansivel();
+            if (afirmativa != null) {
                 return true;
             }
         }

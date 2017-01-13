@@ -24,7 +24,7 @@ public class Solucionador {
     public Solucionador(Puzzle puzzle) {
         _puzzle = puzzle;
         Ramo ramoInicial = new Ramo(puzzle);
-        ramoInicial.adicionarEnvelope(_puzzle.getAxioma());
+        ramoInicial.adicionarAfirmativa(_puzzle.getAxioma());
         _tableaux.adicionarRamo(ramoInicial);
     }
 
@@ -65,7 +65,7 @@ public class Solucionador {
         Ramo saida = new Ramo(ramo);
         for (Afirmativa e : ramo) {
             for (Localizacao n : e.explicitarObjetosQueNaoEstaoAqui()) {
-                saida.adicionarEnvelope(n);
+                saida.adicionarAfirmativa(n);
             }
         }
         return saida;
@@ -118,8 +118,8 @@ public class Solucionador {
                 Localizacao localizacaoInferida = new Localizacao(
                         objetos.iterator().next(), j + 1);
                 localizacaoInferida.associarAPuzzle(_puzzle);
-                Afirmativa envelope = localizacaoInferida;
-                saida.adicionarEnvelope(envelope);
+                Afirmativa afirmativa = localizacaoInferida;
+                saida.adicionarAfirmativa(afirmativa);
             }
         }
         return saida;
@@ -154,7 +154,7 @@ public class Solucionador {
         }
         for (Afirmativa af : deducoes) {
             for (Ramo r : _tableaux.getRamos()) {
-                r.adicionarEnvelope(af);
+                r.adicionarAfirmativa(af);
             }
         }
         _tableaux.expandir();

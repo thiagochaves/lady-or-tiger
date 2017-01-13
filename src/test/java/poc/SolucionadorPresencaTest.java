@@ -44,7 +44,7 @@ public class SolucionadorPresencaTest {
         solucionador = new Solucionador(puzzle);
         Ramo ramo = new Ramo(puzzle);
         for (Afirmativa af : axioma) {
-            ramo.adicionarEnvelope(af);
+            ramo.adicionarAfirmativa(af);
         }
         return ramo;
     }
