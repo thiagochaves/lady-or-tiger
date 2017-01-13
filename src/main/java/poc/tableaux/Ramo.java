@@ -2,6 +2,7 @@ package poc.tableaux;
 
 import java.util.*;
 
+import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Expansao;
 import poc.afirmativa.Localizacao;
 import poc.afirmativa.Referencia;
@@ -12,8 +13,8 @@ import poc.puzzle.Puzzle;
  * 
  * @author Thiago
  */
-public final class Ramo implements Iterable<Envelope> {
-    private List<Envelope> _envelopes = new ArrayList<Envelope>();
+public final class Ramo implements Iterable<Afirmativa> {
+    private List<Afirmativa> _envelopes = new ArrayList<Afirmativa>();
     private int _indicePossivelEnvelopeExpansivel;
     private Suposicao _suposicao;
     private boolean _fechado;
@@ -34,23 +35,23 @@ public final class Ramo implements Iterable<Envelope> {
         _indicePossivelEnvelopeExpansivel = ramo._indicePossivelEnvelopeExpansivel;
         _suposicao = Suposicao.copiar(ramo._suposicao);
         _fechado = ramo._fechado;
-        for (Envelope e : ramo._envelopes) {
-            _envelopes.add(Envelope.criarCopia(e));
+        for (Afirmativa e : ramo._envelopes) {
+            _envelopes.add(e);
         }
     }
 
-    public void adicionarEnvelope(Envelope envelope) {
+    public void adicionarEnvelope(Afirmativa envelope) {
         if (envelope == null) {
             throw new IllegalArgumentException();
         }
         if (_envelopes.contains(envelope)) {
             return;
         }
-        if (_suposicao.contradiz(envelope.getAfirmativa())) {
+        if (_suposicao.contradiz(envelope)) {
             _fechado = true;
         }
         _envelopes.add(envelope);
-        _suposicao.suporTambem(envelope.getAfirmativa());
+        _suposicao.suporTambem(envelope);
     }
 
     /**
@@ -58,9 +59,9 @@ public final class Ramo implements Iterable<Envelope> {
      * @return <code>null</code> se não houver envelope expansível no 
      * ramo.
      */
-    public Envelope obterPrimeiroEnvelopeExpansivel() {
+    public Afirmativa obterPrimeiroEnvelopeExpansivel() {
         for (int i = _indicePossivelEnvelopeExpansivel; i < _envelopes.size(); i++) {
-            Envelope envelope = _envelopes.get(i);
+            Afirmativa envelope = _envelopes.get(i);
             if (envelope.eExpansivel()) {
                 _indicePossivelEnvelopeExpansivel = i;
                 return envelope;
@@ -85,7 +86,7 @@ public final class Ramo implements Iterable<Envelope> {
      */
     public Ramo getEssenciais() {
         Ramo saida = new Ramo(_suposicao);
-        for (Envelope envelope : _envelopes) {
+        for (Afirmativa envelope : _envelopes) {
             if (envelope.eEssencial()) {
                 saida.adicionarEnvelope(envelope);
             }
@@ -102,7 +103,7 @@ public final class Ramo implements Iterable<Envelope> {
             throw new IllegalArgumentException();
         }
         Ramo intersecao = new Ramo(_suposicao);
-        for (Envelope env : _envelopes) {
+        for (Afirmativa env : _envelopes) {
             // Trata o caso em que há repetições
             if (intersecao.contem(env)) {
                 continue;
@@ -114,17 +115,17 @@ public final class Ramo implements Iterable<Envelope> {
         return intersecao;
     }
 
-    private boolean contem(Envelope env) {
+    private boolean contem(Afirmativa env) {
         return _envelopes.contains(env);
     }
 
     @Override
     public String toString() {
-        List<Envelope> copia = new ArrayList<Envelope>(_envelopes);
-        Collections.sort(copia, new Comparator<Envelope>() {
+        List<Afirmativa> copia = new ArrayList<Afirmativa>(_envelopes);
+        Collections.sort(copia, new Comparator<Afirmativa>() {
             // TODO Acertar esta bagunça aqui
             @Override
-            public int compare(Envelope o1, Envelope o2) {
+            public int compare(Afirmativa o1, Afirmativa o2) {
                 if (o1.eEssencial() && !o2.eEssencial()) {
                     return -1;
                 }
@@ -134,18 +135,18 @@ public final class Ramo implements Iterable<Envelope> {
                 if (!o1.eEssencial() && !o2.eEssencial()) {
                     return o1.hashCode() - o2.hashCode();
                 }
-                if (o1.getAfirmativa() instanceof Referencia && o2.getAfirmativa() instanceof Localizacao) {
+                if (o1 instanceof Referencia && o2 instanceof Localizacao) {
                     return -1;
                 }
-                if (o2.getAfirmativa() instanceof Referencia && o1.getAfirmativa() instanceof Localizacao) {
+                if (o2 instanceof Referencia && o1 instanceof Localizacao) {
                     return 1;
                 }
-                if (o1.getAfirmativa() instanceof Referencia && o2.getAfirmativa() instanceof Referencia) {
-                    return ((Referencia)o1.getAfirmativa()).getIndice() - ((Referencia)o2.getAfirmativa()).getIndice();
+                if (o1 instanceof Referencia && o2 instanceof Referencia) {
+                    return ((Referencia)o1).getIndice() - ((Referencia)o2).getIndice();
                 }
-                int comparacaoLugar = ((Localizacao)o1.getAfirmativa()).getLugar() - ((Localizacao)o2.getAfirmativa()).getLugar();
+                int comparacaoLugar = ((Localizacao)o1).getLugar() - ((Localizacao)o2).getLugar();
                 if (comparacaoLugar == 0) {
-                    return ((Localizacao)o1.getAfirmativa()).getObjeto().compareTo(((Localizacao)o2.getAfirmativa()).getObjeto());
+                    return ((Localizacao)o1).getObjeto().compareTo(((Localizacao)o2).getObjeto());
                 }
                 return comparacaoLugar;
             }
@@ -179,12 +180,12 @@ public final class Ramo implements Iterable<Envelope> {
         return true;
     }
 
-    public void removerEnvelope(Envelope envelopeASerExpandido) {
+    public void removerEnvelope(Afirmativa envelopeASerExpandido) {
         _envelopes.remove(envelopeASerExpandido);
     }
 
     @Override
-    public Iterator<Envelope> iterator() {
+    public Iterator<Afirmativa> iterator() {
         return Collections.unmodifiableList(_envelopes).iterator();
     }
 }

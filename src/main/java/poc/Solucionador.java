@@ -6,7 +6,6 @@ import java.util.List;
 
 import poc.afirmativa.*;
 import poc.puzzle.Puzzle;
-import poc.tableaux.Envelope;
 import poc.tableaux.Ramo;
 import poc.tableaux.Tableaux;
 
@@ -25,7 +24,7 @@ public class Solucionador {
     public Solucionador(Puzzle puzzle) {
         _puzzle = puzzle;
         Ramo ramoInicial = new Ramo(puzzle);
-        ramoInicial.adicionarEnvelope(new Envelope(_puzzle.getAxioma()));
+        ramoInicial.adicionarEnvelope(_puzzle.getAxioma());
         _tableaux.adicionarRamo(ramoInicial);
     }
 
@@ -64,9 +63,9 @@ public class Solucionador {
      */
     private Ramo deduzirAusencia(Ramo ramo) {
         Ramo saida = new Ramo(ramo);
-        for (Envelope e : ramo) {
+        for (Afirmativa e : ramo) {
             for (Localizacao n : e.explicitarObjetosQueNaoEstaoAqui()) {
-                saida.adicionarEnvelope(new Envelope(n));
+                saida.adicionarEnvelope(n);
             }
         }
         return saida;
@@ -89,12 +88,12 @@ public class Solucionador {
         }
         // 2- Passar por todas as verdades, se ela for uma negação de uma
         // localização então então inclua seu objeto no container respectivo
-        for (Envelope atual : ramo) {
-            if (!(atual.getAfirmativa().estaNegada())) {
+        for (Afirmativa atual : ramo) {
+            if (!(atual.estaNegada())) {
                 continue;
             }
-            if (atual.getAfirmativa() instanceof Localizacao) {
-                Localizacao localizacao = (Localizacao) atual.getAfirmativa();
+            if (atual instanceof Localizacao) {
+                Localizacao localizacao = (Localizacao) atual;
                 String objeto = localizacao.getObjeto();
                 int lugar = localizacao.getLugar();
                 if (!portas[lugar - 1].contains(objeto)) {
@@ -119,7 +118,7 @@ public class Solucionador {
                 Localizacao localizacaoInferida = new Localizacao(
                         objetos.iterator().next(), j + 1);
                 localizacaoInferida.associarAPuzzle(_puzzle);
-                Envelope envelope = new Envelope(localizacaoInferida);
+                Afirmativa envelope = localizacaoInferida;
                 saida.adicionarEnvelope(envelope);
             }
         }
@@ -155,7 +154,7 @@ public class Solucionador {
         }
         for (Afirmativa af : deducoes) {
             for (Ramo r : _tableaux.getRamos()) {
-                r.adicionarEnvelope(new Envelope(af));
+                r.adicionarEnvelope(af);
             }
         }
         _tableaux.expandir();

@@ -89,7 +89,7 @@ public class Tableaux {
         final int numRamos = _ramos.size();
         for (int i = 0; i < numRamos; i++) {
             Ramo ramoAtual = getRamo(i);
-            Envelope envelopeASerExpandido = ramoAtual.obterPrimeiroEnvelopeExpansivel();
+            Afirmativa envelopeASerExpandido = ramoAtual.obterPrimeiroEnvelopeExpansivel();
             if (envelopeASerExpandido == null) {
                 continue;
             }
@@ -118,7 +118,7 @@ public class Tableaux {
             int indiceRamo) {
         Ramo ramoAtual = getRamo(indiceRamo);
         for(Afirmativa a : afirmativas) {
-            ramoAtual.adicionarEnvelope(new Envelope(a));
+            ramoAtual.adicionarEnvelope(a);
         }
     }
 
@@ -135,8 +135,8 @@ public class Tableaux {
         Ramo ramoAtual = getRamo(indiceRamo);
         Ramo novoRamo = new Ramo(ramoAtual);
         Iterator<Afirmativa> it = afirmativas.iterator();
-        ramoAtual.adicionarEnvelope(new Envelope(it.next()));
-        novoRamo.adicionarEnvelope(new Envelope(it.next()));
+        ramoAtual.adicionarEnvelope(it.next());
+        novoRamo.adicionarEnvelope(it.next());
         adicionarRamo(novoRamo);
     }
 
@@ -161,7 +161,7 @@ public class Tableaux {
         final int numRamos = getRamos().size();
         for (int i = 0; i < numRamos; i++) {
             Ramo ramoAtual = getRamo(i);
-            Envelope env = ramoAtual.obterPrimeiroEnvelopeExpansivel();
+            Afirmativa env = ramoAtual.obterPrimeiroEnvelopeExpansivel();
             if (env != null) {
                 return true;
             }

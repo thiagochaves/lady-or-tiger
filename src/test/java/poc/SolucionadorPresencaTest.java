@@ -6,7 +6,6 @@ import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Referencia;
 import poc.puzzle.ParserExpressao;
 import poc.puzzle.Puzzle;
-import poc.tableaux.Envelope;
 import poc.tableaux.Ramo;
 
 import java.util.*;
@@ -45,7 +44,7 @@ public class SolucionadorPresencaTest {
         solucionador = new Solucionador(puzzle);
         Ramo ramo = new Ramo(puzzle);
         for (Afirmativa af : axioma) {
-            ramo.adicionarEnvelope(new Envelope(af));
+            ramo.adicionarEnvelope(af);
         }
         return ramo;
     }
