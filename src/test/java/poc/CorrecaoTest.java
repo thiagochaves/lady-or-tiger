@@ -24,7 +24,6 @@ public class CorrecaoTest {
         LeitorPuzzle leitor = LeitorPuzzle.lerDoArquivo(caminho);
         Puzzle puzzle = leitor.puzzle();
         Solucionador tableaux = new Solucionador(puzzle);
-        tableaux.expandir();
         Ramo solucao = tableaux.getSolucao();
         assertEquals(leitor.solucao(), solucao.toString());
     }

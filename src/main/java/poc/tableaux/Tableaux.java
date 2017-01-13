@@ -14,10 +14,7 @@ public class Tableaux {
     /** Indica se as mensagens de depuração devem ser mostradas. */
     private static boolean cdepuracao = false;
 
-    /**
-     * Construtor para as subclasses.
-     */
-    protected Tableaux() {
+    public Tableaux() {
     }
 
     /**
@@ -45,7 +42,7 @@ public class Tableaux {
      * Adiciona um ramo ao tableaux.
      * @param ramo Não pode ser <code>null</code>.
      */
-    protected void adicionarRamo(Ramo ramo) {
+    public void adicionarRamo(Ramo ramo) {
         if (ramo == null) {
             throw new IllegalArgumentException("Ramo nulo");
         }
@@ -73,7 +70,7 @@ public class Tableaux {
     /**
      * Obtém a árvore toda.
      */
-    protected List<Ramo> getRamos() {
+    public List<Ramo> getRamos() {
         return Collections.unmodifiableList(_ramos);
     }
     

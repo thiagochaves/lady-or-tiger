@@ -14,7 +14,6 @@ public class TestePerformance {
         Puzzle puzzle = leitor.puzzle();
         long t1 = System.currentTimeMillis();
         Solucionador tableaux = new Solucionador(puzzle);
-        tableaux.expandir();
         tableaux.getSolucao();
         long t2 = System.currentTimeMillis();
         return (t2 - t1) / 1000.0;

@@ -13,10 +13,11 @@ import poc.tableaux.Tableaux;
 /**
  * Representa um tableaux semântico para um determinado problema.
  */
-public class Solucionador extends Tableaux {
+public class Solucionador {
 
     /** Puzzle a ser resolvido. */
     private Puzzle _puzzle;
+    private Tableaux _tableaux = new Tableaux();
 
     /**
      * Cria um tableaux para resolver determinado puzzle.
@@ -25,23 +26,20 @@ public class Solucionador extends Tableaux {
         _puzzle = puzzle;
         Ramo ramoInicial = new Ramo(puzzle);
         ramoInicial.adicionarEnvelope(new Envelope(_puzzle.getAxioma()));
-        adicionarRamo(ramoInicial);
+        _tableaux.adicionarRamo(ramoInicial);
     }
 
     /**
      * Obtém a solução do puzzle, se for coerente.
      */
     public Ramo getSolucao() {
-        if (eExpansivel()) {
-            throw new IllegalStateException(
-                    "Soluções só podem ser encontradas após "
-                            + "a expansão completa do tableaux.");
-        }
-        fechar();
+        expandir();
+        assert !_tableaux.eExpansivel();
+        _tableaux.fechar();
         // Realiza mais algumas inferências
         List<Ramo> ramos = new ArrayList<Ramo>();
-        for (int i = 0; i < getNumRamos(); i++) {
-            Ramo ramo = getRamo(i).getEssenciais();
+        for (Ramo r : _tableaux.getRamos()) {
+            Ramo ramo = r.getEssenciais();
             ramo = deduzirPresenca(ramo);
             if (ramo == null) {
                 continue;
@@ -83,7 +81,7 @@ public class Solucionador extends Tableaux {
      * método retorna null.
      */
     @SuppressWarnings("unchecked")
-    public Ramo deduzirPresenca(Ramo ramo) {
+    Ramo deduzirPresenca(Ramo ramo) {
         // 1- Criar um container para cada porta
         ArrayList<String>[] portas = new ArrayList[_puzzle.getNumPortas()];
         for (int i = 0; i < _puzzle.getNumPortas(); i++) {
@@ -130,20 +128,14 @@ public class Solucionador extends Tableaux {
     }
 
     private Ramo calcularIntersecao(List<Ramo> ramos) {
-        show("Calculando interseção:");
         Ramo verdades = new Ramo(ramos.get(0).getEssenciais());
-        show("Encontrado : ", verdades);
         for (Ramo r : ramos) {
             Ramo ramo = r.getEssenciais();
-            show("Encontrado : ", ramo);
             verdades = verdades.calcularIntersecao(ramo);
-            show("Interseção parcial : ", verdades);
         }
-        show("Solução : ", verdades);
         return verdades;
     }
 
-    @Override
     /*
       A solução pode não conter a indicação
       se uma determinada porta está dizendo a verdade ou não.
@@ -154,7 +146,7 @@ public class Solucionador extends Tableaux {
       Funciona porque a expansão de uma porta mantém sua afirmativa
       no ramo, que é nosso objetivo
      */
-    public void expandir() {
+    private void expandir() {
         List<Afirmativa> deducoes = new ArrayList<Afirmativa>();
         for (int iPorta = 1; iPorta <= _puzzle.getNumPortas(); iPorta++) {
             Afirmativa afPorta = _puzzle.getPorta(iPorta);
@@ -163,10 +155,10 @@ public class Solucionador extends Tableaux {
             deducoes.add(portaEstaCertaOuErrada);
         }
         for (Afirmativa af : deducoes) {
-            for (Ramo r : getRamos()) {
+            for (Ramo r : _tableaux.getRamos()) {
                 r.adicionarEnvelope(new Envelope(af));
             }
         }
-        super.expandir();
+        _tableaux.expandir();
     }
 }

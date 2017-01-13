@@ -16,7 +16,6 @@ public class TesteSimples {
         LeitorPuzzle leitor = LeitorPuzzle.lerDoArquivo(caminho);
         Puzzle puzzle = leitor.puzzle();
         Solucionador tableaux = new Solucionador(puzzle);
-        tableaux.expandir();
         Ramo solucao = tableaux.getSolucao();
         System.out.println(solucao);
     }
