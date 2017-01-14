@@ -7,7 +7,8 @@ import java.util.List;
 import poc.afirmativa.*;
 import poc.puzzle.Puzzle;
 import poc.tableaux.Ramo;
-import poc.tableaux.Tableaux;
+import poc.tableaux.Tableau;
+import poc.tableaux.TableauSerial;
 
 /**
  * Representa um tableaux semântico para um determinado problema.
@@ -16,7 +17,7 @@ public class Solucionador {
 
     /** Puzzle a ser resolvido. */
     private Puzzle _puzzle;
-    private Tableaux _tableaux = new Tableaux();
+    private Tableau _tableau = new TableauSerial();
 
     /**
      * Cria um tableaux para resolver determinado puzzle.
@@ -25,7 +26,7 @@ public class Solucionador {
         _puzzle = puzzle;
         Ramo ramoInicial = new Ramo(puzzle);
         ramoInicial.adicionarAfirmativa(_puzzle.getAxioma());
-        _tableaux.adicionarRamo(ramoInicial);
+        _tableau.adicionarRamo(ramoInicial);
     }
 
     /**
@@ -33,11 +34,10 @@ public class Solucionador {
      */
     public Ramo getSolucao() {
         expandir();
-        assert !_tableaux.eExpansivel();
-        _tableaux.fechar();
+        assert !_tableau.eExpansivel();
         // Realiza mais algumas inferências
         List<Ramo> ramos = new ArrayList<Ramo>();
-        for (Ramo r : _tableaux.getRamos()) {
+        for (Ramo r : _tableau.getRamos()) {
             Ramo ramo = r.getEssenciais();
             ramo = deduzirPresenca(ramo);
             if (ramo == null) {
@@ -153,10 +153,10 @@ public class Solucionador {
             deducoes.add(portaEstaCertaOuErrada);
         }
         for (Afirmativa af : deducoes) {
-            for (Ramo r : _tableaux.getRamos()) {
+            for (Ramo r : _tableau.getRamos()) {
                 r.adicionarAfirmativa(af);
             }
         }
-        _tableaux.expandir();
+        _tableau.expandir();
     }
 }

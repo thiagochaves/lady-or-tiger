@@ -1,6 +1,8 @@
 package poc.tableaux;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Expansao;
@@ -8,40 +10,26 @@ import poc.afirmativa.Expansao;
 /**
  * Representa um tableaux semântico genérico.
  */
-public class Tableaux {
+public class TableauSerial implements Tableau {
     /** Lista de ramos da árvore. */
     private List<Ramo> _ramos = new ArrayList<Ramo>();
-    /** Indica se as mensagens de depuração devem ser mostradas. */
-    private static boolean cdepuracao = false;
+    private Logger _logger = Logger.getLogger("tableau");
 
-    public Tableaux() {
+    public TableauSerial() {
     }
 
-    /**
-     * Define se as mensagens de depuração devem ser mostradas ou não.
-     */
-    public static void setDepuracao(boolean depuracao) {
-        cdepuracao = depuracao;
-    }
-
-    /**
-     * Expande o tableaux ao máximo de forma estrita.
-     */
+    @Override
     public void expandir() {
-        show("Tableaux original : ", this);
+        show("TableauSerial original : ", this);
         while (eExpansivel()) {
             expandirUmNivel();
             show("Expansão do tableaux : ", this);
             fechar();
         }
-        fechar();
-        show("Tableaux sem ramos fechados : ", this);
+        show("TableauSerial sem ramos fechados : ", this);
     }
     
-    /**
-     * Adiciona um ramo ao tableaux.
-     * @param ramo Não pode ser <code>null</code>.
-     */
+    @Override
     public void adicionarRamo(Ramo ramo) {
         if (ramo == null) {
             throw new IllegalArgumentException("Ramo nulo");
@@ -140,10 +128,7 @@ public class Tableaux {
         adicionarRamo(novoRamo);
     }
 
-    /**
-     * Fecha os ramos que podem ser fechados, removendo-os.
-     */
-    public void fechar() {
+    private void fechar() {
         final int numRamos = getRamos().size();
         for (int i = numRamos - 1; i >= 0; i--) {
             Ramo ramoAtual = getRamo(i);
@@ -153,10 +138,7 @@ public class Tableaux {
         }
     }
 
-    /**
-     * Indica se mais alguma expansão pode ser feita ou não. Em caso negativo o
-     * tableaux já atingiu a atomicidade máxima.
-     */
+    @Override
     public boolean eExpansivel() {
         final int numRamos = getRamos().size();
         for (int i = 0; i < numRamos; i++) {
@@ -187,12 +169,6 @@ public class Tableaux {
      * Mostra uma mensagem de depuração se assim for pedido.
      */
     protected void show(String mensagem, Object... objetosAExibir) {
-        if (cdepuracao) {
-            if (objetosAExibir.length > 0) {
-                System.out.println(mensagem + Arrays.asList(objetosAExibir));
-            } else {
-                System.out.println(mensagem);
-            }
-        }
+        _logger.log(Level.FINE, mensagem, objetosAExibir);
     }
 }
