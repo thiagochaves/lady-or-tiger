@@ -25,21 +25,12 @@ class Expansor implements Runnable {
                     continue;
                 case ALFA:
                 case GAMA:
-                    for (Afirmativa nova : a.expandir()) {
-                        _ramo.adicionarAfirmativa(nova);
-                    }
+                    adicionarExpansaoAUmRamo(a);
                     i.remove();
                     break;
                 case BETA:
-                    Iterator<Afirmativa> iterator = a.expandir().iterator();
                     i.remove();
-                    Ramo duplicado = new Ramo(_ramo);
-                    _ramo.adicionarAfirmativa(iterator.next());
-                    duplicado.adicionarAfirmativa(iterator.next());
-                    if (duplicado.podeSerFechado()) {
-                        break;
-                    }
-                    _controlador.ramoNovo(duplicado);
+                    adicionarExpansaoADoisRamos(a);
                     break;
             }
             if (_ramo.podeSerFechado()) {
@@ -48,5 +39,21 @@ class Expansor implements Runnable {
             }
         }
         _controlador.ramoAberto(_id);
+    }
+
+    private void adicionarExpansaoAUmRamo(Afirmativa a) {
+        for (Afirmativa expansao : a.expandir()) {
+            _ramo.adicionarAfirmativa(expansao);
+        }
+    }
+
+    private void adicionarExpansaoADoisRamos(Afirmativa a) {
+        Iterator<Afirmativa> expansoes = a.expandir().iterator();
+        Ramo duplicado = new Ramo(_ramo);
+        _ramo.adicionarAfirmativa(expansoes.next());
+        duplicado.adicionarAfirmativa(expansoes.next());
+        if (!duplicado.podeSerFechado()) {
+            _controlador.ramoNovo(duplicado);
+        }
     }
 }

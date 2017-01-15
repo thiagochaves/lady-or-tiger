@@ -3,13 +3,13 @@ package poc;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Logger;
 
 import poc.afirmativa.*;
 import poc.puzzle.Puzzle;
 import poc.tableaux.Ramo;
 import poc.tableaux.Tableau;
 import poc.tableaux.TableauParalelo;
-import poc.tableaux.TableauSerial;
 
 /**
  * Representa um tableaux semântico para um determinado problema.
@@ -19,11 +19,13 @@ public class Solucionador {
     /** Puzzle a ser resolvido. */
     private Puzzle _puzzle;
     private Tableau _tableau = new TableauParalelo();
+    private Logger _log = Logger.getLogger("tableau");
 
     /**
      * Cria um tableaux para resolver determinado puzzle.
      */
     public Solucionador(Puzzle puzzle) {
+        _log.finest("Iniciando solucionador");
         _puzzle = puzzle;
         Ramo ramoInicial = new Ramo(puzzle);
         ramoInicial.adicionarAfirmativa(_puzzle.getAxioma());
@@ -34,10 +36,14 @@ public class Solucionador {
      * Obtém a solução do puzzle, se for coerente.
      */
     public Ramo getSolucao() {
-        expandir();
+        _log.fine("Iniciando busca por solução");
+        configurarRelacaoPortasAfirmativas();
+        _tableau.expandir();
         // Realiza mais algumas inferências
         List<Ramo> ramos = new ArrayList<Ramo>();
         for (Ramo r : _tableau.getRamos()) {
+            // TODO Não é preciso obter uma cópia com os essenciais, porque os ramos só estarão com afirmativas
+            // essenciais neste ponto.
             Ramo ramo = r.getEssenciais();
             ramo = deduzirPresenca(ramo);
             if (ramo == null) {
@@ -134,17 +140,12 @@ public class Solucionador {
         return verdades;
     }
 
-    /*
-      A solução pode não conter a indicação
-      se uma determinada porta está dizendo a verdade ou não.
-      Inserimos então, em cada ramo, a implicância
-      (conteúdo da afirmativa da porta) <-> (porta diz a verdade).
-      Com isso instruímos o tableaux a dizer que a afirmativa da
-      porta é verdadeira se ele for capaz de deduzir isso.
-      Funciona porque a expansão de uma porta mantém sua afirmativa
-      no ramo, que é nosso objetivo
-     */
-    private void expandir() {
+    private void configurarRelacaoPortasAfirmativas() {
+        List<Afirmativa> deducoes = criarAfirmativasSeESomenteSePortaVerdadeiraEntaoConteudoPortaVerdadeiro();
+        adicionarAfirmativasATodosOsRamos(deducoes);
+    }
+
+    private List<Afirmativa> criarAfirmativasSeESomenteSePortaVerdadeiraEntaoConteudoPortaVerdadeiro() {
         List<Afirmativa> deducoes = new ArrayList<Afirmativa>();
         for (int iPorta = 1; iPorta <= _puzzle.getNumPortas(); iPorta++) {
             Afirmativa afPorta = _puzzle.getPorta(iPorta);
@@ -152,11 +153,14 @@ public class Solucionador {
             portaEstaCertaOuErrada.associarAPuzzle(_puzzle);
             deducoes.add(portaEstaCertaOuErrada);
         }
+        return deducoes;
+    }
+
+    private void adicionarAfirmativasATodosOsRamos(List<Afirmativa> deducoes) {
         for (Afirmativa af : deducoes) {
             for (Ramo r : _tableau.getRamos()) {
                 r.adicionarAfirmativa(af);
             }
         }
-        _tableau.expandir();
     }
 }
