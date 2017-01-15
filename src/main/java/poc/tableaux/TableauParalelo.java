@@ -56,6 +56,7 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
         synchronized (_ramos) {
             _ramos.add(ramo);
         }
+
     }
     
     /**

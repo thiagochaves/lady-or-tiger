@@ -21,8 +21,7 @@ public class TableauSerial implements Tableau {
     @Override
     public void expandir() {
         show("TableauSerial original : ", this);
-        while (eExpansivel()) {
-            expandirUmNivel();
+        while (expandirUmNivel()) {
             show("Expansão do tableaux : ", this);
             fechar();
         }
@@ -72,7 +71,8 @@ public class TableauSerial implements Tableau {
     /**
      * Aplica uma regra de expansão ao tableaux.
      */
-    private void expandirUmNivel() {
+    private boolean expandirUmNivel() {
+        boolean expandiu = false;
         // 1. Para cada ramo ATUAL
         final int numRamos = _ramos.size();
         for (int i = 0; i < numRamos; i++) {
@@ -97,12 +97,15 @@ public class TableauSerial implements Tableau {
                     // Nestes tipos de expansões os elementos são adicionados ao
                     // ramo atual
                     adicionarAfirmativasRamo(expansao, i);
+                    expandiu = true;
                     break;
                 case BETA:
                     // Neste tipo de expansão é criado um novo ramo
                     bifurcarRamo(expansao, i);
+                    expandiu = true;
             }
         }
+        return expandiu;
     }
 
     /**
@@ -142,15 +145,6 @@ public class TableauSerial implements Tableau {
                 removerRamo(i);
             }
         }
-    }
-
-    public boolean eExpansivel() {
-        for (Ramo r : _ramos) {
-            if (r.expansiveis().iterator().hasNext()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
