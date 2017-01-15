@@ -17,7 +17,7 @@ class Expansor implements Runnable {
 
     @Override
     public void run() {
-        Iterator<Afirmativa> i = _ramo.expansiveis().iterator();
+        Iterator<Afirmativa> i = _ramo.afirmativasParaExpansao().iterator();
         while (i.hasNext()) {
             Afirmativa a = i.next();
             switch (a.getTipoExpansao()) {

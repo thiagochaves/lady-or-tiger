@@ -1,7 +1,6 @@
 package poc.tableaux;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Localizacao;
@@ -173,18 +172,18 @@ public final class Ramo implements Iterable<Afirmativa> {
         return Collections.unmodifiableList(_afirmativas).iterator();
     }
 
-    public Iterable<Afirmativa> expansiveis() {
-        return new IteravelExpansivel();
+    public Iterable<Afirmativa> afirmativasParaExpansao() {
+        return new IteravelAfirmativasParaExpansao();
     }
 
-    private class IteravelExpansivel implements Iterable<Afirmativa> {
+    private class IteravelAfirmativasParaExpansao implements Iterable<Afirmativa> {
         @Override
         public Iterator<Afirmativa> iterator() {
-            return new IteradorExpansivel();
+            return new IteradorAfirmativasParaExpansao();
         }
     }
 
-    private class IteradorExpansivel implements Iterator<Afirmativa>
+    private class IteradorAfirmativasParaExpansao implements Iterator<Afirmativa>
     {
         private int i = 0;
         @Override

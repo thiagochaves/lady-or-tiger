@@ -18,7 +18,7 @@ public class Solucionador {
 
     /** Puzzle a ser resolvido. */
     private Puzzle _puzzle;
-    private Tableau _tableau = new TableauSerial();
+    private Tableau _tableau = new TableauParalelo();
 
     /**
      * Cria um tableaux para resolver determinado puzzle.

@@ -34,11 +34,6 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-//        try {
-//            Thread.sleep(1);
-//        } catch (InterruptedException ignored) {
-//        }
-        System.out.println("Shutdown " + _numExecutores.get());
         _executor.shutdown();
         try {
             _executor.awaitTermination(10, TimeUnit.MINUTES);
@@ -90,51 +85,36 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
 
     @Override
     public void ramoNovo(Ramo novo) {
-//        System.out.println("Novo: " + novo);
         Expansor e;
         synchronized (_ramos) {
             int tamanho = _ramos.size();
             adicionarRamo(novo);
             e = new Expansor(tamanho, novo, this);
         }
-        if (_executor.isShutdown()) {
-            System.out.println("ERRO");
-        }
         try {
+            _numExecutores.incrementAndGet();
             synchronized (_executor) {
                 _executor.execute(e);
             }
-            _numExecutores.incrementAndGet();
         } catch (RejectedExecutionException ex) {
             ex.printStackTrace();
-            System.out.println("num: " + _numExecutores.get());
         }
     }
 
     @Override
     public void ramoFechado(int id) {
-//        System.out.println("Fechou: " + _ramos.get(id).toStringPuro());
         synchronized (_ramos) {
             _ramos.set(id, null);
         }
         if (_numExecutores.decrementAndGet() == 0) {
-            System.out.println("release 1");
             _semaforo.release();
-        }
-        if (_numExecutores.get() < 0) {
-            System.out.println("Erro");
         }
     }
 
     @Override
     public void ramoAberto(int id) {
-//        System.out.println("Sobrou aberto: " + _ramos.get(id).toStringPuro());
         if (_numExecutores.decrementAndGet() == 0) {
-            System.out.println("release 2");
             _semaforo.release();
-        }
-        if (_numExecutores.get() < 0) {
-            System.out.println("Erro");
         }
     }
 }
