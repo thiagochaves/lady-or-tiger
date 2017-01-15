@@ -77,7 +77,13 @@ public class TableauSerial implements Tableau {
         final int numRamos = _ramos.size();
         for (int i = 0; i < numRamos; i++) {
             Ramo ramoAtual = getRamo(i);
-            Afirmativa afirmativaAExpandir = ramoAtual.obterPrimeiraAfirmativaExpansivel();
+            Afirmativa afirmativaAExpandir = null;
+            for (Afirmativa a : ramoAtual) {
+                if (a.eExpansivel()) {
+                    afirmativaAExpandir = a;
+                    break;
+                }
+            }
             if (afirmativaAExpandir == null) {
                 continue;
             }
@@ -138,13 +144,9 @@ public class TableauSerial implements Tableau {
         }
     }
 
-    @Override
     public boolean eExpansivel() {
-        final int numRamos = getRamos().size();
-        for (int i = 0; i < numRamos; i++) {
-            Ramo ramoAtual = getRamo(i);
-            Afirmativa afirmativa = ramoAtual.obterPrimeiraAfirmativaExpansivel();
-            if (afirmativa != null) {
+        for (Ramo r : _ramos) {
+            if (r.expansiveis().iterator().hasNext()) {
                 return true;
             }
         }

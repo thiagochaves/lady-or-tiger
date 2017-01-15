@@ -8,6 +8,7 @@ import poc.afirmativa.*;
 import poc.puzzle.Puzzle;
 import poc.tableaux.Ramo;
 import poc.tableaux.Tableau;
+import poc.tableaux.TableauParalelo;
 import poc.tableaux.TableauSerial;
 
 /**
@@ -17,7 +18,7 @@ public class Solucionador {
 
     /** Puzzle a ser resolvido. */
     private Puzzle _puzzle;
-    private Tableau _tableau = new TableauSerial();
+    private Tableau _tableau = new TableauParalelo();
 
     /**
      * Cria um tableaux para resolver determinado puzzle.
@@ -34,7 +35,6 @@ public class Solucionador {
      */
     public Ramo getSolucao() {
         expandir();
-        assert !_tableau.eExpansivel();
         // Realiza mais algumas inferências
         List<Ramo> ramos = new ArrayList<Ramo>();
         for (Ramo r : _tableau.getRamos()) {

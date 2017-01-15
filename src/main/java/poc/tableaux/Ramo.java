@@ -1,6 +1,7 @@
 package poc.tableaux;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 import poc.afirmativa.Afirmativa;
 import poc.afirmativa.Localizacao;
@@ -14,7 +15,6 @@ import poc.puzzle.Puzzle;
  */
 public final class Ramo implements Iterable<Afirmativa> {
     private List<Afirmativa> _afirmativas = new ArrayList<Afirmativa>();
-    private int _indicePossivelExpansao;
     private Suposicao _suposicao;
     private boolean _fechado;
 
@@ -31,7 +31,6 @@ public final class Ramo implements Iterable<Afirmativa> {
      * @param ramo Não pode ser <code>null</code>.
      */
     public Ramo(Ramo ramo) {
-        _indicePossivelExpansao = ramo._indicePossivelExpansao;
         _suposicao = Suposicao.copiar(ramo._suposicao);
         _fechado = ramo._fechado;
         for (Afirmativa e : ramo._afirmativas) {
@@ -53,23 +52,6 @@ public final class Ramo implements Iterable<Afirmativa> {
         _suposicao.suporTambem(afirmativa);
     }
 
-    /**
-     * Procure linearmente pela primeira afirmativa expansível neste ramo.
-     * @return <code>null</code> se não houver afirmativa expansível no
-     * ramo.
-     */
-    public Afirmativa obterPrimeiraAfirmativaExpansivel() {
-        for (int i = _indicePossivelExpansao; i < _afirmativas.size(); i++) {
-            Afirmativa afirmativa = _afirmativas.get(i);
-            if (afirmativa.eExpansivel()) {
-                _indicePossivelExpansao = i;
-                return afirmativa;
-            }
-        }
-        _indicePossivelExpansao = _afirmativas.size();
-        return null;
-    }
-    
     /**
      * Indica se o ramo pode ser fechado, ou seja, possui uma 
      * contradição em seu conteúdo.
@@ -115,6 +97,10 @@ public final class Ramo implements Iterable<Afirmativa> {
 
     private boolean contem(Afirmativa afirmativa) {
         return _afirmativas.contains(afirmativa);
+    }
+
+    public String toStringPuro() {
+        return _afirmativas.toString();
     }
 
     @Override
@@ -185,5 +171,37 @@ public final class Ramo implements Iterable<Afirmativa> {
     @Override
     public Iterator<Afirmativa> iterator() {
         return Collections.unmodifiableList(_afirmativas).iterator();
+    }
+
+    public Iterable<Afirmativa> expansiveis() {
+        return new IteravelExpansivel();
+    }
+
+    private class IteravelExpansivel implements Iterable<Afirmativa> {
+        @Override
+        public Iterator<Afirmativa> iterator() {
+            return new IteradorExpansivel();
+        }
+    }
+
+    private class IteradorExpansivel implements Iterator<Afirmativa>
+    {
+        private int i = 0;
+        @Override
+        public boolean hasNext() {
+            return i < _afirmativas.size();
+        }
+
+        @Override
+        public Afirmativa next() {
+            return _afirmativas.get(i++);
+        }
+
+        @Override
+        public void remove() {
+            int previous = i - 1;
+            _afirmativas.remove(previous);
+            i--;
+        }
     }
 }

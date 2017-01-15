@@ -18,10 +18,4 @@ public interface Tableau {
      * Obtém a árvore toda.
      */
     List<Ramo> getRamos();
-
-    /**
-     * Indica se mais alguma expansão pode ser feita ou não. Em caso negativo o
-     * tableaux já atingiu a atomicidade máxima.
-     */
-    boolean eExpansivel();
 }

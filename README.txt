@@ -28,3 +28,7 @@ Situações do executor:
     Talvez guardar os ramos num Map em Tableau, cada um com um ID que serve de chave. Assim apagar um ramo não interfere na numeração dos demais.
 5) Ramo aberto e não expansível
     Notifica o controlador que o ramo foi todo expandido e continua aberto.
+
+
+Corrigir: Quando eu duplico um ramo, as afirmativas da cópia que já tinham sido expandidas na original estão sendo expandidas novamente?
+Acho que um efeito colateral de ter removido os envelopes é esse.
