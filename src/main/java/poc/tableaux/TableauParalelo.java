@@ -1,12 +1,8 @@
 package poc.tableaux;
 
-import poc.afirmativa.Afirmativa;
-import poc.afirmativa.Expansao;
-
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class TableauParalelo implements Tableau, ControladorParalelo {
@@ -18,22 +14,39 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
 
     @Override
     public void expandir() {
+        List<Expansor> expansores = criarExpansores();
+        _numExecutores.compareAndSet(0, expansores.size());
+        iniciaExpansaoParalela(expansores);
+        aguardarFimExpansao();
+        finalizarExecutores();
+    }
+
+    private List<Expansor> criarExpansores() {
         List<Expansor> expansores = new ArrayList<Expansor>();
         for (int i = 0; i < _ramos.size(); i++) {
             Expansor e = new Expansor(i, _ramos.get(i), this);
             expansores.add(e);
-            _numExecutores.incrementAndGet();
         }
+        return expansores;
+    }
+
+    private void iniciaExpansaoParalela(List<Expansor> expansores) {
         for (Expansor e : expansores) {
             synchronized (_executor) {
                 _executor.execute(e);
             }
         }
+    }
+
+    private void aguardarFimExpansao() {
         try {
             _semaforo.acquire();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void finalizarExecutores() {
         _executor.shutdown();
         try {
             _executor.awaitTermination(10, TimeUnit.MINUTES);
@@ -42,7 +55,7 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
         }
         _executor.shutdownNow();
     }
-    
+
     @Override
     public void adicionarRamo(Ramo ramo) {
         if (ramo == null) {
@@ -51,7 +64,6 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
         synchronized (_ramos) {
             _ramos.add(ramo);
         }
-
     }
     
     /**
@@ -85,12 +97,21 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
 
     @Override
     public void ramoNovo(Ramo novo) {
-        Expansor e;
+        Expansor e = adicionarRamoCriarExpansor(novo);
+        executarNovoExpansor(e);
+    }
+
+    private Expansor adicionarRamoCriarExpansor(Ramo novo) {
+        int tamanho;
         synchronized (_ramos) {
-            int tamanho = _ramos.size();
+            tamanho = _ramos.size();
             adicionarRamo(novo);
-            e = new Expansor(tamanho, novo, this);
         }
+        Expansor e = new Expansor(tamanho, novo, this);
+        return e;
+    }
+
+    private void executarNovoExpansor(Expansor e) {
         try {
             _numExecutores.incrementAndGet();
             synchronized (_executor) {
@@ -103,9 +124,17 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
 
     @Override
     public void ramoFechado(int id) {
+        removerRamoLogicamente(id);
+        finalizarExpansaoSeForOUltimoExpansor();
+    }
+
+    private void removerRamoLogicamente(int id) {
         synchronized (_ramos) {
             _ramos.set(id, null);
         }
+    }
+
+    private void finalizarExpansaoSeForOUltimoExpansor() {
         if (_numExecutores.decrementAndGet() == 0) {
             _semaforo.release();
         }
@@ -113,8 +142,6 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
 
     @Override
     public void ramoAberto(int id) {
-        if (_numExecutores.decrementAndGet() == 0) {
-            _semaforo.release();
-        }
+        finalizarExpansaoSeForOUltimoExpansor();
     }
 }
