@@ -1,8 +1,7 @@
 package poc;
 
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 import poc.puzzle.LeitorPuzzle;
 import poc.puzzle.Puzzle;
@@ -22,8 +21,12 @@ public class TesteSimples {
     }
 
     public static void main(String[] args) {
-        Logger.getLogger("tableau").setLevel(Level.ALL);
-        File caminho = new File(DIRETORIO, "lady1.txt");
+        Logger logger = Logger.getLogger("tableau");
+        logger.setLevel(Level.FINE);
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setLevel(Level.FINE);
+        logger.addHandler(handler);
+        File caminho = new File(DIRETORIO, "lady12.txt");
         testarConfiguracaoDoArquivo(caminho);
     }
 

@@ -3,6 +3,7 @@ package poc;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import poc.afirmativa.*;
@@ -55,6 +56,7 @@ public class Solucionador {
             }
             ramos.add(ramo);
         }
+        _log.log(Level.FINE, "Tableau expandido totalmente: {0}", _tableau.toString());
         // Calculamos a interseção dos ramos restantes
         if (!ramos.isEmpty()) {
             return calcularIntersecao(ramos);

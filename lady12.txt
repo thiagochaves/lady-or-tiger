@@ -41,5 +41,5 @@ a(2) v a(4)
 em(t,8) ^ em(n,9)
 # 9) This room contains a tiger and VI is wrong
 em(t,9) ^ (!a(6))
-# SOLUÇÃO - As portas 3, 4 e 5 estão vazias, mas não aparece na solução: corrigir
+# SOLUÇÃO
 [a(1), ¬a(2), ¬a(3), ¬a(4), ¬a(5), a(6), a(7), ¬a(8), ¬a(9), ¬em(m, 1), em(n, 1), ¬em(t, 1), ¬em(m, 2), ¬em(n, 2), em(t, 2), ¬em(m, 3), ¬em(m, 4), ¬em(m, 5), ¬em(m, 6), em(n, 6), ¬em(t, 6), em(m, 7), ¬em(n, 7), ¬em(t, 7), ¬em(m, 8), ¬em(n, 8), em(t, 8), ¬em(m, 9), ¬em(n, 9), em(t, 9)]

@@ -32,3 +32,9 @@ Situações do executor:
 
 Corrigir: Quando eu duplico um ramo, as afirmativas da cópia que já tinham sido expandidas na original estão sendo expandidas novamente?
 Acho que um efeito colateral de ter removido os envelopes é esse.
+
+Eu acredito que não há como especificar se as portas 3, 4 e 5 no problema 12 possuem um tigre ou estão vazias.
+As sentenças não fazem menção a isso. O máximo que dá para saber é que a moça não está atrás delas.
+
+Para tratar o caso de informação extra no problema 12, que tal uma nova linha com algo do tipo !(em(?, 8)), e aí
+o solucionador gera um tableau para cada objeto e retorna a solução como a interseção das soluções não vazias?
