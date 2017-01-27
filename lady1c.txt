@@ -1,0 +1,16 @@
+nome:
+    Problema 1
+objetos:
+    (m)oça[1]
+    (t)igre[1]
+exibir:
+    em que porta está a moça?
+    a veracidade de cada porta.
+portas:
+    p1 = m1 ^ t2
+    p2 = (m1 ^ t2) v (m2 ^ t1)
+dado que:
+    (p1 ^ !p2) v (!p1 ^ p2)
+    e cada porta possui um objeto
+solução:
+    [¬p1, p2, ¬m1, t1, m2, ¬t2]
