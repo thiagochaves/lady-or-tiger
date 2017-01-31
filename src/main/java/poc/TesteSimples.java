@@ -10,7 +10,7 @@ import poc.tableaux.TableauSerial;
 
 public class TesteSimples {
 
-    private static final String DIRETORIO = System.getProperty("user.dir");
+    private static final String DIRETORIO = System.getProperty("user.dir") + File.separator + "puzzles";
     
     private static void testarConfiguracaoDoArquivo(File caminho) {
         LeitorPuzzle leitor = LeitorPuzzle.lerDoArquivo(caminho);

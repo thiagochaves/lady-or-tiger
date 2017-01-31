@@ -7,7 +7,7 @@ import poc.puzzle.Puzzle;
 
 public class TestePerformance {
 
-    private static final String DIRETORIO = System.getProperty("user.dir");
+    private static final String DIRETORIO = System.getProperty("user.dir") + File.separator + "puzzles";
     
     private static double testarConfiguracaoDoArquivo(File caminho) {
         LeitorPuzzle leitor = LeitorPuzzle.lerDoArquivo(caminho);

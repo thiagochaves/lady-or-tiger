@@ -12,7 +12,7 @@ import poc.tableaux.Ramo;
 
 public class CorrecaoTest {
 
-    private static final String DIRETORIO = System.getProperty("user.dir");
+    private static final String DIRETORIO = System.getProperty("user.dir") + File.separator + "puzzles";
     
     @Test
     public void test01() {
