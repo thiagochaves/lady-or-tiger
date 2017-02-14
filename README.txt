@@ -38,3 +38,89 @@ As sentenças não fazem menção a isso. O máximo que dá para saber é que a 
 
 Para tratar o caso de informação extra no problema 12, que tal uma nova linha com algo do tipo !(em(?, 8)), e aí
 o solucionador gera um tableau para cada objeto e retorna a solução como a interseção das soluções não vazias?
+
+  * Criar uma linguagem para especificar as consultas acerca dos resultados.
+  * Talvez uma para questionar o caminho de execução? Por exemplo, perguntar por que determinada afirmativa tem que ser falsa?
+
+Tradução de count()
+-------------------
+
+count(x) = 0
+!x
+
+count(x) = 1
+x
+
+count(x) > 0
+x
+
+count(x) < 0
+erro
+
+count(x,y) = 0
+!x ^!y
+
+count(x,y) = 1
+x v y
+x <=> !y
+x y
+0 0 F
+0 1 T
+1 0 T
+1 1 F
+(!x ^ y) v (x ^ !y) -> * cria apenas um ramo extra
+ x <=> !y
+ x -> !y
+ !y -> x
+ (!x v !y) ^ (y v x) -> * cria mais ramos
+ * equivalentes logicamente
+
+count(x,y) = 2
+x ^ y
+
+count(x,y) > 0
+x v y
+
+count(x,y) < 0
+erro
+
+count(x,y) > 1
+x ^ y
+
+count(x,y) < 1
+!x ^!y
+
+count(x,y) > 2
+erro
+
+count(x,y) < 2
+!x v !y
+
+count(x,y,z) = 1
+x <=> !y^!z
+y <=> !x^!z
+z <=> !x^!y
+
+count(x,y,z) = 2
+!x <=> y^z
+!y <=> x^z
+!z <=> x^y
+
+count(x,y,z) > 0
+x v y v z
+
+count(x,y,z) > 1
+!x -> y^z
+!y -> x^z
+!z -> x^y
+
+count(x,y,z) < 2
+x -> !y^!z
+y -> !x^!z
+z -> !x^!y
+
+Quine–McCluskey algorithm
+não resultará nas implicações
+mas se der todas as possibilidades, vai dar certo
+é fácil montar a tabela da verdade
+

@@ -1,0 +1,21 @@
+nome:
+    Problema 1
+objetos:
+    x, y, z
+afirmativas:
+    a, b, c
+portas:
+    a <=> ma ^ tb,
+    b <=> (ma ^ tb) v (mb ^ ta)
+dado que:
+    count[xa, xb, xc] = 1
+    xa <=> !xb ^ !xc,
+    xb <=> !xa ^ !xc,
+    xc <=> !xb ^ !xa,
+    count(ya, yb, yc) <= 2
+    !(ya ^ yb ^ yc)
+    ya ^ yb -> !yc
+    ya ^ yc -> !yb
+    yc ^ yb -> !ya
+solução:
+    [¬a, b, ¬ma, ta, mb, ¬tb]

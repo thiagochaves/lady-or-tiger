@@ -1,0 +1,17 @@
+nome:
+    Problema 1
+objetos:
+    m, t
+afirmativas:
+    a, b, ta, tb, ma, mb
+portas:
+    a <=> ma ^ tb,
+    b <=> (ma ^ tb) v (mb ^ ta)
+dado que:
+    (a ^ !b) v (!a ^b),
+    ma <=> !tb ^ !mb,
+    ta <=> !ma ^ !tb,
+    mb <=> !tb ^ !ma,
+    tb <=> !mb ^ !ta
+solução:
+    [¬a, b, ¬ma, ta, mb, ¬tb]
