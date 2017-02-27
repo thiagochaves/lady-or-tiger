@@ -124,3 +124,10 @@ não resultará nas implicações
 mas se der todas as possibilidades, vai dar certo
 é fácil montar a tabela da verdade
 
+OBSERVAÇÂO
+
+Se eu tiver a sentença
+identificador da porta <=> afirmativa da porta
+para todas as portas, então é desnecessário que as afirmativas de portas tenham uma expansão. Isso evita problemas
+de recursão infinita nos casos (não explorados) em que a porta faz referência à sua própria veracidade (não estamos
+mais trabalhando em largura, e nem sei se isto seria o suficiente para evitar o problema).
