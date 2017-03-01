@@ -1,7 +1,7 @@
 nome:
     A Logical Labyrinth
 sentenças:
-    count(m[1..9]) = 1
+    count(for x in [1..9]: m[x]) = 1
     for x in [1..9]: m[x] -> p[x]
     for x in [1..9]: t[x] -> !p[x]
     !n[8]
