@@ -1,9 +1,9 @@
 package poc.tableaux;
 
-public interface ControladorParalelo {
+interface ControladorParalelo {
     void ramoNovo(Ramo novo);
 
     void ramoFechado(int id);
 
-    void ramoAberto(int id);
+    void ramoAberto();
 }

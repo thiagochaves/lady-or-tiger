@@ -25,8 +25,8 @@ public class Suposicao {
     private int _numLocais;
     private int _numObjetos;
     // A ordem em que os objetos devem ser levados em consideração
-    private HashMap<String, Integer> _indicesDeObjetos = new HashMap<String, Integer>();
-    private List<String> _objetos = new ArrayList<String>();
+    private final HashMap<String, Integer> _indicesDeObjetos = new HashMap<String, Integer>();
+    private final List<String> _objetos = new ArrayList<String>();
     
     private Suposicao() {
     }
@@ -151,30 +151,30 @@ public class Suposicao {
     
     @Override
     public String toString() {
-        String saida = "";
+        StringBuilder saida = new StringBuilder();
         for (int i = 0; i < _numLocais; i++) {
             if (_suposicoesFeitas[i]) {
                 if (_afirmativas[i]) {
-                    saida += "a(" + (i + 1) + ")";
+                    saida.append("a(").append(i + 1).append(")");
                 } else {
-                    saida += "¬a(" + (i + 1) + ")";
+                    saida.append("¬a(").append(i + 1).append(")");
                 }
             }
-            saida += " ";
+            saida.append(" ");
         }
         for (int i = 0; i < _numLocais; i++) {
             for (int j = 0; j < _numObjetos; j++) {
                 int indice = _numLocais + i * _numLocais + j;
                 if (_suposicoesFeitas[indice]) {
                     if (_afirmativas[indice]) {
-                        saida += "em(" + _objetos.get(j) + ", " + (i + 1) + ")";
+                        saida.append("em(").append(_objetos.get(j)).append(", ").append(i + 1).append(")");
                     } else {
-                        saida += "¬em(" + _objetos.get(j) + ", " + (i + 1) + ")";
+                        saida.append("¬em(").append(_objetos.get(j)).append(", ").append(i + 1).append(")");
                     }
                 }
-                saida += " ";
+                saida.append(" ");
             }
         }
-        return saida;
+        return saida.toString();
     }
 }

@@ -5,9 +5,9 @@ import poc.afirmativa.Afirmativa;
 import java.util.Iterator;
 
 class Expansor implements Runnable {
-    private Ramo _ramo;
-    private int _id;
-    private ControladorParalelo _controlador;
+    private final Ramo _ramo;
+    private final int _id;
+    private final ControladorParalelo _controlador;
 
     public Expansor(int id, Ramo ramo, ControladorParalelo controlador) {
         _id = id;
@@ -38,7 +38,7 @@ class Expansor implements Runnable {
                 return;
             }
         }
-        _controlador.ramoAberto(_id);
+        _controlador.ramoAberto();
     }
 
     private void adicionarExpansaoAUmRamo(Afirmativa a) {

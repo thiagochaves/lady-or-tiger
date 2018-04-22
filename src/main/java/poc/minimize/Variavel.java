@@ -3,13 +3,13 @@ package poc.minimize;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class Variavel {
-    private String _nome;
+    private final String _nome;
 
     public Variavel(String nome) {
         _nome = checkNotNull(nome);
     }
 
-    public String getNome() {
+    private String getNome() {
         return _nome;
     }
 

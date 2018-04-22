@@ -12,9 +12,10 @@ import poc.puzzle.Puzzle;
  * 
  * @author Thiago
  */
+@SuppressWarnings("ConstantConditions")
 public final class Ramo implements Iterable<Afirmativa> {
-    private List<Afirmativa> _afirmativas = new ArrayList<Afirmativa>();
-    private Suposicao _suposicao;
+    private final List<Afirmativa> _afirmativas = new ArrayList<Afirmativa>();
+    private final Suposicao _suposicao;
     private boolean _fechado;
 
     private Ramo(Suposicao s) {
@@ -32,9 +33,7 @@ public final class Ramo implements Iterable<Afirmativa> {
     public Ramo(Ramo ramo) {
         _suposicao = Suposicao.copiar(ramo._suposicao);
         _fechado = ramo._fechado;
-        for (Afirmativa e : ramo._afirmativas) {
-            _afirmativas.add(e);
-        }
+        _afirmativas.addAll(ramo._afirmativas);
     }
 
     public void adicionarAfirmativa(Afirmativa afirmativa) {
@@ -152,15 +151,9 @@ public final class Ramo implements Iterable<Afirmativa> {
         if (getClass() != obj.getClass())
             return false;
         Ramo other = (Ramo) obj;
-        if (_afirmativas == null) {
-            if (other._afirmativas != null)
-                return false;
-        } else if (!_afirmativas.containsAll(other._afirmativas)) {
+        if (!_afirmativas.containsAll(other._afirmativas)) {
             return false;
-        } else if (!other._afirmativas.containsAll(_afirmativas)) {
-            return false;
-        }
-        return true;
+        } else return other._afirmativas.containsAll(_afirmativas);
     }
 
     public void removerAfirmativa(Afirmativa afirmativa) {

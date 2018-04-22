@@ -15,12 +15,12 @@ import poc.tableaux.TableauParalelo;
 /**
  * Representa um tableaux semântico para um determinado problema.
  */
-public class Solucionador {
+class Solucionador {
 
     /** Puzzle a ser resolvido. */
-    private Puzzle _puzzle;
-    private Tableau _tableau = new TableauParalelo();
-    private Logger _log = Logger.getLogger("tableau");
+    private final Puzzle _puzzle;
+    private final Tableau _tableau = new TableauParalelo();
+    private final Logger _log = Logger.getLogger("tableau");
 
     /**
      * Cria um tableaux para resolver determinado puzzle.
@@ -114,8 +114,7 @@ public class Solucionador {
         Ramo saida = new Ramo(ramo);
         for (int j = 0; j < portas.length; j++) {
             ArrayList<String> portaAtual = portas[j];
-            HashSet<String> objetos = new HashSet<String>();
-            objetos.addAll(_puzzle.getObjetos());
+            HashSet<String> objetos = new HashSet<String>(_puzzle.getObjetos());
             objetos.removeAll(portaAtual);
             // O método Ramo.impossivelTerAlgoNoLugar() já elimina estas situações durante a expansão
             if (objetos.size() == 0) {
@@ -126,8 +125,7 @@ public class Solucionador {
                 Localizacao localizacaoInferida = new Localizacao(
                         objetos.iterator().next(), j + 1);
                 localizacaoInferida.associarAPuzzle(_puzzle);
-                Afirmativa afirmativa = localizacaoInferida;
-                saida.adicionarAfirmativa(afirmativa);
+                saida.adicionarAfirmativa(localizacaoInferida);
             }
         }
         return saida;

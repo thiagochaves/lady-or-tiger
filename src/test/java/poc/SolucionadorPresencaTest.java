@@ -32,7 +32,7 @@ public class SolucionadorPresencaTest {
     @Test
     public void testarDeducaoPresenca() {
         configurarAxioma("!em(m,1)");
-        configurarPortas(1);
+        configurarPortas();
         configurarObjetos("m", "t");
         Ramo ramo = configurarRamo();
         Ramo novo = solucionador.deduzirPresenca(ramo);
@@ -53,8 +53,8 @@ public class SolucionadorPresencaTest {
         Collections.addAll(objetos, nomes);
     }
 
-    private void configurarPortas(int numPortas) {
-        for (int i = 0; i < numPortas; i++) {
+    private void configurarPortas() {
+        for (int i = 0; i < 1; i++) {
             portas.add(new ParserExpressao().parse("a(1)"));
         }
     }
@@ -68,7 +68,7 @@ public class SolucionadorPresencaTest {
     @Test
     public void testarDeducaoPresenca4Itens() {
         configurarAxioma("!em(m,1)", "!em(n,1)", "!em(o,1)");
-        configurarPortas(1);
+        configurarPortas();
         configurarObjetos("m", "n", "o", "p");
         Ramo ramo = configurarRamo();
         Ramo novo = solucionador.deduzirPresenca(ramo);
@@ -78,7 +78,7 @@ public class SolucionadorPresencaTest {
     @Test
     public void testarDeducaoPresencaItemPresente() {
         configurarAxioma("!em(m,1)", "em(n,1)", "!em(o,1)");
-        configurarPortas(1);
+        configurarPortas();
         configurarObjetos("m", "n", "o", "p");
         Ramo ramo = configurarRamo();
         Ramo novo = solucionador.deduzirPresenca(ramo);
@@ -88,7 +88,7 @@ public class SolucionadorPresencaTest {
     @Test
     public void testarDeducaoPresencaNada() {
         configurarAxioma("!em(m,1)", "!em(n,1)", "!em(o,1)", "!em(p,1)");
-        configurarPortas(1);
+        configurarPortas();
         configurarObjetos("m", "n", "o", "p");
         Ramo ramo = configurarRamo();
         Ramo novo = solucionador.deduzirPresenca(ramo);

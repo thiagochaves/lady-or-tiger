@@ -15,8 +15,8 @@ import java.util.Set;
  */
 public class Bicondicional implements Afirmativa {
     private boolean _negada;
-    private Afirmativa _antecedente;
-    private Afirmativa _consequente;
+    private final Afirmativa _antecedente;
+    private final Afirmativa _consequente;
     private Puzzle _puzzle;
 
     public Bicondicional(Afirmativa antecedente, Afirmativa consequente) {

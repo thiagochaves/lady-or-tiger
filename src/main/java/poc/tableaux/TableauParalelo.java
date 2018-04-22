@@ -6,11 +6,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 public class TableauParalelo implements Tableau, ControladorParalelo {
-    private List<Ramo> _ramos = new ArrayList<Ramo>();
+    private final List<Ramo> _ramos = new ArrayList<Ramo>();
     private Logger _logger = Logger.getLogger("tableau");
-    private ExecutorService _executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-    private AtomicInteger _numExecutores = new AtomicInteger();
-    private Semaphore _semaforo = new Semaphore(0);
+    private final ExecutorService _executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    private final AtomicInteger _numExecutores = new AtomicInteger();
+    private final Semaphore _semaforo = new Semaphore(0);
 
     @Override
     public void expandir() {
@@ -107,8 +107,7 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
             tamanho = _ramos.size();
             adicionarRamo(novo);
         }
-        Expansor e = new Expansor(tamanho, novo, this);
-        return e;
+        return new Expansor(tamanho, novo, this);
     }
 
     private void executarNovoExpansor(Expansor e) {
@@ -141,7 +140,7 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
     }
 
     @Override
-    public void ramoAberto(int id) {
+    public void ramoAberto() {
         finalizarExpansaoSeForOUltimoExpansor();
     }
 }

@@ -138,13 +138,8 @@ public class Localizacao implements Afirmativa {
             return false;
         }
         if (_objeto == null) {
-            if (other._objeto != null) {
-                return false;
-            }
-        } else if (!_objeto.equals(other._objeto)) {
-            return false;
-        }
-        return true;
+            return other._objeto == null;
+        } else return _objeto.equals(other._objeto);
     }
 
     @Override

@@ -10,11 +10,11 @@ import poc.afirmativa.Afirmativa;
 public class Puzzle {
 
 	/** Restrição do problema que é sempre verdadeira. */
-	private Afirmativa _axioma;
+	private final Afirmativa _axioma;
 	/** Afirmativas das portas. */
-	private List<Afirmativa> _portas;
+	private final List<Afirmativa> _portas;
 	/** Objetos que podem se encontrar atrás das portas. */
-	private Set<String> _objetos;
+	private final Set<String> _objetos;
 
     /**
      * Cria um novo puzzle.
@@ -102,10 +102,7 @@ public class Puzzle {
         } else if (!_portas.equals(other._portas))
             return false;
         if (_axioma == null) {
-            if (other._axioma != null)
-                return false;
-        } else if (!_axioma.equals(other._axioma))
-            return false;
-        return true;
+            return other._axioma == null;
+        } else return _axioma.equals(other._axioma);
     }
 }

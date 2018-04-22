@@ -88,20 +88,20 @@ public class ParserExpressao {
         else if (inicio == 'e') {
             next(texto);
             next(texto);
-            String objeto = "";
+            StringBuilder objeto = new StringBuilder();
             char caractere = next(texto);
             while (caractere != ',') {
-                objeto += caractere;
+                objeto.append(caractere);
                 caractere = next(texto);
             }
-            String numero = "";
+            StringBuilder numero = new StringBuilder();
             char digito = next(texto);
             while (digito != ')') {
-                numero += "" + digito;
+                numero.append(digito);
                 digito = next(texto);
             }
-            int lugar = Integer.parseInt(numero);
-            return new Localizacao(objeto.trim(), lugar);
+            int lugar = Integer.parseInt(numero.toString());
+            return new Localizacao(objeto.toString().trim(), lugar);
         }
         throw new ExcecaoParsing("ARGH! : inicio = " + inicio + 
                 ", texto = " + texto);

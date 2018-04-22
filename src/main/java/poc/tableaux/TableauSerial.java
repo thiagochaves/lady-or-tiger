@@ -12,8 +12,8 @@ import poc.afirmativa.Expansao;
  */
 public class TableauSerial implements Tableau {
     /** Lista de ramos da árvore. */
-    private List<Ramo> _ramos = new ArrayList<Ramo>();
-    private Logger _logger = Logger.getLogger("tableau");
+    private final List<Ramo> _ramos = new ArrayList<Ramo>();
+    private final Logger _logger = Logger.getLogger("tableau");
 
     public TableauSerial() {
     }
@@ -49,8 +49,7 @@ public class TableauSerial implements Tableau {
     /**
      * Obtém um ramo do tableaux.
      */
-    protected Ramo getRamo(int indice) {
-        assert _ramos != null : "Não há ramos";
+    private Ramo getRamo(int indice) {
         return _ramos.get(indice);
     }
 
@@ -64,7 +63,7 @@ public class TableauSerial implements Tableau {
     /**
      * @return O número de ramos neste tableaux.
      */
-    protected int getNumRamos() {
+    private int getNumRamos() {
         return _ramos.size();
     }
 
@@ -164,7 +163,7 @@ public class TableauSerial implements Tableau {
     /**
      * Mostra uma mensagem de depuração se assim for pedido.
      */
-    protected void show(String mensagem, Object... objetosAExibir) {
+    private void show(String mensagem, Object... objetosAExibir) {
         _logger.log(Level.FINE, mensagem, objetosAExibir);
     }
 }

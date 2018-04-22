@@ -6,7 +6,7 @@ package poc.puzzle;
  * 
  * @author Thiago
  */
-public class ExcecaoArquivoInvalido extends RuntimeException {
+class ExcecaoArquivoInvalido extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 

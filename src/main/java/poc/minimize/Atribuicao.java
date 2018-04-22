@@ -2,9 +2,9 @@ package poc.minimize;
 
 import static com.google.common.base.Preconditions.*;
 
-public class Atribuicao {
-    private Variavel _x;
-    private boolean _valor;
+class Atribuicao {
+    private final Variavel _x;
+    private final boolean _valor;
 
     public Atribuicao(Variavel x, boolean valor) {
         _x = checkNotNull(x);

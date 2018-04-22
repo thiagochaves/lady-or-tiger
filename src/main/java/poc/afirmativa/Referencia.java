@@ -2,7 +2,6 @@ package poc.afirmativa;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 import poc.puzzle.Puzzle;
@@ -16,7 +15,7 @@ public class Referencia implements Afirmativa {
 	/** Puzzle a que esta afirmativa está relacionada. */
 	private Puzzle _puzzle;
 	/** A que afirmativa do Puzzle esta se refere. */
-	private int _indice;
+	private final int _indice;
     private boolean _negada;
 
 	/**
@@ -115,12 +114,7 @@ public class Referencia implements Afirmativa {
             return false;
         }
         if (_puzzle == null) {
-            if (other._puzzle != null) {
-                return false;
-            }
-        } else if (!_puzzle.equals(other._puzzle)) {
-            return false;
-        }
-        return true;
+            return other._puzzle == null;
+        } else return _puzzle.equals(other._puzzle);
     }
 }

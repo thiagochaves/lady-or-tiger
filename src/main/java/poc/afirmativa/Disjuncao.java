@@ -12,9 +12,9 @@ import poc.puzzle.Puzzle;
  */
 public class Disjuncao implements Afirmativa {
 	/** Primeira afirmativa. */
-	private Afirmativa _afirmativaUm; // NOPMD by Thiago on 05/09/10 13:01
+	private final Afirmativa _afirmativaUm; // NOPMD by Thiago on 05/09/10 13:01
 	/** Segunda afirmativa. */
-	private Afirmativa _afirmativaDois; // NOPMD by Thiago on 05/09/10 13:01
+	private final Afirmativa _afirmativaDois; // NOPMD by Thiago on 05/09/10 13:01
     private boolean _negada;
 
 	/** Constrói uma afirmativa que é a disjunção de duas. */
