@@ -5,5 +5,5 @@ import java.util.Set;
 
 interface TabelaVerdade {
     Set<Variavel> getVariaveis();
-    boolean getValor(Collection<Atribuicao> atribuicoes);
+    boolean getValor(Collection<Variavel> verdadeiras);
 }

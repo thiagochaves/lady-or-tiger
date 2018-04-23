@@ -9,7 +9,7 @@ public class Variavel {
         _nome = checkNotNull(nome);
     }
 
-    private String getNome() {
+    public String getNome() {
         return _nome;
     }
 
