@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -19,7 +20,8 @@ public class TabelaVerdadeContagemTest {
 
     @Before
     public void setUp() {
-        _variaveis = Sets.newHashSet(_a, _b, _c);
+        _variaveis = Sets.newLinkedHashSet();
+        _variaveis.addAll(Lists.newArrayList(_a, _b, _c));
         _tabela = TabelaVerdadeContagem.criarContagemIgual(2, _variaveis);
     }
 
@@ -28,5 +30,14 @@ public class TabelaVerdadeContagemTest {
         assertTrue(_tabela.getValor(Lists.newArrayList(_a, _c, _d)));
         assertFalse(_tabela.getValor(Lists.newArrayList(_a)));
         assertTrue(_tabela.getValor(Lists.newArrayList(_b, _c)));
+    }
+
+    @Test
+    public void testarMintermos() {
+        Set<Mintermo> termos = _tabela.getMintermos();
+        Mintermo ab = Mintermo.criar(Lists.newArrayList(_variaveis), Lists.newArrayList(_a, _b));
+        Mintermo ac = Mintermo.criar(Lists.newArrayList(_variaveis), Lists.newArrayList(_a, _c));
+        Mintermo bc = Mintermo.criar(Lists.newArrayList(_variaveis), Lists.newArrayList(_b, _c));
+        assertEquals(termos, Sets.newHashSet(ab, ac, bc));
     }
 }

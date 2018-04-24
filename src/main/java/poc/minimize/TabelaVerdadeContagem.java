@@ -4,10 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TabelaVerdadeContagem implements TabelaVerdade {
 
@@ -34,5 +31,30 @@ public class TabelaVerdadeContagem implements TabelaVerdade {
     public boolean getValor(Collection<Variavel> verdadeiras) {
         long pertinentes = verdadeiras.stream().filter(v -> _variaveis.contains(v)).count();
         return pertinentes == _contagem;
+    }
+
+    @Override
+    public Set<Mintermo> getMintermos() {
+        Set<Mintermo> todos = getMintermos(_variaveis.get(0), _variaveis.subList(1, _variaveis.size()));
+        for (Iterator<Mintermo> i = todos.iterator(); i.hasNext();) {
+            Mintermo termo = i.next();
+            if (termo.getVariaveis().size() != _contagem) {
+                i.remove();
+            }
+        }
+        return todos;
+    }
+
+    private Set<Mintermo> getMintermos(Variavel variavel, List<Variavel> variaveis) {
+        if (variaveis.isEmpty()) {
+            Mintermo com = Mintermo.criar(_variaveis, Lists.newArrayList(variavel));
+            Mintermo sem = Mintermo.criar(_variaveis, Lists.newArrayList());
+            return Sets.newHashSet(com, sem);
+        }
+        Set<Mintermo> seguintes = getMintermos(variaveis.get(0), variaveis.subList(1, variaveis.size()));
+        Set<Mintermo> saida = Sets.newHashSet();
+        saida.addAll(seguintes);
+        seguintes.forEach(termo -> saida.add(termo.adicionarVariavel(variavel)));
+        return saida;
     }
 }
