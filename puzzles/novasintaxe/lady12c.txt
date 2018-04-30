@@ -17,4 +17,6 @@ sentenças:
     p[9] <=> t[9] & !p[6]
 
 solução:
-    "A moça está atrás da porta " + [for x in [1..9]: x if m[x]]
+    A moça está atrás da porta {for x in [1..9]: x if m[x]}.
+    As portas {for x in [1..9]: x if n[x]} estão vazias.
+    Há tigres atrás das portas {for x in [1..9]: x if t[x]}.

@@ -124,6 +124,8 @@ não resultará nas implicações
 mas se der todas as possibilidades, vai dar certo
 é fácil montar a tabela da verdade
 
+Para o caso em que a contagem é igual a um valor, não há como simplificar a expressão.
+
 OBSERVAÇÂO
 
 Se eu tiver a sentença
