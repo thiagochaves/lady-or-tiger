@@ -1,0 +1,18 @@
+# São 5 pessoas
+5
+# Queremos saber quem desenhou
+s,n
+# Apenas uma mentiu
+((!a(1)) = a(2)^a(3)^a(4)^a(5))^((!a(2)) = a(1)^a(3)^a(4)^a(5))^((!a(3)) = a(2)^a(1)^a(4)^a(5))^((!a(4)) = a(2)^a(3)^a(1)^a(5))^((!a(5)) = a(2)^a(3)^a(4)^a(1))^((em(s,1)=em(n,2)^em(n,3)^em(n,4)^em(n,5))^(em(s,2)=em(n,1)^em(n,3)^em(n,4)^em(n,5))^(em(s,3)=em(n,2)^em(n,1)^em(n,4)^em(n,5))^(em(s,4)=em(n,2)^em(n,3)^em(n,1)^em(n,5))^(em(s,5)=em(n,2)^em(n,3)^em(n,4)^em(n,1)))^(em(s,1) v em(s,2) v em(s,3) v em(s,4) v em(s,5))
+# Emília: não fui eu
+em(n,1)
+# Luísa: Foi a Marília ou Rafaela
+em(s,3) v em(s,4)
+# Marília: Não foi a Rafaela e nem a Vitória
+em(n,4) ^ em(n,5)
+# Rafaela: Não foi a Luísa
+em(n,2)
+# Vitória: Luísa não está dizendo a verdade
+!a(2)
+# Solução
+[]

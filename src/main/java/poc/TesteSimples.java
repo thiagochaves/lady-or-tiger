@@ -6,7 +6,6 @@ import java.util.logging.*;
 import poc.puzzle.LeitorPuzzle;
 import poc.puzzle.Puzzle;
 import poc.tableaux.Ramo;
-import poc.tableaux.TableauSerial;
 
 public class TesteSimples {
 
@@ -26,7 +25,7 @@ public class TesteSimples {
         ConsoleHandler handler = new ConsoleHandler();
         handler.setLevel(Level.FINE);
         logger.addHandler(handler);
-        File caminho = new File(DIRETORIO, "lady12.txt");
+        File caminho = new File(DIRETORIO, "vovovera.txt");
         testarConfiguracaoDoArquivo(caminho);
     }
 

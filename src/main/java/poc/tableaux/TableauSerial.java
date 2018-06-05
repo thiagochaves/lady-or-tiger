@@ -20,12 +20,12 @@ public class TableauSerial implements Tableau {
 
     @Override
     public void expandir() {
-        show("TableauSerial original : ", this);
+        show("TableauSerial original : {0}", this);
         while (expandirUmNivel()) {
-            show("Expansão do tableaux : ", this);
+            show("Expansão do tableaux : {0}", this);
             fechar();
         }
-        show("TableauSerial sem ramos fechados : ", this);
+        show("TableauSerial sem ramos fechados : {0}", this);
     }
     
     @Override
@@ -151,12 +151,14 @@ public class TableauSerial implements Tableau {
      */
     public String toString() {
         StringBuilder resultado = new StringBuilder();
+        resultado.append("TABLEAUX:[");
         for (int i = 0; i < getRamos().size(); i++) {
             if (i != 0) {
                 resultado.append("\n");
             }
             resultado.append(getRamos().get(i));
         }
+        resultado.append("]");
         return resultado.toString();
     }
 
