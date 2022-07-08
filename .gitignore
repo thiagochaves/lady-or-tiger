@@ -1,2 +1,7 @@
 .idea/
 ladytiger.iml
+/README.html
+/.classpath
+/.project
+/.settings/
+/target/
