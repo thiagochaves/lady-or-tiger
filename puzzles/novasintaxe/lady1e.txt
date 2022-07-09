@@ -1,0 +1,17 @@
+name: Problem 1
+enum who:
+    lady
+    tiger
+enum room:
+    _1
+    _2
+rules:
+    # In this room there is a lady, and a tiger is in the other room.
+    _1 <=> (lady, _1) and (tiger, _2)
+    # In one of these rooms there is a lady and in the other there is a tiger.
+    _2 <=> or((lady, X) for any room X) and ((lady, _1) => (tiger, _2)) and ((lady, _2) => (tiger, _1))
+    # _2 <=> ((lady, _1) and (tiger, _2)) or ((lady, _2) and (tiger, _1)) # Alternative, equivalent rule
+    # One door says the truth and the other lies.
+    _1 <=> !_2
+    # There can be only a lady or a tiger inside each room.
+    (lady, X) <=> !(tiger, X) for any room X
