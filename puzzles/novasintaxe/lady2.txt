@@ -1,0 +1,18 @@
+name: The Second Trial
+object who:
+    lady
+    tiger
+object room:
+    _1
+    _2
+predicate sign_is_true(room)
+predicate contains(room, who)
+rules:
+    # There can be only a lady or a tiger inside each room.
+    for every room X (contains(X, lady) <=> !contains(X, tiger))
+    # 1. At least one of these rooms contains a lady.
+    sign_is_true(_1) <=> there is a room X (contains(X, lady))
+    # 2. A tiger is in the other room.
+    sign_is_true(_2) <=> contains(_1, tiger)
+    # The statements are either both true or both false.
+    sign_is_true(_1) <=> sign_is_true(_2)

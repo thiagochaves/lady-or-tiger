@@ -1,5 +1,23 @@
 = The Lady or the Tiger?
 
+== Grammar
+
+----
+start -> NAME OBJECT_LIST PREDICATE_LIST RULE_SECTION
+NAME -> name: TEXT
+OBJECT_LIST -> OBJECT | OBJECT OBJECT_LIST
+OBJECT -> object ID: ID_LIST
+ID_LIST -> ID | ID ID_LIST
+PREDICATE_LIST -> PREDICATE | PREDICATE PREDICATE_LIST
+PREDICATE -> predicate ID(ID_LIST)
+RULE_SECTION -> rules: RULE_LIST
+RULE_LIST -> RULE | RULE RULE_LIST
+RULE -> EXPRESSION
+EXPRESSION -> TERM | TERM and EXPRESSION | TERM or EXPRESSION | TERM => EXPRESSION | TERM <=> EXPRESSION
+TERM -> (EXPRESSION) | !EXPRESSION | APPLIED_PREDICATE | for every ID ID (EXPRESSION) | there is a ID ID (EXPRESSION)
+APPLIED_PREDICATE -> ID(ID_LIST)
+----
+
 == First Day
 
 Each of the two rooms can contain either a lady or a tiger.
@@ -11,6 +29,8 @@ Each of the two rooms can contain either a lady or a tiger.
 
 One sign is true and the other is false.
 
+include::novasintaxe/lady1e.txt[indent=4]
+
 === The Second Trial
 
 1. At least one of these rooms contains a lady.
@@ -18,12 +38,16 @@ One sign is true and the other is false.
 
 The statements are either both true or both false.
 
+include::novasintaxe/lady2.txt[indent=4]
+
 === The Third Trial
 
 1. Either a tiger is in this room or a lady is in the other room.
 2. A lady is in the other room.
 
 Does the first room contain a lady or a tiger? What about the other room?
+
+include::novasintaxe/lady3.txt[indent=4]
 
 == The Second Day
 

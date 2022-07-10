@@ -1,0 +1,16 @@
+name: The Third Trial
+object who:
+    lady
+    tiger
+object room:
+    _1
+    _2
+predicate sign_is_true(room)
+predicate contains(room, who)
+rules:
+    # There can be only a lady or a tiger inside each room.
+    for every room X (contains(X, lady) <=> !contains(X, tiger))
+    # 1. Either a tiger is in this room or a lady is in the other room.
+    sign_is_true(_1) <=> contains(_1, tiger) or contains(_2, lady)
+    # 2. A lady is in the other room.
+    sign_is_true(_2) <=> contains(_1, lady)

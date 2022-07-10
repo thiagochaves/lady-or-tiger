@@ -1,17 +1,18 @@
-name: Problem 1
-enum who:
+name: The First Trial
+object who:
     lady
     tiger
-enum room:
+object room:
     _1
     _2
+predicate sign_is_true(room)
+predicate contains(room, who)
 rules:
-    # In this room there is a lady, and a tiger is in the other room.
-    _1 <=> (lady, _1) and (tiger, _2)
-    # In one of these rooms there is a lady and in the other there is a tiger.
-    _2 <=> or((lady, X) for any room X) and ((lady, _1) => (tiger, _2)) and ((lady, _2) => (tiger, _1))
-    # _2 <=> ((lady, _1) and (tiger, _2)) or ((lady, _2) and (tiger, _1)) # Alternative, equivalent rule
-    # One door says the truth and the other lies.
-    _1 <=> !_2
     # There can be only a lady or a tiger inside each room.
-    (lady, X) <=> !(tiger, X) for any room X
+    for every room X (contains(X, lady) <=> !contains(X, tiger))
+    # In this room there is a lady, and a tiger is in the other room.
+    sign_is_true(_1) <=> contains(_1, lady) and contains(_2, tiger)
+    # In one of these rooms there is a lady and in the other there is a tiger.
+    sign_is_true(_2) <=> there is a room X (contains(X, lady)) and ((contains(_1, lady) => contains(_2, tiger)) and (contains(_2, lady) => contains(_1, tiger)))
+    # One door says the truth and the other lies.
+    sign_is_true(_1) <=> !sign_is_true(_2)
