@@ -1,0 +1,22 @@
+name: The Fifth Trial
+object who:
+    lady
+    tiger
+object room:
+    _1
+    _2
+predicate sign_is_true(room)
+predicate contains(room, who)
+rules:
+    # There can be only a lady or a tiger inside each room.
+    for every room X (contains(X, lady) <=> !contains(X, tiger))
+    # In room 1, if a lady is in it, then the sign on the door is true, but if a tiger is in it, the sign is false. 
+    contains(_1, lady) => sign_is_true(_1)
+    contains(_1, tiger) => !sign_is_true(_1)
+    # In room 2, if a lady is in it, then the sign on the door is false, but if a tiger is in it, the sign is true. 
+    contains(_2, lady) => !sign_is_true(_2)
+    contains(_2, tiger) => sign_is_true(_2)
+    # 1. At least one room contains a lady.
+    sign_is_true(_1) <=> there is a room X (contains(X, lady))
+    # 2. The other room contains a lady.
+    sign_is_true(_2) <=> contains(_1, lady)

@@ -1,0 +1,28 @@
+name: First, Second, and Third Choice
+object who:
+    lady
+    tiger
+    empty
+object room:
+    _1
+    _2
+    _3
+predicate sign_is_true(room)
+predicate contains(room, who)
+rules:
+    # There can be only a lady or a tiger inside each room.
+    for every room X (contains(X, lady) <=> !contains(X, tiger))
+    # One of the three rooms contains a lady, another a tiger and the third room was empty.
+    for every who Y (there is a room X (contains(X, Y)))
+    # The sign on the door of the room containing the lady was true.
+    for every room X (contains(X, lady) => sign_is_true(X))
+    # The sign on the door of the room with the tiger was false.
+    for every room X (contains(X, tiger) => !sign_is_true(X))
+    # The sign on the empty room could be true or false.
+    # -- I suppose nothing is needed to specify the previous sentence
+    # 1. Room 3 is empty.
+    sign_is_true(_1) <=> contains(_3, empty)
+    # 2. The tiger is in room 1.
+    sign_is_true(_2) <=> contains(_1, tiger)
+    # 3. This room is empty.
+    sign_is_true(_3) <=> contains(_3, empty)

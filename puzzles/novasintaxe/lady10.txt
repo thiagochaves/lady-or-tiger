@@ -1,0 +1,24 @@
+name: The Tenth Trial
+object who:
+    lady
+    tiger
+object room:
+    _1
+    _2
+    _3
+predicate sign_is_true(room)
+predicate contains(room, who)
+rules:
+    # There can be only a lady or a tiger inside each room.
+    for every room X (contains(X, lady) <=> !contains(X, tiger))
+    # There is one lady and two tigers
+    for every room X (contains(X, lady) => for every room Y except X (contains(Y, tiger)))
+    # The sign on the door of the room containing the lady was true,
+    # and that at least one of the other two signs was false.
+    for every room X (contains(X, lady) => (sign_is_true(X) and there is a room Y except X (!sign_is_true(Y))))
+    # 1. A tiger is in room 2.
+    sign_is_true(_1) <=> contains(_2, tiger)
+    # 2. A tiger is in this room.
+    sign_is_true(_2) <=> contains(_2, tiger)
+    # 3. A tiger is in room 1.
+    sign_is_true(_3) <=> contains(_1, tiger)
