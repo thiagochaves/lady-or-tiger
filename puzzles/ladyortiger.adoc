@@ -29,7 +29,7 @@ Each of the two rooms can contain either a lady or a tiger.
 
 One sign is true and the other is false.
 
-include::novasintaxe/lady1.txt[indent=4]
+include::lady1.txt[indent=4]
 
 === The Second Trial
 
@@ -38,7 +38,7 @@ include::novasintaxe/lady1.txt[indent=4]
 
 The statements are either both true or both false.
 
-include::novasintaxe/lady2.txt[indent=4]
+include::lady2.txt[indent=4]
 
 === The Third Trial
 
@@ -47,7 +47,7 @@ include::novasintaxe/lady2.txt[indent=4]
 
 Does the first room contain a lady or a tiger? What about the other room?
 
-include::novasintaxe/lady3.txt[indent=4]
+include::lady3.txt[indent=4]
 
 == The Second Day
 
@@ -58,28 +58,28 @@ In room 1, if a lady is in it, then the sign on the door is true, but if a tiger
 1. Both rooms contain ladies.
 2. Both rooms contain ladies.
 
-include::novasintaxe/lady4.txt[indent=4]
+include::lady4.txt[indent=4]
 
 === The Fifth Trial
 
 1. At least one room contains a lady.
 2. The other room contains a lady.
 
-include::novasintaxe/lady5.txt[indent=4]
+include::lady5.txt[indent=4]
 
 === The Sixth Trial
 
 1. It makes no difference which room you pick.
 2. There is a lady in the other room.
 
-include::novasintaxe/lady6.txt[indent=4]
+include::lady6.txt[indent=4]
 
 === The Seventh Trial
 
 1. It does make a difference which room you pick.
 2. You are better off choosing the other room.
 
-include::novasintaxe/lady7.txt[indent=4]
+include::lady7.txt[indent=4]
 
 === The Eighth Trial
 
@@ -88,7 +88,7 @@ include::novasintaxe/lady7.txt[indent=4]
 
 It is not known which sign goes on which door.
 
-include::novasintaxe/lady8.txt[indent=4]
+include::lady8.txt[indent=4]
 
 == The Third Day
 
@@ -102,7 +102,7 @@ There are three rooms. In only one there is a lady. In the other two there are t
 
 At most one of the three signs is true.
 
-include::novasintaxe/lady9.txt[indent=4]
+include::lady9.txt[indent=4]
 
 === The Tenth Trial
 
@@ -112,7 +112,7 @@ The sign on the door of the room containing the lady was true, and that at least
 2. A tiger is in this room.
 3. A tiger is in room 1.
 
-include::novasintaxe/lady10.txt[indent=4]
+include::lady10.txt[indent=4]
 
 === First, Second, and Third Choice
 
@@ -125,7 +125,7 @@ The sign on the empty room could be true or false.
 2. The tiger is in room 1.
 3. This room is empty.
 
-include::novasintaxe/lady11.txt[indent=4]
+include::lady11.txt[indent=4]
 
 == The Fourth Day
 
@@ -148,4 +148,4 @@ The signs on the empty rooms could be true or false.
 
 This problem is unsolvable, but knowing if room 8 is empty or not is enough to make the problem solvable.
 
-include::novasintaxe/lady12.txt[indent=4]
+include::lady12.txt[indent=4]
