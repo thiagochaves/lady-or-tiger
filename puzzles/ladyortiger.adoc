@@ -14,7 +14,7 @@ RULE_SECTION -> rules: RULE_LIST
 RULE_LIST -> RULE | RULE RULE_LIST
 RULE -> EXPRESSION
 EXPRESSION -> TERM | TERM and EXPRESSION | TERM or EXPRESSION | TERM => EXPRESSION | TERM <=> EXPRESSION
-TERM -> (EXPRESSION) | !EXPRESSION | APPLIED_PREDICATE | for every ID ID (EXPRESSION) | there is a ID ID (EXPRESSION) | for every ID ID except ID (EXPRESSION) | there is a ID ID except ID (EXPRESSION)
+TERM -> (EXPRESSION) | !EXPRESSION | APPLIED_PREDICATE | for every ID ID (EXPRESSION) | there is a ID ID (EXPRESSION) | for every ID ID except ID (EXPRESSION) | there is a ID ID except ID (EXPRESSION) | solvable if (EXPRESSION) is known
 APPLIED_PREDICATE -> ID(ID_LIST)
 ----
 
@@ -147,3 +147,5 @@ The signs on the empty rooms could be true or false.
 9. This room contains a tiger and 6 is wrong.
 
 This problem is unsolvable, but knowing if room 8 is empty or not is enough to make the problem solvable.
+
+include::novasintaxe/lady12.txt[indent=4]

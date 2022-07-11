@@ -10,8 +10,8 @@ object room:
 predicate sign_is_true(room)
 predicate contains(room, who)
 rules:
-    # There can be only a lady or a tiger inside each room.
-    for every room X (contains(X, lady) <=> !contains(X, tiger))
+    # A room can have a lady, a tiger or be empty.
+    for every room X (for every who Y (contains(X, Y) <=> for every who Z except Y (!contains(X, Z))))
     # One of the three rooms contains a lady, another a tiger and the third room was empty.
     for every who Y (there is a room X (contains(X, Y)))
     # The sign on the door of the room containing the lady was true.

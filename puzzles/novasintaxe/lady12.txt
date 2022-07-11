@@ -1,0 +1,48 @@
+name: A Logical Labyrinth
+object who:
+    lady
+    tiger
+    empty
+object room:
+    _1
+    _2
+    _3
+    _4
+    _5
+    _6
+    _7
+    _8
+    _9
+predicate sign_is_true(room)
+predicate contains(room, who)
+rules:
+    # A room can have a lady, a tiger or be empty.
+    for every room X (for every who Y (contains(X, Y) <=> for every who Z except Y (!contains(X, Z))))
+    # Only one room contains a lady. Each of the other rooms contains either a tiger or is empty.
+    for every room X (contains(X, lady) <=> for every room W except X (!contains(W, lady)))
+    # The sign on the door of the room containing the lady was true.
+    for every room X (contains(X, lady) => sign_is_true(X))
+    # The signs on the doors of the rooms with the tigers were false.
+    for every room X (contains(X, tiger) => !sign_is_true(X))
+    # The signs on the empty rooms could be true or false.
+    # -- I suppose nothing is needed to specify the previous sentence
+    # 1. The lady is in an odd-numbered room.
+    sign_is_true(_1) <=> contains(_1, lady) or contains(_3, lady) or contains(_5, lady) or contains(_5, lady) or contains(_7, lady) or contains(_9, lady)
+    # 2. This room is empty.
+    sign_is_true(_2) <=> contains(_2, empty)
+    # 3. Either sign 5 is right or sign 7 is wrong.
+    sign_is_true(_3) <=> sign_is_true(_5) or !sign_is_true(_7)
+    # 4. Sign 1 is wrong.
+    sign_is_true(_4) <=> !sign_is_true(_1)
+    # 5. Either sign 2 or sign 4 is right.
+    sign_is_true(_5) <=> sign_is_true(_2) or sign_is_true(_4)
+    # 6. Sign 3 is wrong.
+    sign_is_true(_6) <=> !sign_is_true(_3)
+    # 7. The lady is not in room 1.
+    sign_is_true(_7) <=> !contains(_1, lady)
+    # 8. This room contains a tiger and room 9 is empty.
+    sign_is_true(_8) <=> contains(_8, tiger) and contains(_9, empty)
+    # 9. This room contains a tiger and 6 is wrong.
+    sign_is_true(_9) <=> contains(_9, tiger) and !sign_is_true(_6)
+    # This problem is unsolvable, but knowing if room 8 is empty or not is enough to make the problem solvable.
+    solvable if (contains(_8, empty)) is known
