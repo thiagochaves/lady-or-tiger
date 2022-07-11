@@ -11,18 +11,17 @@ import poc.puzzle.Puzzle;
  * Representa a conjunção de duas afirmativas.
  */
 public class Conjuncao implements Afirmativa {
-	/** Primeira afirmativa. */
-	private final Afirmativa _afirmativaUm;
-	/** Segunda afirmativa. */
-	private final Afirmativa _afirmativaDois;
+    /** Primeira afirmativa. */
+    private final Afirmativa _afirmativaUm;
+    /** Segunda afirmativa. */
+    private final Afirmativa _afirmativaDois;
     private boolean _negada;
 
-	/** Constrói uma afirmativa que é a conjunção de duas. */
-	public Conjuncao(Afirmativa umaAfirmativa,
-			Afirmativa outraAfirmativa) {
-		_afirmativaUm = umaAfirmativa;
-		_afirmativaDois = outraAfirmativa;
-	}
+    /** Constrói uma afirmativa que é a conjunção de duas. */
+    public Conjuncao(Afirmativa umaAfirmativa, Afirmativa outraAfirmativa) {
+        _afirmativaUm = umaAfirmativa;
+        _afirmativaDois = outraAfirmativa;
+    }
 
     @Override
     public boolean estaNegada() {
@@ -41,11 +40,11 @@ public class Conjuncao implements Afirmativa {
         return true;
     }
 
-	/**
-	 * Os componentes são as subafirmativas.
-	 */
-	public Set<Afirmativa> expandir() {
-	    Set<Afirmativa> expansao = new HashSet<Afirmativa>();
+    /**
+     * Os componentes são as subafirmativas.
+     */
+    public Set<Afirmativa> expandir() {
+        Set<Afirmativa> expansao = new HashSet<Afirmativa>();
         if (!estaNegada()) {
             expansao.add(_afirmativaUm);
             expansao.add(_afirmativaDois);
@@ -53,33 +52,33 @@ public class Conjuncao implements Afirmativa {
             expansao.add(_afirmativaUm.negar());
             expansao.add(_afirmativaDois.negar());
         }
-		return expansao;
-	}
+        return expansao;
+    }
 
-	/**
-	 * Indica o tipo de expansão que o método expandir() fará.
-	 */
-	public Expansao getTipoExpansao() {
-	    if (!estaNegada()) {
-	        return Expansao.ALFA;
-	    } else {
-	        return Expansao.BETA;
-	    }
-	}
+    /**
+     * Indica o tipo de expansão que o método expandir() fará.
+     */
+    public Expansao getTipoExpansao() {
+        if (!estaNegada()) {
+            return Expansao.ALFA;
+        } else {
+            return Expansao.BETA;
+        }
+    }
 
-	/**
-	 * Representação textual.
-	 */
-	public String toString() {
-		String base = "(" + _afirmativaUm + " ^ " + _afirmativaDois + ")";
-		if (estaNegada()) {
-		    return "¬" + base;
-		} else {
-		    return base;
-		}
-	}
+    /**
+     * Representação textual.
+     */
+    public String toString() {
+        String base = "(" + _afirmativaUm + " ^ " + _afirmativaDois + ")";
+        if (estaNegada()) {
+            return "¬" + base;
+        } else {
+            return base;
+        }
+    }
 
-	@Override
+    @Override
     public void associarAPuzzle(Puzzle puzzle) {
         _afirmativaUm.associarAPuzzle(puzzle);
         _afirmativaDois.associarAPuzzle(puzzle);
@@ -99,10 +98,8 @@ public class Conjuncao implements Afirmativa {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result
-                + ((_afirmativaDois == null) ? 0 : _afirmativaDois.hashCode());
-        result = prime * result
-                + ((_afirmativaUm == null) ? 0 : _afirmativaUm.hashCode());
+        result = prime * result + ((_afirmativaDois == null) ? 0 : _afirmativaDois.hashCode());
+        result = prime * result + ((_afirmativaUm == null) ? 0 : _afirmativaUm.hashCode());
         result = prime * result + (_negada ? 1231 : 1237);
         return result;
     }

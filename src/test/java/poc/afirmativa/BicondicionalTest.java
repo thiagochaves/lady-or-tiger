@@ -12,8 +12,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 /**
- * Testa a classe Bicondicional.
- * Created by Thiago on 10/01/17.
+ * Testa a classe Bicondicional. Created by Thiago on 10/01/17.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class BicondicionalTest {

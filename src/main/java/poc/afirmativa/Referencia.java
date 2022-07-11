@@ -7,30 +7,29 @@ import java.util.Set;
 import poc.puzzle.Puzzle;
 
 /**
- * Usada pelo parser. Substitui uma referência a uma afirmativa se ela não
- * estiver disponível. Feita para resolver o problema de recursão mútua entre
- * afirmativas.
+ * Usada pelo parser. Substitui uma referência a uma afirmativa se ela não estiver disponível. Feita
+ * para resolver o problema de recursão mútua entre afirmativas.
  */
 public class Referencia implements Afirmativa {
-	/** Puzzle a que esta afirmativa está relacionada. */
-	private Puzzle _puzzle;
-	/** A que afirmativa do Puzzle esta se refere. */
-	private final int _indice;
+    /** Puzzle a que esta afirmativa está relacionada. */
+    private Puzzle _puzzle;
+    /** A que afirmativa do Puzzle esta se refere. */
+    private final int _indice;
     private boolean _negada;
 
-	/**
-	 * Cria uma nova referência a uma afirmativa.
-	 * 
-	 * @param indice Deve estar entre 1 e puzzle.getNumPortas().
-	 */
-	public Referencia(int indice) {
-		_indice = indice;
-	}
+    /**
+     * Cria uma nova referência a uma afirmativa.
+     * 
+     * @param indice
+     *            Deve estar entre 1 e puzzle.getNumPortas().
+     */
+    public Referencia(int indice) {
+        _indice = indice;
+    }
 
-	public int getIndice() {
-		return _indice;
-	}
-
+    public int getIndice() {
+        return _indice;
+    }
 
     @Override
     public boolean estaNegada() {
@@ -50,25 +49,25 @@ public class Referencia implements Afirmativa {
         return false;
     }
 
-	public Set<Afirmativa> expandir() {
+    public Set<Afirmativa> expandir() {
         throw new UnsupportedOperationException(
                 "Afirmativas atômicas não podem ser expandidas.");
-	}
+    }
 
-	public Expansao getTipoExpansao() {
-		return Expansao.IDENTIDADE;
-	}
+    public Expansao getTipoExpansao() {
+        return Expansao.IDENTIDADE;
+    }
 
-	public String toString() {
-		String base = "a(" + _indice + ")";
+    public String toString() {
+        String base = "a(" + _indice + ")";
         if (estaNegada()) {
             return "¬" + base;
         } else {
             return base;
         }
-	}
+    }
 
-	@Override
+    @Override
     public void associarAPuzzle(Puzzle puzzle) {
         if (puzzle == null) {
             throw new IllegalArgumentException("Puzzle nulo");
@@ -115,6 +114,7 @@ public class Referencia implements Afirmativa {
         }
         if (_puzzle == null) {
             return other._puzzle == null;
-        } else return _puzzle.equals(other._puzzle);
+        } else
+            return _puzzle.equals(other._puzzle);
     }
 }

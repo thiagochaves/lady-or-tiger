@@ -10,7 +10,9 @@ public interface Tableau {
 
     /**
      * Adiciona um ramo ao tableaux.
-     * @param ramo Não pode ser <code>null</code>.
+     * 
+     * @param ramo
+     *            Não pode ser <code>null</code>.
      */
     void adicionarRamo(Ramo ramo);
 

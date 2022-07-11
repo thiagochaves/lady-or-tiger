@@ -21,14 +21,16 @@ public final class Ramo implements Iterable<Afirmativa> {
     private Ramo(Suposicao s) {
         _suposicao = Suposicao.criarNovaDeMesmaEstrutura(s);
     }
-    
+
     public Ramo(Puzzle puzzle) {
         _suposicao = Suposicao.criar(puzzle.getNumPortas(), puzzle.getObjetos());
     }
 
     /**
      * Cria um novo ramo fazendo uma cópia do conteúdo do ramo informado.
-     * @param ramo Não pode ser <code>null</code>.
+     * 
+     * @param ramo
+     *            Não pode ser <code>null</code>.
      */
     public Ramo(Ramo ramo) {
         _suposicao = Suposicao.copiar(ramo._suposicao);
@@ -51,16 +53,15 @@ public final class Ramo implements Iterable<Afirmativa> {
     }
 
     /**
-     * Indica se o ramo pode ser fechado, ou seja, possui uma 
-     * contradição em seu conteúdo.
+     * Indica se o ramo pode ser fechado, ou seja, possui uma contradição em seu conteúdo.
      */
     public boolean podeSerFechado() {
         return _fechado;
     }
-    
+
     /**
-     * Retorna um ramo que contém todas as afirmativas essenciais deste ramo
-     * (localização ou afirmativa de porta).
+     * Retorna um ramo que contém todas as afirmativas essenciais deste ramo (localização ou
+     * afirmativa de porta).
      */
     public Ramo getEssenciais() {
         Ramo saida = new Ramo(_suposicao);
@@ -73,8 +74,10 @@ public final class Ramo implements Iterable<Afirmativa> {
     }
 
     /**
-     * Calcula a interseção do ramo atual com o informado. 
-     * @throws NullPointerException Se o ramo for <code>null</code>.
+     * Calcula a interseção do ramo atual com o informado.
+     * 
+     * @throws NullPointerException
+     *             Se o ramo for <code>null</code>.
      */
     public Ramo calcularIntersecao(Ramo outroRamo) {
         if (outroRamo == null) {
@@ -124,11 +127,13 @@ public final class Ramo implements Iterable<Afirmativa> {
                     return 1;
                 }
                 if (o1 instanceof Referencia && o2 instanceof Referencia) {
-                    return ((Referencia)o1).getIndice() - ((Referencia)o2).getIndice();
+                    return ((Referencia) o1).getIndice() - ((Referencia) o2).getIndice();
                 }
-                int comparacaoLugar = ((Localizacao)o1).getLugar() - ((Localizacao)o2).getLugar();
+                int comparacaoLugar =
+                        ((Localizacao) o1).getLugar() - ((Localizacao) o2).getLugar();
                 if (comparacaoLugar == 0) {
-                    return ((Localizacao)o1).getObjeto().compareTo(((Localizacao)o2).getObjeto());
+                    return ((Localizacao) o1).getObjeto()
+                            .compareTo(((Localizacao) o2).getObjeto());
                 }
                 return comparacaoLugar;
             }
@@ -153,7 +158,8 @@ public final class Ramo implements Iterable<Afirmativa> {
         Ramo other = (Ramo) obj;
         if (!_afirmativas.containsAll(other._afirmativas)) {
             return false;
-        } else return other._afirmativas.containsAll(_afirmativas);
+        } else
+            return other._afirmativas.containsAll(_afirmativas);
     }
 
     public void removerAfirmativa(Afirmativa afirmativa) {
@@ -176,9 +182,9 @@ public final class Ramo implements Iterable<Afirmativa> {
         }
     }
 
-    private class IteradorAfirmativasParaExpansao implements Iterator<Afirmativa>
-    {
+    private class IteradorAfirmativasParaExpansao implements Iterator<Afirmativa> {
         private int i = 0;
+
         @Override
         public boolean hasNext() {
             return i < _afirmativas.size();

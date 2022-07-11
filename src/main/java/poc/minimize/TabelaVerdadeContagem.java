@@ -11,9 +11,11 @@ public class TabelaVerdadeContagem implements TabelaVerdade {
     private int _contagem;
     private List<Variavel> _variaveis;
 
-    private TabelaVerdadeContagem() {}
+    private TabelaVerdadeContagem() {
+    }
 
-    public static TabelaVerdadeContagem criarContagemIgual(int contagem, Set<Variavel> variaveis) {
+    public static TabelaVerdadeContagem criarContagemIgual(int contagem,
+            Set<Variavel> variaveis) {
         Preconditions.checkNotNull(variaveis);
         Preconditions.checkArgument(contagem >= 0);
         TabelaVerdadeContagem nova = new TabelaVerdadeContagem();
@@ -35,7 +37,8 @@ public class TabelaVerdadeContagem implements TabelaVerdade {
 
     @Override
     public Set<Mintermo> getMintermos() {
-        Set<Mintermo> todos = getMintermos(_variaveis.get(0), _variaveis.subList(1, _variaveis.size()));
+        Set<Mintermo> todos =
+                getMintermos(_variaveis.get(0), _variaveis.subList(1, _variaveis.size()));
         for (Iterator<Mintermo> i = todos.iterator(); i.hasNext();) {
             Mintermo termo = i.next();
             if (termo.getVariaveis().size() != _contagem) {
@@ -51,7 +54,8 @@ public class TabelaVerdadeContagem implements TabelaVerdade {
             Mintermo sem = Mintermo.criar(_variaveis, Lists.newArrayList());
             return Sets.newHashSet(com, sem);
         }
-        Set<Mintermo> seguintes = getMintermos(variaveis.get(0), variaveis.subList(1, variaveis.size()));
+        Set<Mintermo> seguintes =
+                getMintermos(variaveis.get(0), variaveis.subList(1, variaveis.size()));
         Set<Mintermo> saida = Sets.newHashSet();
         saida.addAll(seguintes);
         seguintes.forEach(termo -> saida.add(termo.adicionarVariavel(variavel)));

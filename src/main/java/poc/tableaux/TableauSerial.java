@@ -27,7 +27,7 @@ public class TableauSerial implements Tableau {
         }
         show("TableauSerial sem ramos fechados : {0}", this);
     }
-    
+
     @Override
     public void adicionarRamo(Ramo ramo) {
         if (ramo == null) {
@@ -35,7 +35,7 @@ public class TableauSerial implements Tableau {
         }
         _ramos.add(ramo);
     }
-    
+
     /**
      * Remove o ramo no índice informado.
      */
@@ -59,7 +59,7 @@ public class TableauSerial implements Tableau {
     public List<Ramo> getRamos() {
         return Collections.unmodifiableList(_ramos);
     }
-    
+
     /**
      * @return O número de ramos neste tableaux.
      */
@@ -91,17 +91,17 @@ public class TableauSerial implements Tableau {
             Set<Afirmativa> expansao = afirmativaAExpandir.expandir();
             ramoAtual.removerAfirmativa(afirmativaAExpandir);
             switch (tipoExpansao) {
-                case ALFA:
-                case GAMA:
-                    // Nestes tipos de expansões os elementos são adicionados ao
-                    // ramo atual
-                    adicionarAfirmativasRamo(expansao, i);
-                    expandiu = true;
-                    break;
-                case BETA:
-                    // Neste tipo de expansão é criado um novo ramo
-                    bifurcarRamo(expansao, i);
-                    expandiu = true;
+            case ALFA:
+            case GAMA:
+                // Nestes tipos de expansões os elementos são adicionados ao
+                // ramo atual
+                adicionarAfirmativasRamo(expansao, i);
+                expandiu = true;
+                break;
+            case BETA:
+                // Neste tipo de expansão é criado um novo ramo
+                bifurcarRamo(expansao, i);
+                expandiu = true;
             }
         }
         return expandiu;
@@ -110,10 +110,9 @@ public class TableauSerial implements Tableau {
     /**
      * Adiciona uma lista de afirmativas a um ramo.
      */
-    private void adicionarAfirmativasRamo(Set<Afirmativa> afirmativas,
-            int indiceRamo) {
+    private void adicionarAfirmativasRamo(Set<Afirmativa> afirmativas, int indiceRamo) {
         Ramo ramoAtual = getRamo(indiceRamo);
-        for(Afirmativa a : afirmativas) {
+        for (Afirmativa a : afirmativas) {
             ramoAtual.adicionarAfirmativa(a);
         }
     }

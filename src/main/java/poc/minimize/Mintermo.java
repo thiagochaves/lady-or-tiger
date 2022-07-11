@@ -15,7 +15,8 @@ public class Mintermo {
     private List<Variavel> _variaveis;
     private Map<Variavel, Valor> _valores = Maps.newHashMap();
 
-    private Mintermo() {}
+    private Mintermo() {
+    }
 
     public static Mintermo criar(List<Variavel> todas, List<Variavel> verdades) {
         Preconditions.checkNotNull(todas);
@@ -45,10 +46,14 @@ public class Mintermo {
 
     private String exibicao(Valor valor) {
         switch (valor) {
-            case ZERO: return "0";
-            case UM: return "1";
-            case AMBOS: return "-";
-            case QUALQUER: return "X";
+        case ZERO:
+            return "0";
+        case UM:
+            return "1";
+        case AMBOS:
+            return "-";
+        case QUALQUER:
+            return "X";
         }
         return "";
     }
@@ -83,11 +88,13 @@ public class Mintermo {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Mintermo mintermo = (Mintermo) o;
-        return Objects.equal(_variaveis, mintermo._variaveis) &&
-                Objects.equal(_valores, mintermo._valores);
+        return Objects.equal(_variaveis, mintermo._variaveis)
+                && Objects.equal(_valores, mintermo._valores);
     }
 
     @Override

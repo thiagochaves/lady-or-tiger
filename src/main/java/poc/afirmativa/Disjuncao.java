@@ -11,20 +11,19 @@ import poc.puzzle.Puzzle;
  * Representa a disjunção de duas afirmativas.
  */
 public class Disjuncao implements Afirmativa {
-	/** Primeira afirmativa. */
-	private final Afirmativa _afirmativaUm; // NOPMD by Thiago on 05/09/10 13:01
-	/** Segunda afirmativa. */
-	private final Afirmativa _afirmativaDois; // NOPMD by Thiago on 05/09/10 13:01
+    /** Primeira afirmativa. */
+    private final Afirmativa _afirmativaUm; // NOPMD by Thiago on 05/09/10 13:01
+    /** Segunda afirmativa. */
+    private final Afirmativa _afirmativaDois; // NOPMD by Thiago on 05/09/10 13:01
     private boolean _negada;
 
-	/** Constrói uma afirmativa que é a disjunção de duas. */
-	public Disjuncao(Afirmativa umaAfirmativa,
-			Afirmativa outraAfirmativa) {
-		_afirmativaUm = umaAfirmativa;
-		_afirmativaDois = outraAfirmativa;
-	}
+    /** Constrói uma afirmativa que é a disjunção de duas. */
+    public Disjuncao(Afirmativa umaAfirmativa, Afirmativa outraAfirmativa) {
+        _afirmativaUm = umaAfirmativa;
+        _afirmativaDois = outraAfirmativa;
+    }
 
-	@Override
+    @Override
     public boolean estaNegada() {
         return _negada;
     }
@@ -42,8 +41,8 @@ public class Disjuncao implements Afirmativa {
     }
 
     /**
-	 * Os componentes são as subafirmativas.
-	 */
+     * Os componentes são as subafirmativas.
+     */
     public Set<Afirmativa> expandir() {
         Set<Afirmativa> expansao = new HashSet<Afirmativa>();
         if (!estaNegada()) {
@@ -56,30 +55,30 @@ public class Disjuncao implements Afirmativa {
         return expansao;
     }
 
-	/**
-	 * Indica o tipo de expansão que o método expandir() fará.
-	 */
-	public Expansao getTipoExpansao() {
-	    if (!estaNegada()) {
-	        return Expansao.BETA;
-	    } else {
-	        return Expansao.ALFA;
-	    }
-	}
+    /**
+     * Indica o tipo de expansão que o método expandir() fará.
+     */
+    public Expansao getTipoExpansao() {
+        if (!estaNegada()) {
+            return Expansao.BETA;
+        } else {
+            return Expansao.ALFA;
+        }
+    }
 
-	/**
-	 * Representação textual.
-	 */
-	public String toString() {
-		String base = "(" + _afirmativaUm + " v " + _afirmativaDois + ")";
+    /**
+     * Representação textual.
+     */
+    public String toString() {
+        String base = "(" + _afirmativaUm + " v " + _afirmativaDois + ")";
         if (estaNegada()) {
             return "¬" + base;
         } else {
             return base;
         }
-	}
+    }
 
-	@Override
+    @Override
     public void associarAPuzzle(Puzzle puzzle) {
         _afirmativaUm.associarAPuzzle(puzzle);
         _afirmativaDois.associarAPuzzle(puzzle);
@@ -99,10 +98,8 @@ public class Disjuncao implements Afirmativa {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result
-                + ((_afirmativaDois == null) ? 0 : _afirmativaDois.hashCode());
-        result = prime * result
-                + ((_afirmativaUm == null) ? 0 : _afirmativaUm.hashCode());
+        result = prime * result + ((_afirmativaDois == null) ? 0 : _afirmativaDois.hashCode());
+        result = prime * result + ((_afirmativaUm == null) ? 0 : _afirmativaUm.hashCode());
         result = prime * result + (_negada ? 1231 : 1237);
         return result;
     }

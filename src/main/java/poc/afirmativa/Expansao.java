@@ -1,7 +1,8 @@
 package poc.afirmativa;
 
 /**
- * Tipo de expansão que a afirmativa realiza. 
+ * Tipo de expansão que a afirmativa realiza.
+ * 
  * @author Thiago
  */
 public enum Expansao {

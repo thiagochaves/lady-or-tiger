@@ -8,7 +8,8 @@ import java.util.logging.Logger;
 public class TableauParalelo implements Tableau, ControladorParalelo {
     private final List<Ramo> _ramos = new ArrayList<Ramo>();
     private Logger _logger = Logger.getLogger("tableau");
-    private final ExecutorService _executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    private final ExecutorService _executor =
+            Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     private final AtomicInteger _numExecutores = new AtomicInteger();
     private final Semaphore _semaforo = new Semaphore(0);
 
@@ -65,7 +66,7 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
             _ramos.add(ramo);
         }
     }
-    
+
     /**
      * Obtém a árvore toda.
      */
@@ -78,7 +79,7 @@ public class TableauParalelo implements Tableau, ControladorParalelo {
         }
         return validos;
     }
-    
+
     /**
      * Retorna uma representação textual do tableaux.
      */

@@ -7,13 +7,13 @@ package poc.puzzle;
  */
 class ExcecaoParsing extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public ExcecaoParsing(String message) {
-		super(message);
-	}
+    public ExcecaoParsing(String message) {
+        super(message);
+    }
 
-	public ExcecaoParsing(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public ExcecaoParsing(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

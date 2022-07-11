@@ -17,15 +17,18 @@ import poc.util.CommentLineBufferedReader;
  * Lê um puzzle armazenado no formato padrão.
  */
 public class LeitorPuzzle {
-    
+
     private Puzzle _puzzle;
     private String _solucao;
-    
-    private LeitorPuzzle() {}
+
+    private LeitorPuzzle() {
+    }
 
     /**
      * Obtém as informações para configurar um puzzle de um arquivo.
-     * @param caminho Arquivo com a especificação de um puzzle no formato esperado.
+     * 
+     * @param caminho
+     *            Arquivo com a especificação de um puzzle no formato esperado.
      * @return nunca null.
      */
     public static LeitorPuzzle lerDoArquivo(File caminho) {
@@ -45,20 +48,20 @@ public class LeitorPuzzle {
         List<String> textoPortas = lerAfirmativasDasPortas(leitor, numPortas);
         String resultado = leitor.readLine();
         leitor.close();
-        
+
         ParserExpressao parser = new ParserExpressao();
         if (textoRestricao.trim().isEmpty()) {
             textoRestricao = gerarRestricaoBasica(numPortas);
-        } 
+        }
         Afirmativa restricao = parser.parse(textoRestricao);
         List<Afirmativa> portas = new ArrayList<Afirmativa>();
         for (String p : textoPortas) {
             Afirmativa afirmativaPorta = parser.parse(p);
             portas.add(afirmativaPorta);
         }
-        
+
         Puzzle puzzle = new Puzzle(restricao, portas, objetos);
-        
+
         LeitorPuzzle lp = new LeitorPuzzle();
         lp._puzzle = puzzle;
         lp._solucao = resultado;
@@ -70,27 +73,24 @@ public class LeitorPuzzle {
             return "a(1)v(!a(1))";
         }
         String saidaPortasMenosUm = gerarRestricaoBasica(numPortas - 1);
-        return "((" + saidaPortasMenosUm + ") ^ a(" + numPortas
-                + ")) v ((" + saidaPortasMenosUm + ") ^ (!a(" + numPortas
-                + ")))";
+        return "((" + saidaPortasMenosUm + ") ^ a(" + numPortas + ")) v (("
+                + saidaPortasMenosUm + ") ^ (!a(" + numPortas + ")))";
     }
 
-    private static int lerNumeroDePortas(BufferedReader leitor)
-            throws IOException {
+    private static int lerNumeroDePortas(BufferedReader leitor) throws IOException {
         String linhaPortas = leitor.readLine();
         if (linhaPortas == null) {
-            throw new ExcecaoArquivoInvalido("O arquivo é inválido. " 
-                    + "O número de portas não foi informado.");
+            throw new ExcecaoArquivoInvalido(
+                    "O arquivo é inválido. " + "O número de portas não foi informado.");
         }
         return Integer.parseInt(linhaPortas);
     }
-    
-    private static Set<String> lerObjetos(BufferedReader leitor)
-            throws IOException {
+
+    private static Set<String> lerObjetos(BufferedReader leitor) throws IOException {
         String listaObjetos = leitor.readLine();
         if (listaObjetos == null) {
-            throw new ExcecaoArquivoInvalido("O arquivo é inválido. " 
-                    + "Os objetos existentes não foram informados.");
+            throw new ExcecaoArquivoInvalido(
+                    "O arquivo é inválido. " + "Os objetos existentes não foram informados.");
         }
         StringTokenizer tokenizer = new StringTokenizer(listaObjetos, ", ");
         Set<String> objetos = new HashSet<String>();
@@ -103,20 +103,21 @@ public class LeitorPuzzle {
     private static String lerAxioma(BufferedReader leitor) throws IOException {
         String restricao = leitor.readLine();
         if (restricao == null) {
-            throw new ExcecaoArquivoInvalido("O arquivo é inválido. " 
-                    + "As restrições não foram informadas.");
+            throw new ExcecaoArquivoInvalido(
+                    "O arquivo é inválido. " + "As restrições não foram informadas.");
         }
         String restricaoSemEspacosFinais = restricao.trim();
         while (restricaoSemEspacosFinais.endsWith("\\")) {
-            restricao = restricaoSemEspacosFinais.substring(0, restricaoSemEspacosFinais.length() - 1);
+            restricao = restricaoSemEspacosFinais.substring(0,
+                    restricaoSemEspacosFinais.length() - 1);
             restricao += leitor.readLine();
             restricaoSemEspacosFinais = restricao.trim();
         }
         return restricao;
     }
 
-    private static List<String> lerAfirmativasDasPortas(BufferedReader leitor,
-            int numPortas) throws IOException {
+    private static List<String> lerAfirmativasDasPortas(BufferedReader leitor, int numPortas)
+            throws IOException {
         List<String> portas = new ArrayList<String>();
         for (int i = 0; i < numPortas; i++) {
             portas.add(leitor.readLine());

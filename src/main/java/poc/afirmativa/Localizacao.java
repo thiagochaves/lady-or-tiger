@@ -11,38 +11,36 @@ import poc.puzzle.Puzzle;
  * Suposição em torno da localização de um objeto.
  */
 public class Localizacao implements Afirmativa {
-	private String _objeto;
-	private int _lugar;
-	private Puzzle _puzzle;
-	private boolean _negada;
-	
-	/**
-	 * 
-	 * @param umObjeto
-	 *            Não pode ser <code>null</code>.
-	 * @param umLugar
-	 *            Inteiro positivo.
-	 */
-	public Localizacao(String umObjeto, int umLugar) {
-		if (umObjeto == null) {
-			throw new IllegalArgumentException("Objeto nulo informado.");
-		}
-		if (umLugar <= 0) {
-			throw new IllegalArgumentException(
-					"Número de porta fora do intervalo:" + umLugar);
-		}
-		_objeto = umObjeto;
-		_lugar = umLugar;
-	}
+    private String _objeto;
+    private int _lugar;
+    private Puzzle _puzzle;
+    private boolean _negada;
 
-	public String getObjeto() {
-		return _objeto;
-	}
+    /**
+     * 
+     * @param umObjeto
+     *            Não pode ser <code>null</code>.
+     * @param umLugar
+     *            Inteiro positivo.
+     */
+    public Localizacao(String umObjeto, int umLugar) {
+        if (umObjeto == null) {
+            throw new IllegalArgumentException("Objeto nulo informado.");
+        }
+        if (umLugar <= 0) {
+            throw new IllegalArgumentException("Número de porta fora do intervalo:" + umLugar);
+        }
+        _objeto = umObjeto;
+        _lugar = umLugar;
+    }
 
-	public int getLugar() {
-		return _lugar;
-	}
+    public String getObjeto() {
+        return _objeto;
+    }
 
+    public int getLugar() {
+        return _lugar;
+    }
 
     @Override
     public boolean estaNegada() {
@@ -63,45 +61,45 @@ public class Localizacao implements Afirmativa {
     }
 
     /**
-	 * Uma afirmativa atômica como Localizacao não pode ser expandida.
-	 * 
-	 * @throws UnsupportedOperationException
-	 *             Sempre.
-	 */
-	public Set<Afirmativa> expandir() {
-		throw new UnsupportedOperationException(
-				"Afirmativas atômicas não podem ser expandidas.");
-	}
+     * Uma afirmativa atômica como Localizacao não pode ser expandida.
+     * 
+     * @throws UnsupportedOperationException
+     *             Sempre.
+     */
+    public Set<Afirmativa> expandir() {
+        throw new UnsupportedOperationException(
+                "Afirmativas atômicas não podem ser expandidas.");
+    }
 
-	/**
-	 * Indica o tipo de expansão que o método expandir() fará.
-	 */
-	public Expansao getTipoExpansao() {
-		return Expansao.IDENTIDADE;
-	}
+    /**
+     * Indica o tipo de expansão que o método expandir() fará.
+     */
+    public Expansao getTipoExpansao() {
+        return Expansao.IDENTIDADE;
+    }
 
-	public String toString() {
-		String base = "em(" + _objeto + ", " + _lugar + ")";
+    public String toString() {
+        String base = "em(" + _objeto + ", " + _lugar + ")";
         if (estaNegada()) {
             return "¬" + base;
         } else {
             return base;
         }
-	}
+    }
 
-	@Override
+    @Override
     public void associarAPuzzle(Puzzle puzzle) {
-	    _puzzle = puzzle;
+        _puzzle = puzzle;
     }
 
     @Override
     public boolean eEssencial() {
         return true;
     }
-    
+
     /**
-     * Afirmativas que explicitam todos os objetos que não estão neste lugar.
-     * Vazio se não se aplicar.
+     * Afirmativas que explicitam todos os objetos que não estão neste lugar. Vazio se não se
+     * aplicar.
      */
     public Collection<Localizacao> explicitarObjetosQueNaoEstaoAqui() {
         assert _puzzle != null;
@@ -139,7 +137,8 @@ public class Localizacao implements Afirmativa {
         }
         if (_objeto == null) {
             return other._objeto == null;
-        } else return _objeto.equals(other._objeto);
+        } else
+            return _objeto.equals(other._objeto);
     }
 
     @Override

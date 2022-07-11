@@ -9,12 +9,12 @@ import poc.afirmativa.Afirmativa;
  */
 public class Puzzle {
 
-	/** Restrição do problema que é sempre verdadeira. */
-	private final Afirmativa _axioma;
-	/** Afirmativas das portas. */
-	private final List<Afirmativa> _portas;
-	/** Objetos que podem se encontrar atrás das portas. */
-	private final Set<String> _objetos;
+    /** Restrição do problema que é sempre verdadeira. */
+    private final Afirmativa _axioma;
+    /** Afirmativas das portas. */
+    private final List<Afirmativa> _portas;
+    /** Objetos que podem se encontrar atrás das portas. */
+    private final Set<String> _objetos;
 
     /**
      * Cria um novo puzzle.
@@ -25,9 +25,10 @@ public class Puzzle {
      *            As afirmativas das portas (na ordem).
      * @param objetosValidos
      *            Os objetos que podem estar atrás das portas.
-     * @throws ExcecaoParsing Falha ao interpretar as restrições.
+     * @throws ExcecaoParsing
+     *             Falha ao interpretar as restrições.
      */
-	public Puzzle(Afirmativa axioma, List<Afirmativa> portas, Set<String> objetosValidos) {
+    public Puzzle(Afirmativa axioma, List<Afirmativa> portas, Set<String> objetosValidos) {
         _objetos = new HashSet<String>(objetosValidos);
         _axioma = axioma;
         _portas = new ArrayList<Afirmativa>();
@@ -41,44 +42,42 @@ public class Puzzle {
             p.associarAPuzzle(this);
         }
     }
-	
-	/**
-	 * Obtém o axioma.
-	 */
-	public Afirmativa getAxioma() {
-		return _axioma;
-	}
-
-	/**
-	 * Obtém o número de portas.
-	 */
-	public int getNumPortas() {
-		return _portas.size();
-	}
-
-	/**
-	 * Obtém a afirmativa de uma porta. Obs: A primeira porta tem índice 1.
-	 */
-	public Afirmativa getPorta(int indice) {
-		return _portas.get(indice - 1);
-	}
 
     /**
-	 * Obtém um conjunto com os objetos válidos.
-	 */
-	public Set<String> getObjetos() {
-		return Collections.unmodifiableSet(_objetos);
-	}
+     * Obtém o axioma.
+     */
+    public Afirmativa getAxioma() {
+        return _axioma;
+    }
+
+    /**
+     * Obtém o número de portas.
+     */
+    public int getNumPortas() {
+        return _portas.size();
+    }
+
+    /**
+     * Obtém a afirmativa de uma porta. Obs: A primeira porta tem índice 1.
+     */
+    public Afirmativa getPorta(int indice) {
+        return _portas.get(indice - 1);
+    }
+
+    /**
+     * Obtém um conjunto com os objetos válidos.
+     */
+    public Set<String> getObjetos() {
+        return Collections.unmodifiableSet(_objetos);
+    }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result
-                + ((_objetos == null) ? 0 : _objetos.hashCode());
+        result = prime * result + ((_objetos == null) ? 0 : _objetos.hashCode());
         result = prime * result + ((_portas == null) ? 0 : _portas.hashCode());
-        result = prime * result
-                + ((_axioma == null) ? 0 : _axioma.hashCode());
+        result = prime * result + ((_axioma == null) ? 0 : _axioma.hashCode());
         return result;
     }
 
@@ -103,6 +102,7 @@ public class Puzzle {
             return false;
         if (_axioma == null) {
             return other._axioma == null;
-        } else return _axioma.equals(other._axioma);
+        } else
+            return _axioma.equals(other._axioma);
     }
 }

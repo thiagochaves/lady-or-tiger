@@ -21,17 +21,17 @@ class Expansor implements Runnable {
         while (i.hasNext()) {
             Afirmativa a = i.next();
             switch (a.getTipoExpansao()) {
-                case IDENTIDADE:
-                    continue;
-                case ALFA:
-                case GAMA:
-                    adicionarExpansaoAUmRamo(a);
-                    i.remove();
-                    break;
-                case BETA:
-                    i.remove();
-                    adicionarExpansaoADoisRamos(a);
-                    break;
+            case IDENTIDADE:
+                continue;
+            case ALFA:
+            case GAMA:
+                adicionarExpansaoAUmRamo(a);
+                i.remove();
+                break;
+            case BETA:
+                i.remove();
+                adicionarExpansaoADoisRamos(a);
+                break;
             }
             if (_ramo.podeSerFechado()) {
                 _controlador.ramoFechado(_id);

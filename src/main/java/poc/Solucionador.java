@@ -43,7 +43,8 @@ class Solucionador {
         // Realiza mais algumas inferências
         List<Ramo> ramos = new ArrayList<Ramo>();
         for (Ramo r : _tableau.getRamos()) {
-            // TODO Não é preciso obter uma cópia com os essenciais, porque os ramos só estarão com afirmativas
+            // TODO Não é preciso obter uma cópia com os essenciais, porque os ramos só estarão com
+            // afirmativas
             // essenciais neste ponto.
             Ramo ramo = r.getEssenciais();
             ramo = deduzirPresenca(ramo);
@@ -66,8 +67,8 @@ class Solucionador {
     }
 
     /**
-     * Se já foi descoberto o que há atrás de uma porta, então afirmaremos
-     * que os outros objetos não podem estar atrás de tal porta.
+     * Se já foi descoberto o que há atrás de uma porta, então afirmaremos que os outros objetos não
+     * podem estar atrás de tal porta.
      */
     private Ramo deduzirAusencia(Ramo ramo) {
         Ramo saida = new Ramo(ramo);
@@ -80,12 +81,11 @@ class Solucionador {
     }
 
     /**
-     * Dado que uma porta precisa esconder um e apenas um objeto este método
-     * analisa e infere o que pode estar atrás das portas. O resultado completo
-     * (junto com dados iniciais) é retornado. Ex: Se houver !em(m,1) e os
-     * únicos objetos válidos sejam m e t, então é inferido que em(t,1). OBS:
-     * Sempre deve existir um objeto atrás de uma porta. Se isso não acontecer o
-     * método retorna null.
+     * Dado que uma porta precisa esconder um e apenas um objeto este método analisa e infere o que
+     * pode estar atrás das portas. O resultado completo (junto com dados iniciais) é retornado. Ex:
+     * Se houver !em(m,1) e os únicos objetos válidos sejam m e t, então é inferido que em(t,1).
+     * OBS: Sempre deve existir um objeto atrás de uma porta. Se isso não acontecer o método retorna
+     * null.
      */
     @SuppressWarnings("unchecked")
     Ramo deduzirPresenca(Ramo ramo) {
@@ -116,14 +116,15 @@ class Solucionador {
             ArrayList<String> portaAtual = portas[j];
             HashSet<String> objetos = new HashSet<String>(_puzzle.getObjetos());
             objetos.removeAll(portaAtual);
-            // O método Ramo.impossivelTerAlgoNoLugar() já elimina estas situações durante a expansão
+            // O método Ramo.impossivelTerAlgoNoLugar() já elimina estas situações durante a
+            // expansão
             if (objetos.size() == 0) {
                 // Está dizendo que não há objetos atrás da porta, o que não pode acontecer
                 return null;
             }
             if (objetos.size() == 1) {
-                Localizacao localizacaoInferida = new Localizacao(
-                        objetos.iterator().next(), j + 1);
+                Localizacao localizacaoInferida =
+                        new Localizacao(objetos.iterator().next(), j + 1);
                 localizacaoInferida.associarAPuzzle(_puzzle);
                 saida.adicionarAfirmativa(localizacaoInferida);
             }
@@ -141,15 +142,18 @@ class Solucionador {
     }
 
     private void configurarRelacaoPortasAfirmativas() {
-        List<Afirmativa> deducoes = criarAfirmativasSeESomenteSePortaVerdadeiraEntaoConteudoPortaVerdadeiro();
+        List<Afirmativa> deducoes =
+                criarAfirmativasSeESomenteSePortaVerdadeiraEntaoConteudoPortaVerdadeiro();
         adicionarAfirmativasATodosOsRamos(deducoes);
     }
 
-    private List<Afirmativa> criarAfirmativasSeESomenteSePortaVerdadeiraEntaoConteudoPortaVerdadeiro() {
+    private List<Afirmativa>
+            criarAfirmativasSeESomenteSePortaVerdadeiraEntaoConteudoPortaVerdadeiro() {
         List<Afirmativa> deducoes = new ArrayList<Afirmativa>();
         for (int iPorta = 1; iPorta <= _puzzle.getNumPortas(); iPorta++) {
             Afirmativa afPorta = _puzzle.getPorta(iPorta);
-            Bicondicional portaEstaCertaOuErrada = new Bicondicional(afPorta, new Referencia(iPorta));
+            Bicondicional portaEstaCertaOuErrada =
+                    new Bicondicional(afPorta, new Referencia(iPorta));
             portaEstaCertaOuErrada.associarAPuzzle(_puzzle);
             deducoes.add(portaEstaCertaOuErrada);
         }

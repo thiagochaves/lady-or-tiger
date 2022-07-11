@@ -3,16 +3,17 @@ package poc.puzzle;
 import poc.afirmativa.*;
 
 public class ParserExpressao {
-    
+
     public ParserExpressao() {
     }
 
     /**
-     * Faz o parsing de uma sentença usando um algoritmo descendente recursivo. A
-     * gramática é a seguinte: 
-     * Exp = Term && Exp | Term || Exp | Term -> Exp | Term <-> Exp | Term
-     * Term = !Exp | (Exp) | a(N) | em(N, N)
-     * @throws ExcecaoParsing Caso o texto não seja válido.
+     * Faz o parsing de uma sentença usando um algoritmo descendente recursivo. A gramática é a
+     * seguinte: Exp = Term && Exp | Term || Exp | Term -> Exp | Term <-> Exp | Term Term = !Exp |
+     * (Exp) | a(N) | em(N, N)
+     * 
+     * @throws ExcecaoParsing
+     *             Caso o texto não seja válido.
      */
     public Afirmativa parse(String texto) throws ExcecaoParsing {
         StringBuffer frase = new StringBuffer(texto.trim());
@@ -20,9 +21,10 @@ public class ParserExpressao {
     }
 
     /**
-     * Faz o parsing de uma expressão (afirmativa). O buffer enviado como
-     * parâmetro é modificado.
-     * @throws ExcecaoParsing Caso a expressão não seja válida.
+     * Faz o parsing de uma expressão (afirmativa). O buffer enviado como parâmetro é modificado.
+     * 
+     * @throws ExcecaoParsing
+     *             Caso a expressão não seja válida.
      */
     private Afirmativa exp(StringBuffer texto) throws ExcecaoParsing {
         Afirmativa termo1 = term(texto);
@@ -53,9 +55,10 @@ public class ParserExpressao {
     }
 
     /**
-     * Faz o parsing de uma sub-expressão. O buffer enviado como parâmetro é
-     * modificado.
-     * @throws ExcecaoParsing Expressão inválida.
+     * Faz o parsing de uma sub-expressão. O buffer enviado como parâmetro é modificado.
+     * 
+     * @throws ExcecaoParsing
+     *             Expressão inválida.
      */
     private Afirmativa term(StringBuffer texto) throws ExcecaoParsing {
         char inicio = next(texto);
@@ -69,7 +72,7 @@ public class ParserExpressao {
             Afirmativa expressao = exp(texto);
             char fim = next(texto);
             if (fim != ')') {
-            	throw new ExcecaoParsing("Expressão dentro de parênteses não foi fechada.");
+                throw new ExcecaoParsing("Expressão dentro de parênteses não foi fechada.");
             }
             return expressao;
         }
@@ -103,13 +106,11 @@ public class ParserExpressao {
             int lugar = Integer.parseInt(numero.toString());
             return new Localizacao(objeto.toString().trim(), lugar);
         }
-        throw new ExcecaoParsing("ARGH! : inicio = " + inicio + 
-                ", texto = " + texto);
+        throw new ExcecaoParsing("ARGH! : inicio = " + inicio + ", texto = " + texto);
     }
 
     /**
-     * Obtém o próximo caracter da seqüência (ignorando espaços), removendo-o do
-     * buffer.
+     * Obtém o próximo caracter da seqüência (ignorando espaços), removendo-o do buffer.
      */
     private char next(final StringBuffer texto) {
         if (texto.length() == 0) {

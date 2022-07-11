@@ -8,11 +8,11 @@ import poc.afirmativa.Localizacao;
 import poc.afirmativa.Referencia;
 
 /**
- * Conjunto de suposições acerca de afirmativas essenciais realizadas em um ramo do tableaux.
- * O objetivo desta classe é responder rapidamente se existe uma contradição entre as suposições
- * e determinada afirmativa.
+ * Conjunto de suposições acerca de afirmativas essenciais realizadas em um ramo do tableaux. O
+ * objetivo desta classe é responder rapidamente se existe uma contradição entre as suposições e
+ * determinada afirmativa.
  * 
- * Usar os métodos {@link #criar(int, Set)}, {@link #criarNovaDeMesmaEstrutura(Suposicao)} e 
+ * Usar os métodos {@link #criar(int, Set)}, {@link #criarNovaDeMesmaEstrutura(Suposicao)} e
  * {@link #copiar(Suposicao)} para criar objetos deste tipo.
  */
 public class Suposicao {
@@ -27,10 +27,10 @@ public class Suposicao {
     // A ordem em que os objetos devem ser levados em consideração
     private final HashMap<String, Integer> _indicesDeObjetos = new HashMap<String, Integer>();
     private final List<String> _objetos = new ArrayList<String>();
-    
+
     private Suposicao() {
     }
-    
+
     private Suposicao(int numPortas, Set<String> objetos) {
         _numLocais = numPortas;
         _numObjetos = objetos.size();
@@ -43,11 +43,11 @@ public class Suposicao {
             _objetos.add(o);
         }
     }
-    
+
     public static Suposicao criar(int numPortas, Set<String> objetos) {
         return new Suposicao(numPortas, objetos);
     }
-    
+
     public static Suposicao criarNovaDeMesmaEstrutura(Suposicao original) {
         return new Suposicao(original._numLocais, original._indicesDeObjetos.keySet());
     }
@@ -60,17 +60,18 @@ public class Suposicao {
         int tamanho = nova._numLocais * (1 + nova._numObjetos);
         nova._suposicoesFeitas = new boolean[tamanho];
         nova._afirmativas = new boolean[tamanho];
-        System.arraycopy(original._afirmativas, 0, nova._afirmativas, 0, 
+        System.arraycopy(original._afirmativas, 0, nova._afirmativas, 0,
                 original._afirmativas.length);
-        System.arraycopy(original._suposicoesFeitas, 0, nova._suposicoesFeitas, 0, 
+        System.arraycopy(original._suposicoesFeitas, 0, nova._suposicoesFeitas, 0,
                 original._suposicoesFeitas.length);
         return nova;
     }
 
     public boolean contradiz(Afirmativa a) {
-        return a.eEssencial() && (negacaoJaSuposta(a) || jaTemAlgoNoMesmoLocal(a) || impossivelTerAlgoNoLugar(a));
+        return a.eEssencial() && (negacaoJaSuposta(a) || jaTemAlgoNoMesmoLocal(a)
+                || impossivelTerAlgoNoLugar(a));
     }
-    
+
     private boolean negacaoJaSuposta(Afirmativa a) {
         int indice = obterIndice(a);
         if (a.estaNegada()) {
@@ -82,14 +83,14 @@ public class Suposicao {
 
     private int obterIndice(Afirmativa a) {
         if (a instanceof Referencia) {
-            return ((Referencia)a).getIndice() - 1;
+            return ((Referencia) a).getIndice() - 1;
         } else if (a instanceof Localizacao) {
-            Localizacao loc = (Localizacao)a;
+            Localizacao loc = (Localizacao) a;
             int lugar = loc.getLugar();
             int iObjeto = _indicesDeObjetos.get(loc.getObjeto());
             int indice = _numLocais + (lugar - 1) * _numObjetos + iObjeto;
-            assert indice < _afirmativas.length : "Indice " + indice 
-                    + " passou do limite de " + _afirmativas.length;
+            assert indice < _afirmativas.length
+                    : "Indice " + indice + " passou do limite de " + _afirmativas.length;
             return indice;
         } else {
             throw new ExcecaoImplementacao("Tipo desconhecido " + a);
@@ -101,11 +102,11 @@ public class Suposicao {
             return false;
         }
         if (a instanceof Localizacao) {
-            Localizacao loc = (Localizacao)a;
+            Localizacao loc = (Localizacao) a;
             int lugar = loc.getLugar();
             int indiceInicioLocal = _numLocais + (lugar - 1) * _numObjetos;
             int indiceLimiteLocal = indiceInicioLocal + _numObjetos;
-            assert indiceLimiteLocal <= _afirmativas.length : "Indice " + indiceLimiteLocal 
+            assert indiceLimiteLocal <= _afirmativas.length : "Indice " + indiceLimiteLocal
                     + " passou do limite de " + _afirmativas.length;
             for (int i = indiceInicioLocal; i < indiceLimiteLocal; i++) {
                 if (_suposicoesFeitas[i] && _afirmativas[i]) {
@@ -119,14 +120,15 @@ public class Suposicao {
     private boolean impossivelTerAlgoNoLugar(Afirmativa a) {
         if (a.estaNegada()) {
             if (a instanceof Localizacao) {
-                Localizacao loc = (Localizacao)a;
+                Localizacao loc = (Localizacao) a;
                 int lugar = loc.getLugar();
                 int indiceInicioLocal = _numLocais + (lugar - 1) * _numObjetos;
                 int indiceLimiteLocal = indiceInicioLocal + _numObjetos;
                 assert indiceLimiteLocal <= _afirmativas.length : "Indice " + indiceLimiteLocal
                         + " passou do limite de " + _afirmativas.length;
                 for (int i = indiceInicioLocal; i < indiceLimiteLocal; i++) {
-                    if (i - indiceInicioLocal == _indicesDeObjetos.get(((Localizacao) a).getObjeto())) {
+                    if (i - indiceInicioLocal == _indicesDeObjetos
+                            .get(((Localizacao) a).getObjeto())) {
                         continue;
                     }
                     if (!_suposicoesFeitas[i] || _afirmativas[i]) {
@@ -148,7 +150,7 @@ public class Suposicao {
             }
         }
     }
-    
+
     @Override
     public String toString() {
         StringBuilder saida = new StringBuilder();
@@ -167,9 +169,11 @@ public class Suposicao {
                 int indice = _numLocais + i * _numLocais + j;
                 if (_suposicoesFeitas[indice]) {
                     if (_afirmativas[indice]) {
-                        saida.append("em(").append(_objetos.get(j)).append(", ").append(i + 1).append(")");
+                        saida.append("em(").append(_objetos.get(j)).append(", ").append(i + 1)
+                                .append(")");
                     } else {
-                        saida.append("¬em(").append(_objetos.get(j)).append(", ").append(i + 1).append(")");
+                        saida.append("¬em(").append(_objetos.get(j)).append(", ").append(i + 1)
+                                .append(")");
                     }
                 }
                 saida.append(" ");

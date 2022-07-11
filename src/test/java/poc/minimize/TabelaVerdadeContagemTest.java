@@ -35,9 +35,12 @@ public class TabelaVerdadeContagemTest {
     @Test
     public void testarMintermos() {
         Set<Mintermo> termos = _tabela.getMintermos();
-        Mintermo ab = Mintermo.criar(Lists.newArrayList(_variaveis), Lists.newArrayList(_a, _b));
-        Mintermo ac = Mintermo.criar(Lists.newArrayList(_variaveis), Lists.newArrayList(_a, _c));
-        Mintermo bc = Mintermo.criar(Lists.newArrayList(_variaveis), Lists.newArrayList(_b, _c));
+        Mintermo ab =
+                Mintermo.criar(Lists.newArrayList(_variaveis), Lists.newArrayList(_a, _b));
+        Mintermo ac =
+                Mintermo.criar(Lists.newArrayList(_variaveis), Lists.newArrayList(_a, _c));
+        Mintermo bc =
+                Mintermo.criar(Lists.newArrayList(_variaveis), Lists.newArrayList(_b, _c));
         assertEquals(termos, Sets.newHashSet(ab, ac, bc));
     }
 }

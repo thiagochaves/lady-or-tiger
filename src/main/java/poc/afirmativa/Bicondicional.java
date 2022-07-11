@@ -8,8 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Implementa uma implicação lógica bicondicional.
- * antecedente <-> consequente
+ * Implementa uma implicação lógica bicondicional. antecedente <-> consequente
  *
  * Created by Thiago on 10/01/17.
  */

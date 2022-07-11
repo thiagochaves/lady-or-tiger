@@ -26,12 +26,15 @@ class Atribuicao {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         Atribuicao that = (Atribuicao) o;
 
-        if (_valor != that._valor) return false;
+        if (_valor != that._valor)
+            return false;
         return _x.equals(that._x);
     }
 

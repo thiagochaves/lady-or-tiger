@@ -8,8 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Implementa uma implicação lógica, para facilitar a leitura do processamento.
- * antecedente -> consequente
+ * Implementa uma implicação lógica, para facilitar a leitura do processamento. antecedente ->
+ * consequente
  *
  * Created by Thiago on 09/01/17.
  */
