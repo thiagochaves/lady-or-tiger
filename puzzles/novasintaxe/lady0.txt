@@ -1,9 +1,0 @@
-nome:
-    Problema 1
-sentenças:
-    a <=> ma ^ tb,
-    b <=> (ma ^ tb) v (mb ^ ta)
-    count[xa, xb, xc] = 1
-    count(ya, yb, yc) <= 2
-solução:
-    "A moça está atrás da porta " + [for x in (a, b, c) if mx]
