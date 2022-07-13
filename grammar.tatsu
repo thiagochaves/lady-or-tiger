@@ -1,16 +1,12 @@
 @@whitespace :: /[\t ]+/
 
-start = name object_list predicate_list rule_section;
-name = 'name:' /[^\n]/ {'\n'};
-object_list = object | object object_list;
-object = 'object' id ':' {'\n'} id_list;
-id_list = id {'\n'} | id {'\n'} id_list;
+start = name {object}+ {predicate}+ rule_section;
+name = 'name:' /[^\n]+/ {'\n'};
+object = 'object' id ':' {'\n'}+ { id {'\n'}+ }+;
 id = /[A-Za-z0-9_]+/;
-predicate_list = predicate | predicate predicate_list;
-predicate = 'predicate' id '(' id_list ')' {'\n'};
-rule_section = 'rules:' {'\n'} rule_list;
-rule_list = rule | rule rule_list;
-rule = expression {'\n'};
-expression = term | term 'and' expression | term 'or' expression | term '=>' expression | term '<=>' expression;
-term = '(' expression ')' | '!' expression | applied_predicate | 'for every' id id [ 'except' id ] '(' expression ')' | 'there is a' id id  [ 'except' id ] '(' expression ')' | 'solvable if' '(' expression ')' 'is known';
-applied_predicate = id '(' id_list ')';
+predicate = 'predicate' id '(' ','%{id}+ ')' {'\n'}+;
+rule_section = 'rules:' {'\n'} {rule}+;
+rule = expression {'\n'}+;
+expression = term 'and' expression | term 'or' expression | term '=>' expression | term '<=>' expression | term;
+term = 'for every' id id [ 'except' id ] '(' expression ')' | 'there is a' id id  [ 'except' id ] '(' expression ')' | 'solvable if' '(' expression ')' 'is known' | '(' expression ')' | '!' expression | applied_predicate;
+applied_predicate = id '(' ','%{id}+ ')';
