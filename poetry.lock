@@ -1,0 +1,18 @@
+[[package]]
+name = "tatsu"
+version = "5.8.1"
+description = "TatSu takes a grammar in a variation of EBNF as input, and outputs a memoizing PEG/Packrat parser in Python."
+category = "dev"
+optional = false
+python-versions = ">=3.10"
+
+[package.extras]
+future-regex = ["regex"]
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.10"
+content-hash = "b436667b2f5f870614419b564d4048235c1499566bd64fef8669b699c7d5165e"
+
+[metadata.files]
+tatsu = []

@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "lady-or-tiger"
+version = "0.1.0"
+description = "Logical problem solver"
+authors = ["Thiago F Chaves"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+TatSu = "^5.8.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
