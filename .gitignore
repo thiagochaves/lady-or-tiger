@@ -7,4 +7,4 @@ ladytiger.iml
 /target/
 /puzzles/ladyortiger.html
 /puzzles/ladyortiger.pdf
-/ladytiger/__pycache__/
+__pycache__/
