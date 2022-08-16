@@ -2,13 +2,14 @@
 Acceptance tests.
 Verify that the system can solve some logical puzzles.
 """
-import ladytiger as lt
+from ladytiger import problem as ltproblem
+from ladytiger import solution as ltsolution
 
 
 def test_lady_or_tiger_first_trial():
     problem_spec = load_problem_spec("lady1.txt")
-    problem = lt.problem.from_spec(problem_spec)
-    solution = lt.solution.solve(problem)
+    problem = ltproblem.from_spec(problem_spec)
+    solution = ltsolution.solve(problem)
     assert "contains(_2, lady)" in solution
 
 
